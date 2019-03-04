@@ -139,8 +139,8 @@ public class Twitup implements IDatabaseObserver {
 	}
 
 	public void show() {
-		//this.initMock();
 		this.mMainView.showGUI();
+		this.initMock();
 	}
 
 	/**
