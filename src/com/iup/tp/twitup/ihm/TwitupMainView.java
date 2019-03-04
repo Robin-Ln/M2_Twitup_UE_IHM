@@ -60,6 +60,8 @@ public class TwitupMainView implements ITwitupMainView{
             // Custom de l'affichage
             JFrame frame = TwitupMainView.this.mFrame;
             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            screenSize.height /=  2;
+            screenSize.width /= 2;
             frame.setSize(screenSize);
 
             TwitupMainView.this.mFrame.setVisible(true);

@@ -2,6 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95a424cd-6fed-4602-8f49-771fb3128deb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/META-INF/M2_Twitup_UE_IHM.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/iup/tp/twitup/ihm/TwitupMainView$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/iup/tp/twitup/ihm/TwitupMainView$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/iup/tp/twitup/ihm/TwitupMainView$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/iup/tp/twitup/ihm/TwitupMainView$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/iup/tp/twitup/ihm/TwitupMainView.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/iup/tp/twitup/ihm/TwitupMainView.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/TwitupMainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/TwitupMainView.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -30,13 +37,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/TwitupMainView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="73" column="40" lean-forward="true" selection-start-line="73" selection-start-column="40" selection-end-line="73" selection-end-column="40" />
+            <state relative-caret-position="220">
+              <caret line="63" column="34" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1868#2022#0" expanded="true" />
-                <element signature="e#2021#2022#0" expanded="true" />
+                <element signature="e#4402#4403#0" expanded="true" />
                 <element signature="e#4447#4448#0" expanded="true" />
+                <element signature="e#4530#4531#0" expanded="true" />
                 <element signature="e#4578#4579#0" expanded="true" />
               </folding>
             </state>
@@ -44,91 +51,23 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/TwitupLauncher.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="18" column="17" lean-forward="true" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/core/Twitup.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
-              <caret line="197" column="38" selection-start-line="197" selection-start-column="38" selection-end-line="197" selection-end-column="38" />
+            <state relative-caret-position="163">
+              <caret line="144" column="26" lean-forward="true" selection-start-line="144" selection-start-column="26" selection-end-line="144" selection-end-column="26" />
               <folding>
                 <element signature="e#4549#4550#0" expanded="true" />
-                <element signature="e#4565#4566#0" expanded="true" />
+                <element signature="e#4587#4588#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/TwitupMock.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="881">
-              <caret line="226" column="5" selection-start-line="226" selection-start-column="5" selection-end-line="226" selection-end-column="5" />
-              <folding>
-                <element signature="e#2253#2254#0" expanded="true" />
-                <element signature="e#2299#2300#0" expanded="true" />
-                <element signature="e#2535#2536#0" expanded="true" />
-                <element signature="e#2581#2582#0" expanded="true" />
-                <element signature="e#2896#2897#0" expanded="true" />
-                <element signature="e#2933#2934#0" expanded="true" />
-                <element signature="e#3173#3174#0" expanded="true" />
-                <element signature="e#3210#3211#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/User.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/Twit.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="195" selection-start-line="195" selection-end-line="195" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/core/EntityManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-432">
-              <caret line="346" column="36" selection-start-line="346" selection-start-column="16" selection-end-line="346" selection-end-column="36" />
-              <folding>
-                <element signature="e#9240#9241#0" expanded="true" />
-                <element signature="e#9282#9283#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/Database.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="285" column="8" selection-start-line="285" selection-start-column="8" selection-end-line="287" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/ITwitupMainViewObserver.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="55" selection-start-line="8" selection-start-column="55" selection-end-line="8" selection-end-column="55" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/ITwitupMainView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
             </state>
           </provider>
         </entry>
@@ -186,82 +125,37 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="TwitUp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TwitUp" type="462c0819:PsiDirectoryNode" />
+              <item name="M2_Twitup_UE_IHM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="M2_Twitup_UE_IHM" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="TwitUp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TwitUp" type="462c0819:PsiDirectoryNode" />
+              <item name="M2_Twitup_UE_IHM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="M2_Twitup_UE_IHM" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="TwitUp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TwitUp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="twitup" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TwitUp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TwitUp" type="462c0819:PsiDirectoryNode" />
+              <item name="M2_Twitup_UE_IHM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="M2_Twitup_UE_IHM" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="twitup" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TwitUp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TwitUp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="twitup" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TwitUp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TwitUp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="twitup" type="462c0819:PsiDirectoryNode" />
-              <item name="datamodel" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TwitUp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TwitUp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="twitup" type="462c0819:PsiDirectoryNode" />
-              <item name="datamodel" type="462c0819:PsiDirectoryNode" />
-              <item name="converter" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TwitUp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TwitUp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="twitup" type="462c0819:PsiDirectoryNode" />
-              <item name="ihm" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TwitUp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TwitUp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TwitUp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551728509926" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551728913090" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -314,17 +208,18 @@
       <workItem from="1551703641968" duration="323000" />
       <workItem from="1551704224762" duration="11566000" />
       <workItem from="1551716851309" duration="3983000" />
+      <workItem from="1551728623381" duration="160000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15872000" />
+    <option name="totallyTimeSpent" value="16032000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30533117" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3101777" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -333,8 +228,8 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32876712" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32866043" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.35068494" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32739726" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.35068494" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -467,31 +362,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/core/ITwitupOberver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="31" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/core/ITwitup.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="50" selection-start-line="8" selection-start-column="50" selection-end-line="8" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/core/ITwitupOberver.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/core/ITwitup.java" />
     <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/converter/XmlbeanDatamodelConverter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="555">
           <caret line="46" column="45" selection-start-line="46" selection-start-column="45" selection-end-line="46" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/TwitupLauncher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="17" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -530,52 +406,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/Database.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="285" column="8" selection-start-line="285" selection-start-column="8" selection-end-line="287" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/core/EntityManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-432">
-          <caret line="346" column="36" selection-start-line="346" selection-start-column="16" selection-end-line="346" selection-end-column="36" />
-          <folding>
-            <element signature="e#9240#9241#0" expanded="true" />
-            <element signature="e#9282#9283#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/ITwitupMainView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/core/Twitup.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="197" column="38" selection-start-line="197" selection-start-column="38" selection-end-line="197" selection-end-column="38" />
-          <folding>
-            <element signature="e#4549#4550#0" expanded="true" />
-            <element signature="e#4565#4566#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/ITwitupMainViewObserver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="55" selection-start-line="8" selection-start-column="55" selection-end-line="8" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/TwitupMock.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="881">
+        <state relative-caret-position="2985">
           <caret line="226" column="5" selection-start-line="226" selection-start-column="5" selection-end-line="226" selection-end-column="5" />
           <folding>
             <element signature="e#2253#2254#0" expanded="true" />
@@ -599,20 +432,70 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/Twit.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
+        <state relative-caret-position="2565">
           <caret line="195" selection-start-line="195" selection-end-line="195" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/core/EntityManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4950">
+          <caret line="346" column="36" selection-start-line="346" selection-start-column="16" selection-end-line="346" selection-end-column="36" />
+          <folding>
+            <element signature="e#9240#9241#0" expanded="true" />
+            <element signature="e#9282#9283#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4200">
+          <caret line="285" column="8" selection-start-line="285" selection-start-column="8" selection-end-line="287" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/ITwitupMainViewObserver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="55" selection-start-line="8" selection-start-column="55" selection-end-line="8" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/ITwitupMainView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/TwitupLauncher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="17" lean-forward="true" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/core/Twitup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="144" column="26" lean-forward="true" selection-start-line="144" selection-start-column="26" selection-end-line="144" selection-end-column="26" />
+          <folding>
+            <element signature="e#4549#4550#0" expanded="true" />
+            <element signature="e#4587#4588#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/TwitupMainView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="73" column="40" lean-forward="true" selection-start-line="73" selection-start-column="40" selection-end-line="73" selection-end-column="40" />
+        <state relative-caret-position="220">
+          <caret line="63" column="34" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1868#2022#0" expanded="true" />
-            <element signature="e#2021#2022#0" expanded="true" />
+            <element signature="e#4402#4403#0" expanded="true" />
             <element signature="e#4447#4448#0" expanded="true" />
+            <element signature="e#4530#4531#0" expanded="true" />
             <element signature="e#4578#4579#0" expanded="true" />
           </folding>
         </state>
