@@ -71,7 +71,7 @@ public class TwitupMainView implements ITwitupMainView{
      */
     protected void initGUI() {
         // Création de la fenetre principale
-        this.mFrame = new JFrame("ma fenetre");
+        this.mFrame = new JFrame("Twitup App");
 
         mFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {

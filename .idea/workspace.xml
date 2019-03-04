@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95a424cd-6fed-4602-8f49-771fb3128deb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/ITwitupMainView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/ITwitupMainViewObserver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/core/Twitup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/iup/tp/twitup/core/Twitup.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/TwitupMainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/TwitupMainView.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -31,11 +27,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/TwitupMainView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="149" column="4" selection-start-line="149" selection-start-column="4" selection-end-line="158" selection-end-column="5" />
+            <state relative-caret-position="282">
+              <caret line="73" column="40" lean-forward="true" selection-start-line="73" selection-start-column="40" selection-end-line="73" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1868#2022#0" expanded="true" />
@@ -60,11 +56,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/TwitupMock.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="226" column="5" lean-forward="true" selection-start-line="226" selection-start-column="5" selection-end-line="226" selection-end-column="5" />
+            <state relative-caret-position="881">
+              <caret line="226" column="5" selection-start-line="226" selection-start-column="5" selection-end-line="226" selection-end-column="5" />
               <folding>
                 <element signature="e#2253#2254#0" expanded="true" />
                 <element signature="e#2299#2300#0" expanded="true" />
@@ -75,6 +71,24 @@
                 <element signature="e#3173#3174#0" expanded="true" />
                 <element signature="e#3210#3211#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/User.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/Twit.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="149">
+              <caret line="195" selection-start-line="195" selection-end-line="195" />
             </state>
           </provider>
         </entry>
@@ -96,7 +110,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/Database.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="172">
-              <caret line="285" column="8" lean-forward="true" selection-start-line="285" selection-start-column="8" selection-end-line="287" selection-end-column="9" />
+              <caret line="285" column="8" selection-start-line="285" selection-start-column="8" selection-end-line="287" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -148,8 +162,8 @@
         <option value="$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/ITwitupMainView.java" />
         <option value="$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/ITwitupMainViewObserver.java" />
         <option value="$PROJECT_DIR$/src/com/iup/tp/twitup/core/Twitup.java" />
-        <option value="$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/TwitupMainView.java" />
         <option value="$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/TwitupMock.java" />
+        <option value="$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/TwitupMainView.java" />
       </list>
     </option>
   </component>
@@ -164,7 +178,7 @@
     <option name="width" value="1280" />
     <option name="height" value="734" />
   </component>
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
@@ -247,7 +261,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551727808974" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551728509926" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -299,12 +313,12 @@
       <updated>1551703631179</updated>
       <workItem from="1551703641968" duration="323000" />
       <workItem from="1551704224762" duration="11566000" />
-      <workItem from="1551716851309" duration="3378000" />
+      <workItem from="1551716851309" duration="3983000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15267000" />
+    <option name="totallyTimeSpent" value="15872000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -409,13 +423,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
           <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/Twit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="195" selection-start-line="195" selection-end-line="195" />
         </state>
       </provider>
     </entry>
@@ -526,7 +533,7 @@
     <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/Database.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="172">
-          <caret line="285" column="8" lean-forward="true" selection-start-line="285" selection-start-column="8" selection-end-line="287" selection-end-column="9" />
+          <caret line="285" column="8" selection-start-line="285" selection-start-column="8" selection-end-line="287" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -566,24 +573,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/TwitupMainView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="149" column="4" selection-start-line="149" selection-start-column="4" selection-end-line="158" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1868#2022#0" expanded="true" />
-            <element signature="e#2021#2022#0" expanded="true" />
-            <element signature="e#4447#4448#0" expanded="true" />
-            <element signature="e#4578#4579#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/TwitupMock.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="226" column="5" lean-forward="true" selection-start-line="226" selection-start-column="5" selection-end-line="226" selection-end-column="5" />
+        <state relative-caret-position="881">
+          <caret line="226" column="5" selection-start-line="226" selection-start-column="5" selection-end-line="226" selection-end-column="5" />
           <folding>
             <element signature="e#2253#2254#0" expanded="true" />
             <element signature="e#2299#2300#0" expanded="true" />
@@ -593,6 +586,34 @@
             <element signature="e#2933#2934#0" expanded="true" />
             <element signature="e#3173#3174#0" expanded="true" />
             <element signature="e#3210#3211#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/Twit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="195" selection-start-line="195" selection-end-line="195" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/TwitupMainView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="73" column="40" lean-forward="true" selection-start-line="73" selection-start-column="40" selection-end-line="73" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1868#2022#0" expanded="true" />
+            <element signature="e#2021#2022#0" expanded="true" />
+            <element signature="e#4447#4448#0" expanded="true" />
+            <element signature="e#4578#4579#0" expanded="true" />
           </folding>
         </state>
       </provider>
