@@ -1,0 +1,31 @@
+﻿# Eclipse
+.pmd
+.checkstyle
+.classpath
+.project
+.settings/
+.metadata/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Mac
+.DS_Store
+
+# Maven
+target/
+
+# Code généré
+/cybele-be-generate/cybele-be-generate-module/src
+
+# Autres
+pom.xml.versionsBackup
+log/
+${env.TOMCAT8_BAI_HOME}/
+/cybele-be-dao-impl/src/main/resources/hibernate.cfg.xml
+/cybele-be-model/src/main/java/hibernate.cfg.xml
+~*
+/.tgitconfig
+src/main/resources/application.properties
