@@ -7,27 +7,33 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Classe de la vue principale de l'application.
  */
-public class TwitupMainView {
+public class TwitupMainView implements ITwitupMainView{
 
     /**
      * Fenetre du bouchon
      */
-    protected JFrame mFrame;
+    private JFrame mFrame;
 
     /**
      * Base de donénes de l'application.
      */
-    protected IDatabase mDatabase;
+    private IDatabase mDatabase;
 
     /**
      * Gestionnaire de bdd et de fichier.
      */
-    protected EntityManager mEntityManager;
+    private EntityManager mEntityManager;
+
+    /**
+     * Liste des observateurs de modifications de la base.
+     */
+    protected final Set<ITwitupMainViewObserver> mObservers;
 
     /**
      * Constructeur.
@@ -37,6 +43,7 @@ public class TwitupMainView {
     public TwitupMainView(IDatabase database, EntityManager entityManager) {
         this.mDatabase = database;
         this.mEntityManager = entityManager;
+        this.mObservers = new HashSet<>();
     }
 
     /**
@@ -68,7 +75,7 @@ public class TwitupMainView {
 
         mFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                TwitupMainView.this.HandlerQuitter();
+                TwitupMainView.this.handlerQuitter();
             }
         });
 
@@ -85,17 +92,17 @@ public class TwitupMainView {
         JMenuItem itemEditer = new JMenuItem("Editier");
         ImageIcon iconEditer = new ImageIcon(getClass().getResource("/images/editIcon_20.png"));
         itemEditer.setIcon(iconEditer);
-        itemEditer.addActionListener(e -> TwitupMainView.this.HandlerFileChooser());
+        itemEditer.addActionListener(e -> TwitupMainView.this.handlerFileChooser());
         menu.add(itemEditer);
 
         JMenuItem itemQutter = new JMenuItem("Quitter");
         ImageIcon iconQuitter = new ImageIcon(getClass().getResource("/images/exitIcon_20.png"));
         itemQutter.setIcon(iconQuitter);
-        itemQutter.addActionListener(e -> TwitupMainView.this.HandlerQuitter());
+        itemQutter.addActionListener(e -> TwitupMainView.this.handlerQuitter());
         menu.add(itemQutter);
 
         JMenuItem itemInfo = new JMenuItem("?");
-        itemInfo.addActionListener(e -> TwitupMainView.this.HandlerDialogInfo());
+        itemInfo.addActionListener(e -> TwitupMainView.this.handlerDialogInfo());
         menuBar.add(itemInfo);
 
 
@@ -105,11 +112,17 @@ public class TwitupMainView {
      * Methodes handler
      */
 
-    private void HandlerQuitter() {
+    private void handlerQuitter() {
+
+        // notifier les observer que l'application va se fermer
+        for (ITwitupMainViewObserver observer : this.mObservers) {
+            observer.notifyWindowClosing(this);
+        }
+
         System.exit(0);
     }
 
-    private void HandlerDialogInfo() {
+    private void handlerDialogInfo() {
         JOptionPane jOptionPane = new JOptionPane();
         ImageIcon iconIUP = new ImageIcon(getClass().getResource("/images/logoIUP_50.jpg"));
         jOptionPane.showMessageDialog(this.mFrame,
@@ -119,13 +132,29 @@ public class TwitupMainView {
                 iconIUP);
     }
 
-    private File HandlerFileChooser() {
+    private void handlerFileChooser() {
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int returnVal = chooser.showOpenDialog(this.mFrame);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            return chooser.getSelectedFile();
+            // notifier les observer qu'un fichier à été selectionné
+            for (ITwitupMainViewObserver observer : this.mObservers) {
+                observer.notifyEchangeDirectoryChange(chooser.getSelectedFile());
+            }
+        } else {
+            throw new RuntimeException("handlerFileChooser Fail");
         }
-        return null;
+    }
+
+
+    @Override
+    public void addObserver(ITwitupMainViewObserver observer) {
+        this.mObservers.add(observer);
+    }
+
+
+    @Override
+    public void deleteObserver(ITwitupMainViewObserver observer) {
+        this.mObservers.remove(observer);
     }
 }

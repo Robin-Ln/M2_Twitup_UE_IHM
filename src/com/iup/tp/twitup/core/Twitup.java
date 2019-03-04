@@ -1,19 +1,21 @@
 package com.iup.tp.twitup.core;
 
-import java.io.File;
-
 import com.iup.tp.twitup.datamodel.*;
 import com.iup.tp.twitup.events.file.IWatchableDirectory;
 import com.iup.tp.twitup.events.file.WatchableDirectory;
+import com.iup.tp.twitup.ihm.ITwitupMainView;
+import com.iup.tp.twitup.ihm.ITwitupMainViewObserver;
 import com.iup.tp.twitup.ihm.TwitupMainView;
 import com.iup.tp.twitup.ihm.TwitupMock;
+
+import java.io.File;
 
 /**
  * Classe principale l'application.
  * 
  * @author S.Lucas
  */
-public class Twitup implements IDatabaseObserver {
+public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 	/**
 	 * Base de données.
 	 */
@@ -83,6 +85,7 @@ public class Twitup implements IDatabaseObserver {
 	protected void initGui() {
 		// this.mMainView...
 		this.mMainView = new TwitupMainView(this.mDatabase,this.mEntityManager);
+		this.mMainView.addObserver(this);
 		this.mDatabase.addObserver(this);
 	}
 
@@ -149,31 +152,49 @@ public class Twitup implements IDatabaseObserver {
 
 	@Override
 	public void notifyTwitAdded(Twit addedTwit) {
-		System.out.println("addedTwit");
+		System.out.println("addedTwit :" + addedTwit);
 	}
 
 	@Override
 	public void notifyTwitDeleted(Twit deletedTwit) {
-		System.out.println("deletedTwit");
+		System.out.println("deletedTwit :" + deletedTwit);
 	}
 
 	@Override
 	public void notifyTwitModified(Twit modifiedTwit) {
-		System.out.println("modifiedTwit");
+		System.out.println("modifiedTwit :" + modifiedTwit);
 	}
 
 	@Override
 	public void notifyUserAdded(User addedUser) {
-		System.out.println("addedUser");
+		System.out.println("addedUser :" + addedUser);
 	}
 
 	@Override
 	public void notifyUserDeleted(User deletedUser) {
-		System.out.println("deletedUser");
+		System.out.println("deletedUser :" + deletedUser);
 	}
 
 	@Override
 	public void notifyUserModified(User modifiedUser) {
-		System.out.println("modifiedUser");
+		System.out.println("modifiedUser :" + modifiedUser);
+	}
+
+	/**
+	 * Methodes de l'interface ITwitupMainViewObserver
+	 */
+
+	@Override
+	public void notifyEchangeDirectoryChange(File file) {
+		if (file.isDirectory()) {
+			this.initDirectory(file.getAbsolutePath());
+		}  else {
+			throw new RuntimeException("notifyEchangeDirectoryChange Fail");
+		}
+	}
+
+	@Override
+	public void notifyWindowClosing(ITwitupMainView observable) {
+		observable.deleteObserver(this);
 	}
 }
