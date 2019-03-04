@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95a424cd-6fed-4602-8f49-771fb3128deb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/META-INF/M2_Twitup_UE_IHM.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/iup/tp/twitup/ihm/TwitupMainView$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/iup/tp/twitup/ihm/TwitupMainView$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/iup/tp/twitup/ihm/TwitupMainView$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/iup/tp/twitup/ihm/TwitupMainView$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/iup/tp/twitup/ihm/TwitupMainView.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/iup/tp/twitup/ihm/TwitupMainView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/TwitupMainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/TwitupMainView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,7 +27,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/TwitupMainView.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="220">
@@ -46,6 +39,15 @@
                 <element signature="e#4530#4531#0" expanded="true" />
                 <element signature="e#4578#4579#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1767">
+              <caret line="148" column="63" selection-start-line="148" selection-start-column="63" selection-end-line="148" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -103,6 +105,7 @@
         <option value="$PROJECT_DIR$/src/com/iup/tp/twitup/core/Twitup.java" />
         <option value="$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/TwitupMock.java" />
         <option value="$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/TwitupMainView.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -145,6 +148,12 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="twitup" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="M2_Twitup_UE_IHM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="M2_Twitup_UE_IHM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -154,7 +163,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551728913090" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551729048987" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -162,6 +171,11 @@
     <property name="project.structure.proportion" value="0.14367819" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/resources/sources" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -208,12 +222,12 @@
       <workItem from="1551703641968" duration="323000" />
       <workItem from="1551704224762" duration="11566000" />
       <workItem from="1551716851309" duration="3983000" />
-      <workItem from="1551728623381" duration="160000" />
+      <workItem from="1551728623381" duration="419000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16032000" />
+    <option name="totallyTimeSpent" value="16291000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -228,8 +242,8 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32876712" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32739726" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.35068494" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32739726" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.35068494" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -498,6 +512,13 @@
             <element signature="e#4530#4531#0" expanded="true" />
             <element signature="e#4578#4579#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1767">
+          <caret line="148" column="63" selection-start-line="148" selection-start-column="63" selection-end-line="148" selection-end-column="63" />
         </state>
       </provider>
     </entry>
