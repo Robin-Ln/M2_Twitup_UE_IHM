@@ -2,53 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95a424cd-6fed-4602-8f49-771fb3128deb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M2_Twitup_UE_IHM.iml" beforeDir="false" afterPath="$PROJECT_DIR$/M2_Twitup_UE_IHM.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/resources/TwitFile.xsd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/resources/UserFile.xsd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/resources/configuration.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/resources/images/editIcon_20.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/resources/images/exitIcon_20.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/resources/images/logoIUP_20.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/resources/images/logoIUP_50.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/TwitupLauncher.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/common/Constants.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/common/FilesUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/common/PropertiesManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/core/EntityManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/core/Twitup.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/Database.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/IDatabase.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/IDatabaseObserver.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/Twit.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/converter/XmlbeanDatamodelConverter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/jaxb/JaxbReader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/jaxb/JaxbWriter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/jaxb/bean/twit/ObjectFactory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/jaxb/bean/twit/TwitXml.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/jaxb/bean/twit/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/jaxb/bean/user/ObjectFactory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/jaxb/bean/user/UserXml.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/datamodel/jaxb/bean/user/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/events/file/IWatchableDirectory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/events/file/IWatchableDirectoryObserver.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/events/file/WatchableDirectory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/ITwitupMainView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/ITwitupMainViewObserver.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/TwitupMainView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/iup/tp/twitup/ihm/TwitupMock.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/TwitFile.xsd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/UserFile.xsd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/configuration.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/images/editIcon_20.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/images/exitIcon_20.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/images/logoIUP_20.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/images/logoIUP_50.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/sources/TP_IHM_M2TIIL-2019_s1.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -73,51 +28,7 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/TwitupMainView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="63" column="34" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/TwitupLauncher.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/core/Twitup.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2040">
-              <caret line="144" column="26" selection-start-line="144" selection-start-column="26" selection-end-line="144" selection-end-column="26" />
-              <folding>
-                <element signature="e#4549#4550#0" expanded="true" />
-                <element signature="e#4587#4588#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -231,12 +142,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="M2_Twitup_UE_IHM" type="b2602c69:ProjectViewProjectNode" />
-              <item name="M2_Twitup_UE_IHM" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -246,7 +151,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551736444321" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551736650673" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -309,16 +214,15 @@
       <workItem from="1551704224762" duration="11566000" />
       <workItem from="1551716851309" duration="3983000" />
       <workItem from="1551728623381" duration="728000" />
-      <workItem from="1551735673970" duration="541000" />
+      <workItem from="1551735673970" duration="830000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17141000" />
+    <option name="totallyTimeSpent" value="17430000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31502423" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
