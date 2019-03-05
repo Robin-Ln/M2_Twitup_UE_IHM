@@ -46,6 +46,7 @@ public class TwitupMainView implements ITwitupMainView{
         this.mObservers = new HashSet<>();
     }
 
+
     /**
      * Lance l'afficahge de l'IHM.
      */
@@ -91,11 +92,11 @@ public class TwitupMainView implements ITwitupMainView{
         JMenu menu = new JMenu("Fichier");
         menuBar.add(menu);
 
-        JMenuItem itemEditer = new JMenuItem("Editier");
+        JMenuItem itemConfigurer = new JMenuItem("Configurer");
         ImageIcon iconEditer = new ImageIcon(getClass().getResource("/images/editIcon_20.png"));
-        itemEditer.setIcon(iconEditer);
-        itemEditer.addActionListener(e -> TwitupMainView.this.handlerFileChooser());
-        menu.add(itemEditer);
+        itemConfigurer.setIcon(iconEditer);
+        itemConfigurer.addActionListener(e -> TwitupMainView.this.handlerFileChooser());
+        menu.add(itemConfigurer);
 
         JMenuItem itemQutter = new JMenuItem("Quitter");
         ImageIcon iconQuitter = new ImageIcon(getClass().getResource("/images/exitIcon_20.png"));
@@ -134,8 +135,9 @@ public class TwitupMainView implements ITwitupMainView{
                 iconIUP);
     }
 
-    private void handlerFileChooser() {
+    public void handlerFileChooser() {
         JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle("Chosir un dossier de communication");
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int returnVal = chooser.showOpenDialog(this.mFrame);
         if (returnVal == JFileChooser.APPROVE_OPTION) {

@@ -1,5 +1,6 @@
 package com.iup.tp.twitup.core;
 
+import com.iup.tp.twitup.common.PropertiesManager;
 import com.iup.tp.twitup.datamodel.*;
 import com.iup.tp.twitup.events.file.IWatchableDirectory;
 import com.iup.tp.twitup.events.file.WatchableDirectory;
@@ -7,8 +8,12 @@ import com.iup.tp.twitup.ihm.ITwitupMainView;
 import com.iup.tp.twitup.ihm.ITwitupMainViewObserver;
 import com.iup.tp.twitup.ihm.TwitupMainView;
 import com.iup.tp.twitup.ihm.TwitupMock;
+import org.apache.commons.lang3.StringUtils;
 
+import javax.swing.*;
 import java.io.File;
+import java.net.URL;
+import java.util.Properties;
 
 /**
  * Classe principale l'application.
@@ -52,9 +57,17 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 	protected String mUiClassName;
 
 	/**
+	 * Properties de l'application
+	 */
+	Properties mProperties;
+
+	/**
 	 * Constructeur.
 	 */
 	public Twitup() {
+		// Init le properties de l'application
+		this.initProperties();
+
 		// Init du look and feel de l'application
 		this.initLookAndFeel();
 
@@ -74,9 +87,28 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 	}
 
 	/**
+	 * Initialisation du properties de l'application.
+	 */
+	private void initProperties() {
+		URL url = getClass().getClassLoader().getResource("configuration.properties");
+		String path = url.getPath();
+		this.mProperties = PropertiesManager.loadProperties(path);
+	}
+
+	/**
 	 * Initialisation du look and feel de l'application.
 	 */
 	protected void initLookAndFeel() {
+		try {
+			String lookAndFeel = this.mProperties.getProperty("UI_CLASS_NAME");
+			if (StringUtils.isBlank(lookAndFeel)) {
+				lookAndFeel = UIManager.getSystemLookAndFeelClassName();
+			}
+			UIManager.setLookAndFeel(lookAndFeel);
+			this.mProperties.setProperty("UI_CLASS_NAME", lookAndFeel);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -96,6 +128,16 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 	 * pouvoir utiliser l'application</b>
 	 */
 	protected void initDirectory() {
+
+		String path = this.mProperties.getProperty("EXCHANGE_DIRECTORY");
+
+		if (StringUtils.isNotBlank(path)){
+			this.initDirectory(path);
+		}
+
+		if (StringUtils.isBlank(this.mExchangeDirectoryPath)) {
+			this.mMainView.handlerFileChooser();
+		}
 	}
 
 	/**
@@ -139,6 +181,8 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 
 		mWatchableDirectory.initWatching();
 		mWatchableDirectory.addObserver(mEntityManager);
+
+		this.mProperties.setProperty("EXCHANGE_DIRECTORY", directoryPath);
 	}
 
 	public void show() {
@@ -196,5 +240,7 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 	@Override
 	public void notifyWindowClosing(ITwitupMainView observable) {
 		observable.deleteObserver(this);
+		String path = getClass().getClassLoader().getResource("configuration.properties").getPath();
+		PropertiesManager.writeProperties(this.mProperties, path);
 	}
 }
