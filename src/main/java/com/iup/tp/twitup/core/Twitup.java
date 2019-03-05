@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import javax.swing.*;
 import java.io.File;
 import java.net.URL;
+import java.util.Locale;
 import java.util.Properties;
 
 /**
@@ -62,11 +63,19 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 	Properties mProperties;
 
 	/**
+	 * Conficuration de la langue
+	 */
+	Locale mLocale;
+
+	/**
 	 * Constructeur.
 	 */
 	public Twitup() {
 		// Init le properties de l'application
 		this.initProperties();
+
+		// Init la langue
+		this.initLocal();
 
 		// Init du look and feel de l'application
 		this.initLookAndFeel();
@@ -96,6 +105,19 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 	}
 
 	/**
+	 * Initialisation de la langue de l'application.
+	 */
+	private void initLocal() {
+		String langue = this.mProperties.getProperty("LOCAL");
+
+		if (StringUtils.isNotBlank(langue)){
+			this.mLocale = new Locale(langue, langue.toUpperCase(),"");
+		}else {
+			throw new RuntimeException("initLocal Fail");
+		}
+	}
+
+	/**
 	 * Initialisation du look and feel de l'application.
 	 */
 	protected void initLookAndFeel() {
@@ -116,7 +138,7 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 	 */
 	protected void initGui() {
 		// this.mMainView...
-		this.mMainView = new TwitupMainView(this.mDatabase,this.mEntityManager);
+		this.mMainView = new TwitupMainView(this.mDatabase,this.mEntityManager,this.mLocale);
 		this.mMainView.addObserver(this);
 		this.mDatabase.addObserver(this);
 	}

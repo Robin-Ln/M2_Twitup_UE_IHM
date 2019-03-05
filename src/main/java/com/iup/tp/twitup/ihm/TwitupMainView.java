@@ -8,6 +8,8 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashSet;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 /**
@@ -36,14 +38,20 @@ public class TwitupMainView implements ITwitupMainView{
     protected final Set<ITwitupMainViewObserver> mObservers;
 
     /**
+     * Configurer la langue de l'aplication
+     */
+    ResourceBundle mBundle;
+
+    /**
      * Constructeur.
      *
      * @param database , Base de données de l'application.
      */
-    public TwitupMainView(IDatabase database, EntityManager entityManager) {
+    public TwitupMainView(IDatabase database, EntityManager entityManager, Locale locale) {
         this.mDatabase = database;
         this.mEntityManager = entityManager;
         this.mObservers = new HashSet<>();
+        this.mBundle = ResourceBundle.getBundle("local", locale);
     }
 
 
@@ -74,7 +82,7 @@ public class TwitupMainView implements ITwitupMainView{
      */
     protected void initGUI() {
         // Création de la fenetre principale
-        this.mFrame = new JFrame("Twitup App");
+        this.mFrame = new JFrame(this.mBundle.getString("titre"));
 
         mFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -89,16 +97,16 @@ public class TwitupMainView implements ITwitupMainView{
         JMenuBar menuBar = new JMenuBar();
         mFrame.setJMenuBar(menuBar);
 
-        JMenu menu = new JMenu("Fichier");
+        JMenu menu = new JMenu(this.mBundle.getString("menu.fichier"));
         menuBar.add(menu);
 
-        JMenuItem itemConfigurer = new JMenuItem("Configurer");
+        JMenuItem itemConfigurer = new JMenuItem(this.mBundle.getString("menu.congigurer"));
         ImageIcon iconEditer = new ImageIcon(getClass().getResource("/images/editIcon_20.png"));
         itemConfigurer.setIcon(iconEditer);
         itemConfigurer.addActionListener(e -> TwitupMainView.this.handlerFileChooser());
         menu.add(itemConfigurer);
 
-        JMenuItem itemQutter = new JMenuItem("Quitter");
+        JMenuItem itemQutter = new JMenuItem(this.mBundle.getString("menu.quitter"));
         ImageIcon iconQuitter = new ImageIcon(getClass().getResource("/images/exitIcon_20.png"));
         itemQutter.setIcon(iconQuitter);
         itemQutter.addActionListener(e -> TwitupMainView.this.handlerQuitter());
@@ -129,15 +137,15 @@ public class TwitupMainView implements ITwitupMainView{
         JOptionPane jOptionPane = new JOptionPane();
         ImageIcon iconIUP = new ImageIcon(getClass().getResource("/images/logoIUP_50.jpg"));
         jOptionPane.showMessageDialog(this.mFrame,
-                "UBO M2-TIIL \nDépartement informatique",
-                "A propos",
+                this.mBundle.getString("dialog.info.contenu"),
+                this.mBundle.getString("dialog.info.title"),
                 JOptionPane.INFORMATION_MESSAGE,
                 iconIUP);
     }
 
     public void handlerFileChooser() {
         JFileChooser chooser = new JFileChooser();
-        chooser.setDialogTitle("Chosir un dossier de communication");
+        chooser.setDialogTitle(this.mBundle.getString("dialog.file.choser.tilte"));
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int returnVal = chooser.showOpenDialog(this.mFrame);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
