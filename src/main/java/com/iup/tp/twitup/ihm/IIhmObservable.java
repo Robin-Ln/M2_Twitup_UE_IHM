@@ -1,8 +1,6 @@
 package com.iup.tp.twitup.ihm;
 
-import com.iup.tp.twitup.datamodel.IDatabaseObserver;
-
-public interface ITwitupMainView {
+public interface IIhmObservable {
 
     /**
      * Ajoute un observateur sur les modifications de la vue.

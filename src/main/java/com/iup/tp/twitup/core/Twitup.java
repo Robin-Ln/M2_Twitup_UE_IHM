@@ -4,7 +4,7 @@ import com.iup.tp.twitup.common.PropertiesManager;
 import com.iup.tp.twitup.datamodel.*;
 import com.iup.tp.twitup.events.file.IWatchableDirectory;
 import com.iup.tp.twitup.events.file.WatchableDirectory;
-import com.iup.tp.twitup.ihm.ITwitupMainView;
+import com.iup.tp.twitup.ihm.IIhmObservable;
 import com.iup.tp.twitup.ihm.ITwitupMainViewObserver;
 import com.iup.tp.twitup.ihm.TwitupMainView;
 import com.iup.tp.twitup.ihm.TwitupMock;
@@ -14,7 +14,9 @@ import javax.swing.*;
 import java.io.File;
 import java.net.URL;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Properties;
+import java.util.Set;
 
 /**
  * Classe principale l'application.
@@ -260,9 +262,25 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 	}
 
 	@Override
-	public void notifyWindowClosing(ITwitupMainView observable) {
+	public void notifyWindowClosing(IIhmObservable observable) {
 		observable.deleteObserver(this);
 		String path = getClass().getClassLoader().getResource("configuration.properties").getPath();
 		PropertiesManager.writeProperties(this.mProperties, path);
+	}
+
+	@Override
+	public void notifyRequestUserConnexion(String name, char[] password, Integer nbConnexion) {
+
+		Set<User> users = this.mDatabase.getUsers();
+
+		for (User user : users) {
+			System.out.println(user.getUserPassword());
+			if(Objects.equals(user.getName(),name)
+					&& Objects.equals(user.getUserPassword(),password.toString())){
+				return;
+			}
+		}
+
+		this.mMainView.handlerConnection(++nbConnexion);
 	}
 }

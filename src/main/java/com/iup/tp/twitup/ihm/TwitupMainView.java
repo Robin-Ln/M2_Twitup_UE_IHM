@@ -15,7 +15,7 @@ import java.util.Set;
 /**
  * Classe de la vue principale de l'application.
  */
-public class TwitupMainView implements ITwitupMainView{
+public class TwitupMainView implements IIhmObservable {
 
     /**
      * Fenetre du bouchon
@@ -100,11 +100,28 @@ public class TwitupMainView implements ITwitupMainView{
         JMenu menu = new JMenu(this.mBundle.getString("menu.fichier"));
         menuBar.add(menu);
 
-        JMenuItem itemConfigurer = new JMenuItem(this.mBundle.getString("menu.congigurer"));
+        /**
+         * Menu Configurer
+         */
+
+        JMenuItem itemConfigurer = new JMenuItem(this.mBundle.getString("menu.configurer"));
         ImageIcon iconEditer = new ImageIcon(getClass().getResource("/images/editIcon_20.png"));
         itemConfigurer.setIcon(iconEditer);
         itemConfigurer.addActionListener(e -> TwitupMainView.this.handlerFileChooser());
         menu.add(itemConfigurer);
+
+        /**
+         * Menu Connection
+         */
+
+        JMenuItem itemConnection = new JMenuItem(this.mBundle.getString("menu.connection"));
+        itemConnection.setIcon(iconEditer);
+        itemConnection.addActionListener(e -> TwitupMainView.this.handlerConnection(0));
+        menu.add(itemConnection);
+
+        /**
+         * Menu Quitter
+         */
 
         JMenuItem itemQutter = new JMenuItem(this.mBundle.getString("menu.quitter"));
         ImageIcon iconQuitter = new ImageIcon(getClass().getResource("/images/exitIcon_20.png"));
@@ -119,9 +136,43 @@ public class TwitupMainView implements ITwitupMainView{
 
     }
 
+
+
     /**
      * Methodes handler
      */
+    public void handlerConnection(Integer nbConnexion) {
+
+
+        JTextField nameField = new JTextField();
+        JPasswordField passwordField = new JPasswordField();
+        JPanel panel = new JPanel(new GridLayout(0, 2));
+
+        if(nbConnexion > 0){
+            JLabel echecLabel = new JLabel(this.mBundle.getString("dialog.connexion.label.echec"));
+            echecLabel.setForeground(Color.RED);
+            panel.add(echecLabel);
+
+            JLabel nbConnexionLabel = new JLabel(nbConnexion.toString());
+            nbConnexionLabel.setForeground(Color.RED);
+            panel.add(nbConnexionLabel);
+        }
+
+
+        panel.add(new JLabel(this.mBundle.getString("dialog.connexion.label.name")));
+        panel.add(nameField);
+        panel.add(new JLabel(this.mBundle.getString("dialog.connexion.label.password")));
+        panel.add(passwordField);
+
+
+        int result = JOptionPane.showConfirmDialog(this.mFrame, panel, this.mBundle.getString("dialog.connexion.label.title"),
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if (result == JOptionPane.OK_OPTION) {
+            for (ITwitupMainViewObserver observer : this.mObservers) {
+                observer.notifyRequestUserConnexion(nameField.getText(), passwordField.getPassword(), nbConnexion);
+            }
+        }
+    }
 
     private void handlerQuitter() {
 
