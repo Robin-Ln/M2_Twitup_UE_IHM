@@ -34,22 +34,22 @@ public interface IDatabase {
 	Set<Twit> getTwits();
 
 	/**
-	 * Ajoute un twit à la base de données.
+	 * Ajoute un twitAdd à la base de données.
 	 * 
 	 * @param twitToAdd
 	 */
 	void addTwit(Twit twitToAdd);
 
 	/**
-	 * Supprime un twit de la base de données.
+	 * Supprime un twitAdd de la base de données.
 	 * 
 	 * @param twitToRemove
 	 */
 	void removeTwit(Twit twitToRemove);
 
 	/**
-	 * Modification d'un twit de la base de données. <br/>
-	 * <i>Normalement peu probable qu'un twit soit modifié...</i>
+	 * Modification d'un twitAdd de la base de données. <br/>
+	 * <i>Normalement peu probable qu'un twitAdd soit modifié...</i>
 	 * 
 	 * @param twitToModify
 	 */

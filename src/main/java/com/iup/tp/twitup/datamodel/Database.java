@@ -58,7 +58,7 @@ public class Database implements IDatabase {
 	 */
 	@Override
 	public void addTwit(Twit twitToAdd) {
-		// Ajout du twit
+		// Ajout du twitAdd
 		this.mTwits.add(twitToAdd);
 
 		// Notification des observateurs
@@ -72,7 +72,7 @@ public class Database implements IDatabase {
 	 */
 	@Override
 	public void removeTwit(Twit twitToRemove) {
-		// Suppression du twit
+		// Suppression du twitAdd
 		this.mTwits.remove(twitToRemove);
 
 		// Notification des observateurs
@@ -182,7 +182,7 @@ public class Database implements IDatabase {
 
 		// Parcours de tous les twits de la base
 		for (Twit twit : this.getTwits()) {
-			// Si le twit contiens le tag demandé
+			// Si le twitAdd contiens le tag demandé
 			if (twit.containsTag(tag)) {
 				taggedTwits.add(twit);
 			}
@@ -200,7 +200,7 @@ public class Database implements IDatabase {
 
 		// Parcours de tous les twits de la base
 		for (Twit twit : this.getTwits()) {
-			// Si le twit contiens le tag utilisateur demandé
+			// Si le twitAdd contiens le tag utilisateur demandé
 			if (twit.containsUserTag(userTag)) {
 				taggedTwits.add(twit);
 			}

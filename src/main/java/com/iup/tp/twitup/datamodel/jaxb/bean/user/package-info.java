@@ -5,5 +5,5 @@
 // Generated on: 2015.02.22 at 01:32:54 PM CET 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.example.org/twit/")
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.example.org/twitAdd/")
 package com.iup.tp.twitup.datamodel.jaxb.bean.user;

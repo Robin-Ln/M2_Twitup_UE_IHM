@@ -47,7 +47,7 @@ public class XmlbeanDatamodelConverter {
 	public static Twit convertAsModelTwit(TwitXml twitToConvert, Map<UUID, User> userMap) {
 		UUID twitUuid = UUID.fromString(twitToConvert.getID());
 
-		// Récupération de l'utilisateur source du twit
+		// Récupération de l'utilisateur source du twitAdd
 		User twitUser = userMap.get(UUID.fromString(twitToConvert.getTwiter()));
 		if (twitUser == null) {
 			twitUser = userMap.get(Constants.UNKNONWN_USER_UUID);

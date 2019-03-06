@@ -17,7 +17,7 @@ import com.iup.tp.twitup.datamodel.jaxb.bean.user.UserXml;
  */
 public class JaxbWriter {
 	/**
-	 * Génération d'un fichier pour un twit ({@link TwitXml}).
+	 * Génération d'un fichier pour un twitAdd ({@link TwitXml}).
 	 * 
 	 * @param twit
 	 *            , TwitXml à générer.

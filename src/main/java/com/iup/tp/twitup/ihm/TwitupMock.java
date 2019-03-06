@@ -185,29 +185,29 @@ public class TwitupMock {
 	}
 
 	/**
-	 * Ajoute un twit fictif à la base de données.
+	 * Ajoute un twitAdd fictif à la base de données.
 	 */
 	protected void addTwitInDatabase() {
-		// Création 'un twit fictif
+		// Création 'un twitAdd fictif
 		Twit newTwit = this.generateTwit();
 
-		// Ajout du twit
+		// Ajout du twitAdd
 		this.mDatabase.addTwit(newTwit);
 	}
 
 	/**
-	 * Génération et envoi d'un fichier twit
+	 * Génération et envoi d'un fichier twitAdd
 	 */
 	protected void sendTwit() {
-		// Création d'un twit fictif
+		// Création d'un twitAdd fictif
 		Twit newTwit = this.generateTwit();
 
-		// Génération du fichier twit
+		// Génération du fichier twitAdd
 		this.mEntityManager.sendTwit(newTwit);
 	}
 
 	/**
-	 * Génération d'un twit fictif.
+	 * Génération d'un twitAdd fictif.
 	 */
 	protected Twit generateTwit() {
 		// Si la base n'a pas d'utilisateur
@@ -220,7 +220,7 @@ public class TwitupMock {
 		int userIndex = new Random().nextInt(this.mDatabase.getUsers().size());
 		User randomUser = new ArrayList<User>(this.mDatabase.getUsers()).get(Math.max(0, userIndex - 1));
 
-		// Création d'un twit fictif
+		// Création d'un twitAdd fictif
 		Twit newTwit = new Twit(randomUser, "Twit fictif!! #Mock #test ;)");
 
 		return newTwit;

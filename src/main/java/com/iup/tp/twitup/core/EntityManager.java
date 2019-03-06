@@ -107,11 +107,11 @@ public class EntityManager implements IWatchableDirectoryObserver {
 		// Parcours de la liste des nouveaux twits
 		for (File twitFile : twitFiles) {
 
-			// Extraction du nouveau twit
+			// Extraction du nouveau twitAdd
 			Twit newTwit = this.extractTwit(twitFile);
 
 			if (newTwit != null) {
-				// Ajout du twit
+				// Ajout du twitAdd
 				this.mDatabase.addTwit(newTwit);
 
 				// MAJ de la map
@@ -146,17 +146,17 @@ public class EntityManager implements IWatchableDirectoryObserver {
 		}
 
 		//
-		// Récupération des fichiers twit supprimés
+		// Récupération des fichiers twitAdd supprimés
 		Set<File> deletedTwitFiles = this.getTwitFiles(deletedFiles);
 
-		// Parcours de la liste des fichiers twit supprimés
+		// Parcours de la liste des fichiers twitAdd supprimés
 		for (File deletedTwitFile : deletedTwitFiles) {
 
-			// Récupération du twit correspondant
+			// Récupération du twitAdd correspondant
 			Twit deletedTwit = this.mTwitFileMap.get(deletedTwitFile.getName());
 
 			if (deletedTwit != null) {
-				// Suppression du twit
+				// Suppression du twitAdd
 				this.mDatabase.removeTwit(deletedTwit);
 
 				// MAJ de la map
@@ -173,7 +173,7 @@ public class EntityManager implements IWatchableDirectoryObserver {
 		//
 		// Récupération des utilisateurs en premier (nécessaires pour gérer
 		// les
-		// twit)
+		// twitAdd)
 		Set<File> userFiles = this.getUserFiles(modifiedFiles);
 
 		// Récupération et parcours de la liste des utilisateurs modifiés
@@ -191,26 +191,26 @@ public class EntityManager implements IWatchableDirectoryObserver {
 
 		// Récupération et parcours de la liste des twits modifiés
 		for (Twit modifiedTwit : this.extractAllTwits(twitFiles)) {
-			// Ajout du twit
+			// Ajout du twitAdd
 			this.mDatabase.modifiyTwit(modifiedTwit);
 		}
 	}
 
 	/**
-	 * Extraction de tous les twit d'une liste de fichier.
+	 * Extraction de tous les twitAdd d'une liste de fichier.
 	 * 
 	 * @param allTwitFiles
-	 *            , Liste des fichiers de twit.
+	 *            , Liste des fichiers de twitAdd.
 	 */
 	protected Set<Twit> extractAllTwits(Set<File> allTwitFiles) {
 		Set<Twit> allTwits = new HashSet<Twit>();
 
-		// Parcours de tous les fichiers de twit
+		// Parcours de tous les fichiers de twitAdd
 		for (File twitFile : allTwitFiles) {
-			// Extraction du twit pour le fichier courant
+			// Extraction du twitAdd pour le fichier courant
 			Twit twit = this.extractTwit(twitFile);
 
-			// Si le twit a bien été récupéré
+			// Si le twitAdd a bien été récupéré
 			if (twit != null) {
 				// Sauvegarde de l'objet
 				allTwits.add(twit);
@@ -225,7 +225,7 @@ public class EntityManager implements IWatchableDirectoryObserver {
 	 * <i>Retourne <code>null</code> si un problème est rencontré</i>.
 	 * 
 	 * @param twitFile
-	 *            , Fichier XML du twit à ectraire.
+	 *            , Fichier XML du twitAdd à ectraire.
 	 */
 	protected Twit extractTwit(File twitFile) {
 		Twit newTwit = null;
@@ -349,7 +349,7 @@ public class EntityManager implements IWatchableDirectoryObserver {
 	}
 
 	/**
-	 * Génération du fichier correspondant au twit.
+	 * Génération du fichier correspondant au twitAdd.
 	 * 
 	 * @param twit
 	 */

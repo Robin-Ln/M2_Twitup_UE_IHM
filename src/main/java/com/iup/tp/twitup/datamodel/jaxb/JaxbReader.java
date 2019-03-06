@@ -18,7 +18,7 @@ public class JaxbReader {
 
 	protected static final String JAXB_BEAN_ROOT_PACKAGE = "com.iup.tp.twitup.datamodel.jaxb.bean";
 
-	protected static final String JAXB_TWIT_BEAN_PACKAGE = JAXB_BEAN_ROOT_PACKAGE + "." + "twit";
+	protected static final String JAXB_TWIT_BEAN_PACKAGE = JAXB_BEAN_ROOT_PACKAGE + "." + "twitAdd";
 
 	protected static final String JAXB_USER_BEAN_PACKAGE = JAXB_BEAN_ROOT_PACKAGE + "." + "user";
 

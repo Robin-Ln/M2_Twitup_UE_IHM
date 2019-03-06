@@ -1,20 +1,22 @@
 package com.iup.tp.twitup.core;
 
+import com.iup.tp.twitup.common.Constants;
 import com.iup.tp.twitup.common.PropertiesManager;
 import com.iup.tp.twitup.datamodel.*;
 import com.iup.tp.twitup.events.file.IWatchableDirectory;
 import com.iup.tp.twitup.events.file.WatchableDirectory;
-import com.iup.tp.twitup.ihm.IIhmObservable;
+import com.iup.tp.twitup.ihm.ITwitupMainView;
 import com.iup.tp.twitup.ihm.ITwitupMainViewObserver;
 import com.iup.tp.twitup.ihm.TwitupMainView;
 import com.iup.tp.twitup.ihm.TwitupMock;
+import com.iup.tp.twitup.ihm.components.centerComponent.CenterComponent;
+import com.iup.tp.twitup.ihm.components.northComponent.NorthComponent;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import java.io.File;
 import java.net.URL;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.Properties;
 import java.util.Set;
 
@@ -38,6 +40,17 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 	 * Vue principale de l'application.
 	 */
 	protected TwitupMainView mMainView;
+
+	/**
+	 * mNorthCompoent
+	 */
+	private NorthComponent mNorthCompoent;
+
+	/**
+	 * mCenterCompoent
+	 */
+	private CenterComponent mCenterComponent;
+
 
 	/**
 	 * Classe de surveillance de répertoire
@@ -85,6 +98,9 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 		// Initialisation de la base de données
 		this.initDatabase();
 
+		// Init du fu boolean mock
+		this.initMockEnabled();
+
 		if (this.mIsMockEnabled) {
 			// Initialisation du bouchon de travail
 			this.initMock();
@@ -95,6 +111,14 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 
 		// Initialisation du répertoire d'échange
 		this.initDirectory();
+	}
+
+	/**
+	 * Initialisation du du boolean mock
+	 */
+	private void initMockEnabled() {
+		String mock = this.mProperties.getProperty(Constants.CONFIGURATION_KEY_MOCK_ENABLED);
+		this.mIsMockEnabled = Boolean.parseBoolean(mock);
 	}
 
 	/**
@@ -124,7 +148,7 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 	 */
 	protected void initLookAndFeel() {
 		try {
-			String lookAndFeel = this.mProperties.getProperty("UI_CLASS_NAME");
+			String lookAndFeel = this.mProperties.getProperty(Constants.CONFIGURATION_KEY_UI_CLASS_NAME);
 			if (StringUtils.isBlank(lookAndFeel)) {
 				lookAndFeel = UIManager.getSystemLookAndFeelClassName();
 			}
@@ -141,6 +165,14 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 	protected void initGui() {
 		// this.mMainView...
 		this.mMainView = new TwitupMainView(this.mDatabase,this.mEntityManager,this.mLocale);
+		this.mMainView.initGUI();
+		this.mNorthCompoent = new NorthComponent(this.mDatabase,this.mEntityManager,this.mLocale);
+
+
+		// initialisation du composent north
+		this.mMainView.setNorthComponent(this.mNorthCompoent);
+		this.mNorthCompoent.addObserver(this.mMainView);
+
 		this.mMainView.addObserver(this);
 		this.mDatabase.addObserver(this);
 	}
@@ -153,7 +185,7 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 	 */
 	protected void initDirectory() {
 
-		String path = this.mProperties.getProperty("EXCHANGE_DIRECTORY");
+		String path = this.mProperties.getProperty(Constants.CONFIGURATION_KEY_EXCHANGE_DIRECTORY);
 
 		if (StringUtils.isNotBlank(path)){
 			this.initDirectory(path);
@@ -211,7 +243,6 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 
 	public void show() {
 		this.mMainView.showGUI();
-		this.initMock();
 	}
 
 	/**
@@ -262,7 +293,7 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 	}
 
 	@Override
-	public void notifyWindowClosing(IIhmObservable observable) {
+	public void notifyWindowClosing(ITwitupMainView observable) {
 		observable.deleteObserver(this);
 		String path = getClass().getClassLoader().getResource("configuration.properties").getPath();
 		PropertiesManager.writeProperties(this.mProperties, path);
@@ -273,14 +304,33 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 
 		Set<User> users = this.mDatabase.getUsers();
 
+		String password2 = password.toString();
+
+
+
 		for (User user : users) {
-			System.out.println(user.getUserPassword());
-			if(Objects.equals(user.getName(),name)
-					&& Objects.equals(user.getUserPassword(),password.toString())){
+
+			if(user.getName().equals(name)){
+
+				for (int i = 0; i<password.length; i++) {
+					if (! (password[i] == user.getUserPassword().toCharArray()[i])) {
+						this.mMainView.handlerConnection(++nbConnexion);
+					}
+				}
+				this.handlerSuccessConnexion(user);
 				return;
 			}
 		}
 
 		this.mMainView.handlerConnection(++nbConnexion);
+	}
+
+	/**
+	 * Handler
+	 */
+
+	private void handlerSuccessConnexion(User user){
+		this.mCenterComponent = new CenterComponent(this.mDatabase,this.mEntityManager,this.mLocale);
+		this.mMainView.setCenterComponent(this.mCenterComponent);
 	}
 }

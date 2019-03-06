@@ -14,7 +14,7 @@ import javax.xml.namespace.QName;
 
 /**
  * This object contains factory methods for each Java content interface and Java
- * element interface generated in the com.iup.tp.twitup.jaxb.bean.twit package.
+ * element interface generated in the com.iup.tp.twitup.jaxb.bean.twitAdd package.
  * <p>
  * An ObjectFactory allows you to programatically construct new instances of the
  * Java representation for XML content. The Java representation of XML content
@@ -26,11 +26,11 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-	private final static QName _Twit_QNAME = new QName("http://www.example.org/twit/", "Twit");
+	private final static QName _Twit_QNAME = new QName("http://www.example.org/twitAdd/", "Twit");
 
 	/**
 	 * Create a new ObjectFactory that can be used to create new instances of
-	 * schema derived classes for package: com.iup.tp.twitup.jaxb.bean.twit
+	 * schema derived classes for package: com.iup.tp.twitup.jaxb.bean.twitAdd
 	 * 
 	 */
 	public ObjectFactory() {
@@ -49,7 +49,7 @@ public class ObjectFactory {
 	 * {@code >}}
 	 * 
 	 */
-	@XmlElementDecl(namespace = "http://www.example.org/twit/", name = "Twit")
+	@XmlElementDecl(namespace = "http://www.example.org/twitAdd/", name = "Twit")
 	public JAXBElement<TwitXml> createTwit(TwitXml value) {
 		return new JAXBElement<TwitXml>(_Twit_QNAME, TwitXml.class, null, value);
 	}

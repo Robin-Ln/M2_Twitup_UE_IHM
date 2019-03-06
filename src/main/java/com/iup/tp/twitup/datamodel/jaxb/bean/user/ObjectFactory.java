@@ -26,7 +26,7 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-	private final static QName _User_QNAME = new QName("http://www.example.org/twit/", "User");
+	private final static QName _User_QNAME = new QName("http://www.example.org/twitAdd/", "User");
 
 	/**
 	 * Create a new ObjectFactory that can be used to create new instances of
@@ -49,7 +49,7 @@ public class ObjectFactory {
 	 * {@code >}}
 	 * 
 	 */
-	@XmlElementDecl(namespace = "http://www.example.org/twit/", name = "User")
+	@XmlElementDecl(namespace = "http://www.example.org/twitAdd/", name = "User")
 	public JAXBElement<UserXml> createUser(UserXml value) {
 		return new JAXBElement<UserXml>(_User_QNAME, UserXml.class, null, value);
 	}

@@ -9,13 +9,13 @@ import javax.naming.ldap.HasControls;
 import com.iup.tp.twitup.common.Constants;
 
 /**
- * Classe du modèle représentant un twit.
+ * Classe du modèle représentant un twitAdd.
  * 
  * @author S.Lucas
  */
 public class Twit {
 	/**
-	 * Identifiant unique du twit.
+	 * Identifiant unique du twitAdd.
 	 */
 	protected final UUID mUuid;
 
@@ -25,7 +25,7 @@ public class Twit {
 	protected final User mTwiter;
 
 	/**
-	 * Date d'émission du twit.
+	 * Date d'émission du twitAdd.
 	 */
 	protected final long mEmissionDate;
 
@@ -35,19 +35,19 @@ public class Twit {
 	protected final String mText;
 
 	/**
-	 * Liste des tags représentant un utilisateur présent dans le twit.
+	 * Liste des tags représentant un utilisateur présent dans le twitAdd.
 	 */
 	protected final Set<String> mUserTags;
 
 	/**
-	 * Liste des tags présent dans le twit.
+	 * Liste des tags présent dans le twitAdd.
 	 */
 	protected final Set<String> mTags;
 
 	/**
 	 * Constructeur.
 	 * 
-	 * @param twiter utilisateur à l'origine du twit.
+	 * @param twiter utilisateur à l'origine du twitAdd.
 	 * @param text   , corps du message.
 	 */
 	public Twit(User twiter, String text) {
@@ -57,9 +57,9 @@ public class Twit {
 	/**
 	 * Constructeur.
 	 * 
-	 * @param twitUuid     , identifiant du twit.
-	 * @param twiter       , utilisateur à l'origine du twit.
-	 * @param emissionDate , date d'émission du twit.
+	 * @param twitUuid     , identifiant du twitAdd.
+	 * @param twiter       , utilisateur à l'origine du twitAdd.
+	 * @param emissionDate , date d'émission du twitAdd.
 	 * @param text         , corps du message.
 	 */
 	public Twit(UUID twitUuid, User twiter, long emissionDate, String text) {
@@ -154,8 +154,8 @@ public class Twit {
 	}
 
 	/**
-	 * Retourne une liste clonée des tags du twit. <br/>
-	 * <i> Les tags sont les mots du twit précédés par la
+	 * Retourne une liste clonée des tags du twitAdd. <br/>
+	 * <i> Les tags sont les mots du twitAdd précédés par la
 	 * {@link Constants#WORD_TAG_DELIMITER}</i>
 	 */
 	public Set<String> getTags() {
@@ -163,8 +163,8 @@ public class Twit {
 	}
 
 	/**
-	 * Retourne une liste clonée des tags du twit représentant un utilisateur. <br/>
-	 * <i> Les tags utilisateurs sont les mots du twit précédés par la
+	 * Retourne une liste clonée des tags du twitAdd représentant un utilisateur. <br/>
+	 * <i> Les tags utilisateurs sont les mots du twitAdd précédés par la
 	 * {@link Constants#USER_TAG_DELIMITER}</i>
 	 */
 	public Set<String> getUserTags() {

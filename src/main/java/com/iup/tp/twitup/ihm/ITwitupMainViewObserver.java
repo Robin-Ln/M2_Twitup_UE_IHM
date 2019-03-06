@@ -6,7 +6,7 @@ public interface ITwitupMainViewObserver {
 
     void notifyEchangeDirectoryChange(File file);
 
-    void notifyWindowClosing(IIhmObservable observable);
+    void notifyWindowClosing(ITwitupMainView observable);
 
     void notifyRequestUserConnexion(String name, char[] password, Integer nbConnexion);
 
