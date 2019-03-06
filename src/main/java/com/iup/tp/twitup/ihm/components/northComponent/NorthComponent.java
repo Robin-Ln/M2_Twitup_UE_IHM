@@ -2,6 +2,8 @@ package com.iup.tp.twitup.ihm.components.northComponent;
 
 import com.iup.tp.twitup.core.EntityManager;
 import com.iup.tp.twitup.datamodel.IDatabase;
+import com.iup.tp.twitup.datamodel.Twit;
+import com.iup.tp.twitup.ihm.components.twitComponent.TwitComponent;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -62,6 +64,7 @@ public class NorthComponent extends JPanel implements INorthComponent {
         this.setOpaque(true);
         this.setBackground(new Color(50,150,200,70));
         this.setBorder(new LineBorder(Color.BLUE, 4,true));
+        this.setLayout(new GridBagLayout());
 
         /**
          * Bouton de connexion

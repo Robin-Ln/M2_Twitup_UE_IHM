@@ -71,13 +71,14 @@ public class CenterComponent extends JPanel implements ICenterComponent, IListTw
         this.setOpaque(true);
         this.setBackground(new Color(50,150,200,70));
         this.setBorder(new LineBorder(Color.BLUE, 4,true));
+        this.setLayout(new GridBagLayout());
+
 
         /**
          * Liste des twits
          */
         Set<Twit> twits = this.mDatabase.getTwits();
         ListTwitComponent listTwitComponent = new ListTwitComponent(twits);
-        this.add(listTwitComponent);
         listTwitComponent.addObserver(this);
 
         /**
@@ -85,7 +86,24 @@ public class CenterComponent extends JPanel implements ICenterComponent, IListTw
          */
         TwitAddComponent twitAddComponent = new TwitAddComponent(this.mBundle, this.mUser);
         twitAddComponent.addObserver(listTwitComponent);
-        this.add(twitAddComponent);
+
+        /**
+         * Ajout des composents
+         */
+
+
+        this.add(twitAddComponent,
+                new GridBagConstraints(0, 0, 1, 1, 1, 0,
+                        GridBagConstraints.NORTH,
+                        GridBagConstraints.BOTH,
+                        new Insets(5, 5, 0, 5), 0, 0));
+
+        this.add(listTwitComponent,
+                new GridBagConstraints(1, 0, 1, 1, 1, 1,
+                        GridBagConstraints.NORTH,
+                        GridBagConstraints.BOTH,
+                        new Insets(5, 5, 0, 5), 0, 0));
+
     }
 
     /**
@@ -93,7 +111,9 @@ public class CenterComponent extends JPanel implements ICenterComponent, IListTw
      */
     @Override
     public void notifyTwitListUpdate() {
-        this.revalidate();
-        this.repaint();
+
+        for (ICenterComponentObserver observer : this.mObservers){
+            observer.notifyViewChange();
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.iup.tp.twitup.ihm;
 
 import com.iup.tp.twitup.core.EntityManager;
 import com.iup.tp.twitup.datamodel.IDatabase;
+import com.iup.tp.twitup.ihm.components.listTwitComponent.IListTwitComponentObserver;
 import com.iup.tp.twitup.ihm.components.northComponent.INorthComponentObserver;
 import com.iup.tp.twitup.ihm.components.twitAdd.TwitAddComponent;
 
@@ -173,7 +174,7 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
     public void handlerConnection(Integer nbConnexion) {
 
 
-        JTextField nameField = new JTextField();
+        JTextField nameField = new JTextField("MockUser51184");
         JPasswordField passwordField = new JPasswordField();
         JPanel panel = new JPanel(new GridLayout(0, 2));
 

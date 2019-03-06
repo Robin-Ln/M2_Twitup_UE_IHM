@@ -17,18 +17,54 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent, ITw
      */
     private final Set<IListTwitComponentObserver> mObservers;
 
+    /**
+     * Nonbre de twit
+     */
+    private Integer nbTwit;
+
+
+    /**
+     * Contenue de la liste
+     */
+    JPanel contenu;
 
     public ListTwitComponent(Set<Twit> twits) {
 
         this.mObservers = new HashSet<>();
+        this.nbTwit = 0;
+        this.init(twits);
 
+    }
+
+    private void init(Set<Twit> twits){
 
         this.setBackground(new Color(50,150,200,70));
-        this.setBorder(new LineBorder(Color.BLUE, 4,true));
+        this.setBorder(new LineBorder(Color.MAGENTA, 4,true));
+
+        this.contenu = new JPanel(new GridBagLayout());
+
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.getViewport().add(contenu);
+
+        this.add(scrollPane,
+                new GridBagConstraints(0, 0, 1, 1, 1, 1,
+                        GridBagConstraints.SOUTH,
+                        GridBagConstraints.NONE,
+                        new Insets(5, 5, 0, 5), 0, 0));
 
         for (Twit twit : twits) {
-            this.add(new TwitComponent(twit));
+            this.handlerAddTwit(twit);
         }
+    }
+
+    private void handlerAddTwit(Twit twit){
+        TwitComponent twitComponent = new TwitComponent(twit);
+        this.nbTwit ++;
+        this.contenu.add(twitComponent,
+                new GridBagConstraints(0, this.nbTwit, 1, 1, 1, 1,
+                        GridBagConstraints.NORTH,
+                        GridBagConstraints.HORIZONTAL,
+                        new Insets(5, 5, 0, 5), 0, 0));
     }
 
     /**
@@ -36,7 +72,7 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent, ITw
      */
     @Override
     public void notifyNewTwit(Twit twit) {
-        this.add(new TwitComponent(twit));
+        this.handlerAddTwit(twit);
         for (IListTwitComponentObserver observer : this.mObservers) {
             observer.notifyTwitListUpdate();
         }

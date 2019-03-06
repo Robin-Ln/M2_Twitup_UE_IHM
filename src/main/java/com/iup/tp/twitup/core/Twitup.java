@@ -10,6 +10,7 @@ import com.iup.tp.twitup.ihm.ITwitupMainViewObserver;
 import com.iup.tp.twitup.ihm.TwitupMainView;
 import com.iup.tp.twitup.ihm.TwitupMock;
 import com.iup.tp.twitup.ihm.components.centerComponent.CenterComponent;
+import com.iup.tp.twitup.ihm.components.centerComponent.ICenterComponentObserver;
 import com.iup.tp.twitup.ihm.components.northComponent.NorthComponent;
 import org.apache.commons.lang3.StringUtils;
 
@@ -25,7 +26,7 @@ import java.util.Set;
  * 
  * @author S.Lucas
  */
-public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
+public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver, ICenterComponentObserver {
 	/**
 	 * Base de données.
 	 */
@@ -326,11 +327,21 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 	}
 
 	/**
+	 * Methode de ICenterComponentObserver
+	 */
+	@Override
+	public void notifyViewChange() {
+		this.mMainView.revalidate();
+		this.mMainView.repaint();
+	}
+
+	/**
 	 * Handler
 	 */
 
 	private void handlerSuccessConnexion(User user){
 		this.mCenterComponent = new CenterComponent(this.mDatabase,this.mEntityManager,this.mLocale, user);
+		this.mCenterComponent.addObserver(this);
 		this.mMainView.setCenterComponent(this.mCenterComponent);
 	}
 }
