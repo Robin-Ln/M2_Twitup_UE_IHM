@@ -2,18 +2,21 @@ package com.iup.tp.twitup.ihm.components.centerComponent;
 
 import com.iup.tp.twitup.core.EntityManager;
 import com.iup.tp.twitup.datamodel.IDatabase;
+import com.iup.tp.twitup.datamodel.Twit;
+import com.iup.tp.twitup.datamodel.User;
+import com.iup.tp.twitup.ihm.components.listTwitComponent.IListTwitComponentObserver;
+import com.iup.tp.twitup.ihm.components.listTwitComponent.ListTwitComponent;
+import com.iup.tp.twitup.ihm.components.twitAdd.TwitAddComponent;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-public class CenterComponent extends JPanel implements ICenterComponent {
+public class CenterComponent extends JPanel implements ICenterComponent, IListTwitComponentObserver {
 
     /**
      * Liste des observateurs de modifications de la base.
@@ -35,12 +38,18 @@ public class CenterComponent extends JPanel implements ICenterComponent {
      */
     private ResourceBundle mBundle;
 
-    public CenterComponent(IDatabase database, EntityManager entityManager, Locale locale) {
+    /**
+     * Nom de l'utilisateur
+     */
+    private User mUser;
+
+    public CenterComponent(IDatabase database, EntityManager entityManager, Locale locale, User user) {
         super();
         this.mDatabase = database;
         this.mEntityManager = entityManager;
         this.mObservers = new HashSet<>();
         this.mBundle = ResourceBundle.getBundle("local", locale);
+        this.mUser = user;
         this.init();
     }
 
@@ -64,9 +73,27 @@ public class CenterComponent extends JPanel implements ICenterComponent {
         this.setBorder(new LineBorder(Color.BLUE, 4,true));
 
         /**
-         * Label connexion OK
+         * Liste des twits
          */
-        JLabel label = new JLabel("OK");
-        this.add(label);
+        Set<Twit> twits = this.mDatabase.getTwits();
+        ListTwitComponent listTwitComponent = new ListTwitComponent(twits);
+        this.add(listTwitComponent);
+        listTwitComponent.addObserver(this);
+
+        /**
+         * ajouter un twit
+         */
+        TwitAddComponent twitAddComponent = new TwitAddComponent(this.mBundle, this.mUser);
+        twitAddComponent.addObserver(listTwitComponent);
+        this.add(twitAddComponent);
+    }
+
+    /**
+     * Methode de IListTwitComponentObserver
+     */
+    @Override
+    public void notifyTwitListUpdate() {
+        this.revalidate();
+        this.repaint();
     }
 }

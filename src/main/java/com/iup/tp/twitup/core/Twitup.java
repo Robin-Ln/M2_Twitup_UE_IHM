@@ -330,7 +330,7 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 	 */
 
 	private void handlerSuccessConnexion(User user){
-		this.mCenterComponent = new CenterComponent(this.mDatabase,this.mEntityManager,this.mLocale);
+		this.mCenterComponent = new CenterComponent(this.mDatabase,this.mEntityManager,this.mLocale, user);
 		this.mMainView.setCenterComponent(this.mCenterComponent);
 	}
 }

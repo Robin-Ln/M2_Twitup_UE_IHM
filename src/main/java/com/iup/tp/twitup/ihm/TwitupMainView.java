@@ -53,18 +53,28 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
         this.mBundle = ResourceBundle.getBundle("local", locale);
     }
 
+    public void showGUI() {
+        // dimenssion
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setSize(screenSize);
+
+        // Affichage dans l'EDT
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+
+                // Affichage
+                TwitupMainView.this.setVisible(true);
+            }
+        });
+    }
+
     /**
      * Initialisation de l'IHM
      */
     public void initGUI() {
         // Création de la fenetre principale
         this.setTitle(this.mBundle.getString("titre"));
-
-        // dimenssion
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        screenSize.height /=  2;
-        screenSize.width /= 2;
-        this.setSize(screenSize);
 
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -117,12 +127,6 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
 
 
         /**
-         * twitAdd component
-         */
-
-        TwitAddComponent twitComponent = new TwitAddComponent();
-
-        /**
          * Bouton de connexion
          */
 
@@ -161,7 +165,6 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
         this.revalidate();
         this.repaint();
     }
-
 
 
     /**
@@ -255,15 +258,4 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
         this.handlerConnection(0);
     }
 
-    public void showGUI() {
-        // Affichage dans l'EDT
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-
-                // Affichage
-                TwitupMainView.this.setVisible(true);
-            }
-        });
-    }
 }
