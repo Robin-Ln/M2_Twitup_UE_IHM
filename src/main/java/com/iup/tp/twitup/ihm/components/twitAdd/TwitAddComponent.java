@@ -8,6 +8,8 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -29,6 +31,10 @@ public class TwitAddComponent extends JPanel implements ITwitAddComponent {
      */
     private User mUser;
 
+    /**
+     * boolean aFlag > 250 caract
+     */
+    Boolean isError;
 
     public TwitAddComponent(ResourceBundle bundle, User user) {
         super();
@@ -38,6 +44,8 @@ public class TwitAddComponent extends JPanel implements ITwitAddComponent {
         this.mBundle = bundle;
 
         this.mUser = user;
+
+        this.isError = true;
 
         this.init();
     }
@@ -60,12 +68,37 @@ public class TwitAddComponent extends JPanel implements ITwitAddComponent {
 
         this.setBackground(new Color(50,150,200,70));
         this.setBorder(new LineBorder(Color.CYAN, 4,true));
+        this.setLayout(new GridBagLayout());
+
+        /**
+         * Labelle pas plus de 100 caractère
+         */
+        JLabel errorLabel = new JLabel("test");
 
         /**
          * text area
          */
         TextArea textArea = new TextArea();
-        this.add(textArea);
+        textArea.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if(textArea.getText().length() < 250){
+                    errorLabel.setVisible(false);
+                } else {
+                    errorLabel.setVisible(true);
+                }
+            }
+        });
 
 
         /**
@@ -75,13 +108,35 @@ public class TwitAddComponent extends JPanel implements ITwitAddComponent {
         ajouterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (ITwitAddComponentObserver observer : TwitAddComponent.this.mObservers) {
-                    Twit twit = new Twit(TwitAddComponent.this.mUser, textArea.getText());
-                    observer.notifyNewTwit(twit);
+                if (textArea.getText().length() > 250) {
+                    for (ITwitAddComponentObserver observer : TwitAddComponent.this.mObservers) {
+                        Twit twit = new Twit(TwitAddComponent.this.mUser, textArea.getText());
+                        observer.notifyNewTwit(twit);
+                    }
                 }
             }
         });
-        this.add(ajouterButton);
+
+
+        /**
+         * Ajout des composant dans le layout
+         */
+        this.add(textArea, new GridBagConstraints(0, 0, 1, 1, 1, 1,
+                GridBagConstraints.NORTH,
+                GridBagConstraints.BOTH,
+                new Insets(5, 5, 0, 5), 0, 0));
+
+
+        this.add(errorLabel, new GridBagConstraints(0, 1, 1, 1, 1, 1,
+                GridBagConstraints.NORTH,
+                GridBagConstraints.BOTH,
+                new Insets(5, 5, 0, 5), 0, 0));
+
+
+        this.add(ajouterButton, new GridBagConstraints(1, 0, 1, 1, 0, 1,
+                GridBagConstraints.NORTH,
+                GridBagConstraints.BOTH,
+                new Insets(5, 5, 0, 5), 0, 0));
     }
 
 }

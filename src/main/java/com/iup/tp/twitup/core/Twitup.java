@@ -311,13 +311,8 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver, ICent
 
 		for (User user : users) {
 
-			if(user.getName().equals(name)){
-
-				for (int i = 0; i<password.length; i++) {
-					if (! (password[i] == user.getUserPassword().toCharArray()[i])) {
-						this.mMainView.handlerConnection(++nbConnexion);
-					}
-				}
+			if(user.getName().equals(name) &&
+				user.getUserPassword().equals(new String(password))){
 				this.handlerSuccessConnexion(user);
 				return;
 			}

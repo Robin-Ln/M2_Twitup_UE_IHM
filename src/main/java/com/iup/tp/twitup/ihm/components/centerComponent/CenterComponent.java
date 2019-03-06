@@ -99,7 +99,7 @@ public class CenterComponent extends JPanel implements ICenterComponent, IListTw
                         new Insets(5, 5, 0, 5), 0, 0));
 
         this.add(listTwitComponent,
-                new GridBagConstraints(1, 0, 1, 1, 1, 1,
+                new GridBagConstraints(0, 1, 1, 1, 1, 1,
                         GridBagConstraints.NORTH,
                         GridBagConstraints.BOTH,
                         new Insets(5, 5, 0, 5), 0, 0));
@@ -110,7 +110,7 @@ public class CenterComponent extends JPanel implements ICenterComponent, IListTw
      * Methode de IListTwitComponentObserver
      */
     @Override
-    public void notifyTwitListUpdate() {
+    public void notifyViewChange() {
 
         for (ICenterComponentObserver observer : this.mObservers){
             observer.notifyViewChange();

@@ -6,4 +6,5 @@ public interface ITwitAddComponentObserver {
 
     void notifyNewTwit(Twit twit);
 
+    void notifyViewChange();
 }

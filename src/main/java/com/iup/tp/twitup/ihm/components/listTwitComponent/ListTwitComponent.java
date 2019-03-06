@@ -5,7 +5,6 @@ import com.iup.tp.twitup.ihm.components.twitAdd.ITwitAddComponentObserver;
 import com.iup.tp.twitup.ihm.components.twitComponent.TwitComponent;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -71,8 +70,13 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent, ITw
     public void notifyNewTwit(Twit twit) {
         this.handlerAddTwit(twit);
         for (IListTwitComponentObserver observer : this.mObservers) {
-            observer.notifyTwitListUpdate();
+            observer.notifyViewChange();
         }
+    }
+
+    @Override
+    public void notifyViewChange() {
+
     }
 
     /**
