@@ -37,20 +37,17 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent, ITw
     }
 
     private void init(Set<Twit> twits){
-
-        this.setBackground(new Color(50,150,200,70));
-        this.setBorder(new LineBorder(Color.MAGENTA, 4,true));
+        this.setLayout(new GridBagLayout());
+        JScrollPane scrollPane = new JScrollPane();
 
         this.contenu = new JPanel(new GridBagLayout());
+        scrollPane.getViewport().add(this.contenu);
 
-        JScrollPane scrollPane = new JScrollPane();
-        scrollPane.getViewport().add(contenu);
-
-        this.add(scrollPane,
-                new GridBagConstraints(0, 0, 1, 1, 1, 1,
-                        GridBagConstraints.SOUTH,
-                        GridBagConstraints.NONE,
+        this.add(scrollPane, new GridBagConstraints(0, 0, 1, 1, 1, 1,
+                        GridBagConstraints.NORTH,
+                        GridBagConstraints.BOTH,
                         new Insets(5, 5, 0, 5), 0, 0));
+
 
         for (Twit twit : twits) {
             this.handlerAddTwit(twit);
@@ -61,7 +58,7 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent, ITw
         TwitComponent twitComponent = new TwitComponent(twit);
         this.nbTwit ++;
         this.contenu.add(twitComponent,
-                new GridBagConstraints(0, this.nbTwit, 1, 1, 1, 1,
+                new GridBagConstraints(0, this.nbTwit, 1, 1, 1, 0,
                         GridBagConstraints.NORTH,
                         GridBagConstraints.HORIZONTAL,
                         new Insets(5, 5, 0, 5), 0, 0));
