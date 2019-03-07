@@ -60,15 +60,16 @@ public class NorthLogoutComponent extends JPanel implements INorthLogoutComponen
          * Layout
          */
         this.setLayout(new GridBagLayout());
+
         this.add(siginButton,
                 new GridBagConstraints(0, 0, 1, 1, 0, 0,
-                        GridBagConstraints.NORTHEAST,
+                        GridBagConstraints.EAST,
                         GridBagConstraints.NONE,
                         new Insets(5, 5, 0, 5), 0, 0));
 
         this.add(connexionButton,
                 new GridBagConstraints(1, 0, 1, 1, 0, 0,
-                        GridBagConstraints.NORTHEAST,
+                        GridBagConstraints.EAST,
                         GridBagConstraints.NONE,
                         new Insets(5, 5, 0, 5), 0, 0));
 

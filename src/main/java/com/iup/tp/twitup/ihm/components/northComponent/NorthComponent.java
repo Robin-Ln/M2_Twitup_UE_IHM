@@ -41,11 +41,6 @@ public class NorthComponent extends JPanel implements INorthComponent, ITwitupMa
      */
     private EntityManager mEntityManager;
 
-    /**
-     * Pannel deonnecter
-     */
-    private JPanel contenue;
-
 
 
     /**
@@ -86,38 +81,22 @@ public class NorthComponent extends JPanel implements INorthComponent, ITwitupMa
         this.setBorder(new LineBorder(Color.BLUE, 4,true));
         this.setLayout(new GridBagLayout());
 
-        /**
-         * Ajout dans le layout
-         */
-        this.contenue = new JPanel();
-        this.contenue.setLayout(new GridBagLayout());
-
-
-        /**
-         * Ajout du contenue
-         */
         this.handlerLogout();
-        this.add(this.contenue,
-                new GridBagConstraints(0, 0, 1, 1, 0, 0,
-                        GridBagConstraints.NORTH,
-                        GridBagConstraints.HORIZONTAL,
-                        new Insets(0, 0, 0, 0), 0, 0));
     }
 
     /**
      * handler logout
      */
     private void handlerLogout(){
-
-        this.contenue.removeAll();
+        this.removeAll();
 
         NorthLogoutComponent northLogoutComponent = new NorthLogoutComponent(this.mBundle);
         northLogoutComponent.addObserver(this);
 
-        this.contenue.add(northLogoutComponent,
-                new GridBagConstraints(0, 0, 1, 1, 0, 0,
+        this.add(northLogoutComponent,
+                new GridBagConstraints(0, 0, 1, 1, 1, 0,
                         GridBagConstraints.EAST,
-                        GridBagConstraints.HORIZONTAL,
+                        GridBagConstraints.NONE,
                         new Insets(0, 0, 0, 0), 0, 0));
 
         this.revalidate();
@@ -133,12 +112,12 @@ public class NorthComponent extends JPanel implements INorthComponent, ITwitupMa
 
     @Override
     public void notifySuccessConnexion(User user) {
-        this.contenue.removeAll();
+        this.removeAll();
 
         NorthLogedComponent northLogedComponent = new NorthLogedComponent(this.mBundle);
         northLogedComponent.addObserver(this);
 
-        this.contenue.add(northLogedComponent,
+        this.add(northLogedComponent,
                 new GridBagConstraints(0, 0, 1, 1, 1, 0,
                         GridBagConstraints.NORTH,
                         GridBagConstraints.HORIZONTAL,
