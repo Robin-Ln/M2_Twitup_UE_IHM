@@ -39,7 +39,7 @@ public class LoginComponent implements ILoginComponent {
     public void open() {
         JPanel dialogPanel = new JPanel();
 
-        JTextField nameField = new JTextField("MockUser51184");
+        JTextField nameField = new JTextField("MockUser63035");
         JPasswordField passwordField = new JPasswordField("--");
         dialogPanel.setLayout(new GridLayout(0, 2));
 

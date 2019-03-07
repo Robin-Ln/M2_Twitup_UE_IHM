@@ -1,5 +1,7 @@
 package com.iup.tp.twitup.ihm.components.listTwitComponent;
 
+import com.iup.tp.twitup.core.EntityManager;
+import com.iup.tp.twitup.datamodel.IDatabase;
 import com.iup.tp.twitup.datamodel.Twit;
 import com.iup.tp.twitup.ihm.components.twitAdd.ITwitAddComponentObserver;
 import com.iup.tp.twitup.ihm.components.twitComponent.TwitComponent;
@@ -27,10 +29,24 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent, ITw
      */
     JPanel contenu;
 
-    public ListTwitComponent(Set<Twit> twits) {
+    /**
+     * Gestionnaire de bdd et de fichier.
+     */
+    private EntityManager mEntityManager;
 
+    /**
+     * Data base
+     */
+    /**
+     * Base de donénes de l'application.
+     */
+    private IDatabase mDatabase;
+
+    public ListTwitComponent(Set<Twit> twits, IDatabase database, EntityManager entityManager) {
         this.mObservers = new HashSet<>();
         this.nbTwit = 0;
+        this.mDatabase = database;
+        this.mEntityManager = entityManager;
         this.init(twits);
 
     }
@@ -53,6 +69,29 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent, ITw
         }
     }
 
+    /**
+     * Handler
+     */
+
+    public void handlerSreachTwit(String search){
+
+        // TODO: si vide get tous les twits
+
+        Set<Twit> twits = this.mDatabase.getTwitsWithTag(search);
+        twits.addAll(this.mDatabase.getTwitsWithUserTag(search));
+        this.handlerUpdateListTwith(twits);
+    }
+
+    private void handlerUpdateListTwith(Set<Twit> twits) {
+        this.contenu.removeAll();
+        for (Twit twit : twits) {
+            this.handlerAddTwit(twit);
+        }
+        for (IListTwitComponentObserver observer : this.mObservers) {
+            observer.notifyViewChange();
+        }
+    }
+
     private void handlerAddTwit(Twit twit){
         TwitComponent twitComponent = new TwitComponent(twit);
         this.nbTwit ++;
@@ -69,6 +108,7 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent, ITw
     @Override
     public void notifyNewTwit(Twit twit) {
         this.handlerAddTwit(twit);
+        this.mEntityManager.sendTwit(twit);
         for (IListTwitComponentObserver observer : this.mObservers) {
             observer.notifyViewChange();
         }

@@ -48,7 +48,7 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
     /**
      * Center panel
      */
-    private JPanel centerPanel;
+    private CenterComponent centerComponent;
 
     /**
      * Constructeur.
@@ -157,8 +157,8 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
         this.repaint();
     }
 
-    public void setCenterComponent(JPanel component){
-        this.centerPanel = component;
+    public void setCenterComponent(CenterComponent component){
+        this.centerComponent = component;
         this.getContentPane().add(component, BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
@@ -238,15 +238,14 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
 
     @Override
     public void notifyRequestLogout() {
-        this.remove(this.centerPanel);
-        this.centerPanel = null;
+        this.centerComponent.removeAll();
         this.notifyViewChange();
 
     }
 
     @Override
     public void notifySearchRequest(String search) {
-
+        this.centerComponent.notifySearchRequest(search);
     }
 
     /**
@@ -268,9 +267,12 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
      */
 
     private void handlerSuccessConnexion(User user){
-        CenterComponent centerComponent = new CenterComponent(this.mDatabase,this.mEntityManager,this.mBundle, user);
-        centerComponent.addObserver(this);
-        this.setCenterComponent(centerComponent);
+
+        if(this.centerComponent == null){
+            CenterComponent centerComponent = new CenterComponent(this.mDatabase,this.mEntityManager,this.mBundle, user);
+            centerComponent.addObserver(this);
+            this.setCenterComponent(centerComponent);
+        }
 
         for (ITwitupMainViewObserver observer : this.mObservers) {
             observer.notifySuccessConnexion(user);

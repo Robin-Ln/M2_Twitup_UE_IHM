@@ -6,6 +6,7 @@ import com.iup.tp.twitup.datamodel.Twit;
 import com.iup.tp.twitup.datamodel.User;
 import com.iup.tp.twitup.ihm.components.listTwitComponent.IListTwitComponentObserver;
 import com.iup.tp.twitup.ihm.components.listTwitComponent.ListTwitComponent;
+import com.iup.tp.twitup.ihm.components.northComponent.INorthComponentObserver;
 import com.iup.tp.twitup.ihm.components.twitAdd.TwitAddComponent;
 
 import javax.swing.*;
@@ -15,7 +16,7 @@ import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-public class CenterComponent extends JPanel implements ICenterComponent, IListTwitComponentObserver {
+public class CenterComponent extends JPanel implements ICenterComponent, IListTwitComponentObserver, INorthComponentObserver {
 
     /**
      * Liste des observateurs de modifications de la base.
@@ -41,6 +42,13 @@ public class CenterComponent extends JPanel implements ICenterComponent, IListTw
      * Nom de l'utilisateur
      */
     private User mUser;
+
+    /**
+     *
+     */
+    private ListTwitComponent listTwitComponent;
+
+    private TwitAddComponent twitAddComponent;
 
     public CenterComponent(IDatabase database, EntityManager entityManager, ResourceBundle bundle, User user) {
         super();
@@ -77,27 +85,27 @@ public class CenterComponent extends JPanel implements ICenterComponent, IListTw
          * Liste des twits
          */
         Set<Twit> twits = this.mDatabase.getTwits();
-        ListTwitComponent listTwitComponent = new ListTwitComponent(twits);
-        listTwitComponent.addObserver(this);
+        this.listTwitComponent = new ListTwitComponent(twits,this.mDatabase,this.mEntityManager);
+        this.listTwitComponent.addObserver(this);
 
         /**
          * ajouter un twit
          */
-        TwitAddComponent twitAddComponent = new TwitAddComponent(this.mBundle, this.mUser);
-        twitAddComponent.addObserver(listTwitComponent);
+        this.twitAddComponent = new TwitAddComponent(this.mBundle, this.mUser);
+        this.twitAddComponent.addObserver(listTwitComponent);
 
         /**
          * Ajout des composents
          */
 
 
-        this.add(twitAddComponent,
+        this.add(this.twitAddComponent,
                 new GridBagConstraints(0, 0, 1, 1, 1, 0,
                         GridBagConstraints.NORTH,
                         GridBagConstraints.BOTH,
                         new Insets(5, 5, 0, 5), 0, 0));
 
-        this.add(listTwitComponent,
+        this.add(this.listTwitComponent,
                 new GridBagConstraints(0, 1, 1, 1, 1, 1,
                         GridBagConstraints.NORTH,
                         GridBagConstraints.BOTH,
@@ -110,9 +118,25 @@ public class CenterComponent extends JPanel implements ICenterComponent, IListTw
      */
     @Override
     public void notifyViewChange() {
-
         for (ICenterComponentObserver observer : this.mObservers){
             observer.notifyViewChange();
         }
+    }
+
+    /**
+     * Methode de INorthComponentObserver
+     */
+
+    @Override
+    public void notifyRequestConnexion() {
+    }
+
+    @Override
+    public void notifyRequestLogout() {
+    }
+
+    @Override
+    public void notifySearchRequest(String search) {
+        this.listTwitComponent.handlerSreachTwit(search);
     }
 }

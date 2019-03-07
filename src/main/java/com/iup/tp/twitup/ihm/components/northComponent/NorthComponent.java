@@ -140,7 +140,9 @@ public class NorthComponent extends JPanel implements INorthComponent, ITwitupMa
 
     @Override
     public void notifySearchRequest(String search) {
-
+        for (INorthComponentObserver observer : this.mObservers) {
+            observer.notifySearchRequest(search);
+        }
     }
 
     @Override
