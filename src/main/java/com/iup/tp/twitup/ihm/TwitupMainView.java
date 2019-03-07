@@ -46,6 +46,11 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
     private ResourceBundle mBundle;
 
     /**
+     * Center panel
+     */
+    private JPanel centerPanel;
+
+    /**
      * Constructeur.
      *
      * @param database , Base de données de l'application.
@@ -153,6 +158,7 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
     }
 
     public void setCenterComponent(JPanel component){
+        this.centerPanel = component;
         this.getContentPane().add(component, BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
@@ -223,7 +229,7 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
     }
 
     /**
-     * Methode de l'interface INorthComponentObserver
+     * Methode de l'interface INorthLogoutComponentObserver
      */
     @Override
     public void notifyRequestConnexion() {
@@ -232,8 +238,10 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
 
     @Override
     public void notifyRequestLogout() {
-        BorderLayout layout = (BorderLayout) this.getLayout();
-        this.remove(layout.getLayoutComponent(BorderLayout.CENTER));
+        this.remove(this.centerPanel);
+        this.centerPanel = null;
+        this.notifyViewChange();
+
     }
 
     @Override

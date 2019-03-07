@@ -6,6 +6,11 @@ import com.iup.tp.twitup.datamodel.Twit;
 import com.iup.tp.twitup.datamodel.User;
 import com.iup.tp.twitup.ihm.ITwitupMainView;
 import com.iup.tp.twitup.ihm.ITwitupMainViewObserver;
+import com.iup.tp.twitup.ihm.components.northLogedComponent.INorthLogedComponentObserver;
+import com.iup.tp.twitup.ihm.components.northLogedComponent.NorthLogedComponent;
+import com.iup.tp.twitup.ihm.components.northLogoutComponent.INorthLogoutComponent;
+import com.iup.tp.twitup.ihm.components.northLogoutComponent.INorthLogoutComponentObserver;
+import com.iup.tp.twitup.ihm.components.northLogoutComponent.NorthLogoutComponent;
 import com.iup.tp.twitup.ihm.components.twitComponent.TwitComponent;
 
 import javax.swing.*;
@@ -19,7 +24,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-public class NorthComponent extends JPanel implements INorthComponent, ITwitupMainViewObserver {
+public class NorthComponent extends JPanel implements INorthComponent, ITwitupMainViewObserver, INorthLogoutComponentObserver, INorthLogedComponentObserver {
 
     /**
      * Liste des observateurs de modifications de la base.
@@ -35,16 +40,6 @@ public class NorthComponent extends JPanel implements INorthComponent, ITwitupMa
      * Gestionnaire de bdd et de fichier.
      */
     private EntityManager mEntityManager;
-
-    /**
-     * Pannel connecter
-     */
-    private JPanel logedPanel;
-
-    /**
-     * Pannel deonnecter
-     */
-    private JPanel logoutPanel;
 
     /**
      * Pannel deonnecter
@@ -91,128 +86,41 @@ public class NorthComponent extends JPanel implements INorthComponent, ITwitupMa
         this.setBorder(new LineBorder(Color.BLUE, 4,true));
         this.setLayout(new GridBagLayout());
 
-
-        /**
-         * Barre de recherche
-         */
-        JTextField searchTextField = new JTextField();
-
-        /**
-         * Bouton de recherche
-         */
-        JButton searchButton = new JButton(this.mBundle.getString("button.rechercher.libelle"));
-        searchButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for (INorthComponentObserver observer : NorthComponent.this.mObservers) {
-                    observer.notifySearchRequest(searchTextField.getText());
-                }
-            }
-        });
-
-        /**
-         * Bouton de s'inscrire
-         */
-        JButton siginButton = new JButton(this.mBundle.getString("button.inscription.libelle"));
-        siginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                NorthComponent.this.handlerLogout();
-                for (INorthComponentObserver observer : NorthComponent.this.mObservers) {
-                    observer.notifyRequestLogout();
-                }
-            }
-        });
-
-        /**
-         * Bouton de connexion
-         */
-        JButton connexionButton = new JButton(this.mBundle.getString("button.connexion.libelle"));
-        connexionButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for (INorthComponentObserver observer : NorthComponent.this.mObservers) {
-                    observer.notifyRequestConnexion();
-                }
-            }
-        });
-
-        /**
-         * Bouton de deconnexion
-         */
-        JButton logoutButton = new JButton(this.mBundle.getString("button.logout.libelle"));
-        logoutButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for (INorthComponentObserver observer : NorthComponent.this.mObservers) {
-                }
-            }
-        });
-
-
         /**
          * Ajout dans le layout
          */
         this.contenue = new JPanel();
         this.contenue.setLayout(new GridBagLayout());
 
-        this.logedPanel = new JPanel();
-        this.logedPanel.setLayout(new GridBagLayout());
-
-        this.logoutPanel = new JPanel();
-        logoutPanel.setLayout(new GridBagLayout());
-
-        this.logedPanel.add(searchTextField,
-                new GridBagConstraints(0, 0, 1, 1, 1, 0,
-                        GridBagConstraints.NORTH,
-                        GridBagConstraints.HORIZONTAL,
-                        new Insets(5, 5, 0, 5), 0, 0));
-
-        this.logedPanel.add(searchButton,
-                new GridBagConstraints(1, 0, 1, 1, 0, 0,
-                        GridBagConstraints.NORTH,
-                        GridBagConstraints.NONE,
-                        new Insets(5, 5, 0, 5), 0, 0));
-
-        this.logedPanel.add(logoutButton,
-                new GridBagConstraints(2, 0, 1, 1, 0, 0,
-                        GridBagConstraints.NORTH,
-                        GridBagConstraints.NONE,
-                        new Insets(5, 5, 0, 5), 0, 0));
-
-        this.logoutPanel.add(siginButton,
-                new GridBagConstraints(0, 0, 1, 1, 0, 0,
-                        GridBagConstraints.NORTHEAST,
-                        GridBagConstraints.NONE,
-                        new Insets(5, 5, 0, 5), 0, 0));
-
-        this.logoutPanel.add(connexionButton,
-                new GridBagConstraints(1, 0, 1, 1, 0, 0,
-                        GridBagConstraints.NORTHEAST,
-                        GridBagConstraints.NONE,
-                        new Insets(5, 5, 0, 5), 0, 0));
 
         /**
          * Ajout du contenue
          */
         this.handlerLogout();
+        this.add(this.contenue,
+                new GridBagConstraints(0, 0, 1, 1, 0, 0,
+                        GridBagConstraints.NORTH,
+                        GridBagConstraints.HORIZONTAL,
+                        new Insets(0, 0, 0, 0), 0, 0));
     }
 
     /**
      * handler logout
      */
     private void handlerLogout(){
-        this.contenue.add(this.logoutPanel,
+
+        this.contenue.removeAll();
+
+        NorthLogoutComponent northLogoutComponent = new NorthLogoutComponent(this.mBundle);
+        northLogoutComponent.addObserver(this);
+
+        this.contenue.add(northLogoutComponent,
                 new GridBagConstraints(0, 0, 1, 1, 0, 0,
                         GridBagConstraints.EAST,
-                        GridBagConstraints.NONE,
+                        GridBagConstraints.HORIZONTAL,
                         new Insets(0, 0, 0, 0), 0, 0));
 
-        this.add(this.contenue,
-                new GridBagConstraints(0, 0, 1, 1, 1, 0,
-                        GridBagConstraints.EAST,
-                        GridBagConstraints.NONE,
-                        new Insets(0, 0, 0, 0), 0, 0));
+        this.revalidate();
     }
 
     /**
@@ -226,18 +134,40 @@ public class NorthComponent extends JPanel implements INorthComponent, ITwitupMa
     @Override
     public void notifySuccessConnexion(User user) {
         this.contenue.removeAll();
-        this.removeAll();
 
-        this.contenue.add(this.logedPanel,
+        NorthLogedComponent northLogedComponent = new NorthLogedComponent(this.mBundle);
+        northLogedComponent.addObserver(this);
+
+        this.contenue.add(northLogedComponent,
                 new GridBagConstraints(0, 0, 1, 1, 1, 0,
                         GridBagConstraints.NORTH,
                         GridBagConstraints.HORIZONTAL,
                         new Insets(0, 0, 0, 0), 0, 0));
 
-        this.add(this.contenue,
-                new GridBagConstraints(0, 0, 1, 1, 1, 0,
-                        GridBagConstraints.NORTH,
-                        GridBagConstraints.HORIZONTAL,
-                        new Insets(0, 0, 0, 0), 0, 0));
+        this.revalidate();
+    }
+
+    /**
+     * Methode de INorthLogoutComponentObserver, INorthLogedComponentObserver
+     */
+
+    @Override
+    public void notifyRequestLogout() {
+        this.handlerLogout();
+        for (INorthComponentObserver observer : this.mObservers) {
+            observer.notifyRequestLogout();
+        }
+    }
+
+    @Override
+    public void notifySearchRequest(String search) {
+
+    }
+
+    @Override
+    public void notifyRequestConnexion() {
+        for (INorthComponentObserver observer : this.mObservers) {
+            observer.notifyRequestConnexion();
+        }
     }
 }
