@@ -26,7 +26,7 @@ import java.util.Set;
  * 
  * @author S.Lucas
  */
-public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver, ICenterComponentObserver {
+public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 	/**
 	 * Base de données.
 	 */
@@ -172,6 +172,7 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver, ICent
 
 		// initialisation du composent north
 		this.mMainView.setNorthComponent(this.mNorthCompoent);
+		this.mMainView.addObserver(this.mNorthCompoent);
 		this.mNorthCompoent.addObserver(this.mMainView);
 
 		this.mMainView.addObserver(this);
@@ -301,42 +302,7 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver, ICent
 	}
 
 	@Override
-	public void notifyRequestUserConnexion(String name, char[] password, Integer nbConnexion) {
+	public void notifySuccessConnexion(User user) {
 
-		Set<User> users = this.mDatabase.getUsers();
-
-		String password2 = password.toString();
-
-
-
-		for (User user : users) {
-
-			if(user.getName().equals(name) &&
-				user.getUserPassword().equals(new String(password))){
-				this.handlerSuccessConnexion(user);
-				return;
-			}
-		}
-
-		this.mMainView.handlerConnection(++nbConnexion);
-	}
-
-	/**
-	 * Methode de ICenterComponentObserver
-	 */
-	@Override
-	public void notifyViewChange() {
-		this.mMainView.revalidate();
-		this.mMainView.repaint();
-	}
-
-	/**
-	 * Handler
-	 */
-
-	private void handlerSuccessConnexion(User user){
-		this.mCenterComponent = new CenterComponent(this.mDatabase,this.mEntityManager,this.mLocale, user);
-		this.mCenterComponent.addObserver(this);
-		this.mMainView.setCenterComponent(this.mCenterComponent);
 	}
 }

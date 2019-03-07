@@ -1,5 +1,7 @@
 package com.iup.tp.twitup.ihm;
 
+import com.iup.tp.twitup.datamodel.User;
+
 import java.io.File;
 
 public interface ITwitupMainViewObserver {
@@ -8,6 +10,6 @@ public interface ITwitupMainViewObserver {
 
     void notifyWindowClosing(ITwitupMainView observable);
 
-    void notifyRequestUserConnexion(String name, char[] password, Integer nbConnexion);
+    void notifySuccessConnexion(User user);
 
 }

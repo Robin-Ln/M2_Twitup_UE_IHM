@@ -12,7 +12,6 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -43,12 +42,12 @@ public class CenterComponent extends JPanel implements ICenterComponent, IListTw
      */
     private User mUser;
 
-    public CenterComponent(IDatabase database, EntityManager entityManager, Locale locale, User user) {
+    public CenterComponent(IDatabase database, EntityManager entityManager, ResourceBundle bundle, User user) {
         super();
         this.mDatabase = database;
         this.mEntityManager = entityManager;
         this.mObservers = new HashSet<>();
-        this.mBundle = ResourceBundle.getBundle("local", locale);
+        this.mBundle = bundle;
         this.mUser = user;
         this.init();
     }

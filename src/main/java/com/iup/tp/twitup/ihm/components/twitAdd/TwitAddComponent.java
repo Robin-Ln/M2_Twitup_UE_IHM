@@ -31,10 +31,6 @@ public class TwitAddComponent extends JPanel implements ITwitAddComponent {
      */
     private User mUser;
 
-    /**
-     * boolean aFlag > 250 caract
-     */
-    Boolean isError;
 
     public TwitAddComponent(ResourceBundle bundle, User user) {
         super();
@@ -44,8 +40,6 @@ public class TwitAddComponent extends JPanel implements ITwitAddComponent {
         this.mBundle = bundle;
 
         this.mUser = user;
-
-        this.isError = true;
 
         this.init();
     }
@@ -73,12 +67,17 @@ public class TwitAddComponent extends JPanel implements ITwitAddComponent {
         /**
          * Labelle pas plus de 100 caractère
          */
-        JLabel errorLabel = new JLabel("test");
+        JLabel errorLabel = new JLabel(this.mBundle.getString("text.area.error"));
+        errorLabel.setForeground(Color.RED);
+        errorLabel.setVisible(false);
 
         /**
          * text area
          */
-        TextArea textArea = new TextArea();
+        JTextArea textArea = new JTextArea();
+        textArea.setWrapStyleWord(true);
+        textArea.setLineWrap(true);
+
         textArea.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -108,7 +107,7 @@ public class TwitAddComponent extends JPanel implements ITwitAddComponent {
         ajouterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (textArea.getText().length() > 250) {
+                if (textArea.getText().length() < 250) {
                     for (ITwitAddComponentObserver observer : TwitAddComponent.this.mObservers) {
                         Twit twit = new Twit(TwitAddComponent.this.mUser, textArea.getText());
                         observer.notifyNewTwit(twit);
@@ -133,7 +132,7 @@ public class TwitAddComponent extends JPanel implements ITwitAddComponent {
                 new Insets(5, 5, 0, 5), 0, 0));
 
 
-        this.add(ajouterButton, new GridBagConstraints(1, 0, 1, 1, 0, 1,
+        this.add(ajouterButton, new GridBagConstraints(1, 0, 1, 2, 0, 1,
                 GridBagConstraints.NORTH,
                 GridBagConstraints.BOTH,
                 new Insets(5, 5, 0, 5), 0, 0));

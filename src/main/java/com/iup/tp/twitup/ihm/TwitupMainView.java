@@ -2,9 +2,12 @@ package com.iup.tp.twitup.ihm;
 
 import com.iup.tp.twitup.core.EntityManager;
 import com.iup.tp.twitup.datamodel.IDatabase;
-import com.iup.tp.twitup.ihm.components.listTwitComponent.IListTwitComponentObserver;
+import com.iup.tp.twitup.datamodel.User;
+import com.iup.tp.twitup.ihm.components.centerComponent.CenterComponent;
+import com.iup.tp.twitup.ihm.components.centerComponent.ICenterComponentObserver;
+import com.iup.tp.twitup.ihm.components.loginConponent.ILoginComponentObserver;
+import com.iup.tp.twitup.ihm.components.loginConponent.LoginComponent;
 import com.iup.tp.twitup.ihm.components.northComponent.INorthComponentObserver;
-import com.iup.tp.twitup.ihm.components.twitAdd.TwitAddComponent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +23,7 @@ import java.util.Set;
 /**
  * Classe de la vue principale de l'application.
  */
-public class TwitupMainView extends JFrame implements ITwitupMainView, INorthComponentObserver {
+public class TwitupMainView extends JFrame implements ITwitupMainView, INorthComponentObserver, ICenterComponentObserver, ILoginComponentObserver {
 
     /**
      * Base de donénes de l'application.
@@ -172,36 +175,10 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
      * Methodes handler
      */
     public void handlerConnection(Integer nbConnexion) {
-
-
-        JTextField nameField = new JTextField("MockUser51184");
-        JPasswordField passwordField = new JPasswordField();
-        JPanel panel = new JPanel(new GridLayout(0, 2));
-
-        if(nbConnexion > 0){
-            JLabel echecLabel = new JLabel(this.mBundle.getString("dialog.connexion.label.echec"));
-            echecLabel.setForeground(Color.RED);
-            panel.add(echecLabel);
-
-            JLabel nbConnexionLabel = new JLabel(nbConnexion.toString());
-            nbConnexionLabel.setForeground(Color.RED);
-            panel.add(nbConnexionLabel);
-        }
-
-
-        panel.add(new JLabel(this.mBundle.getString("dialog.connexion.label.name")));
-        panel.add(nameField);
-        panel.add(new JLabel(this.mBundle.getString("dialog.connexion.label.password")));
-        panel.add(passwordField);
-
-
-        int result = JOptionPane.showConfirmDialog(this, panel, this.mBundle.getString("dialog.connexion.label.title"),
-                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-        if (result == JOptionPane.OK_OPTION) {
-            for (ITwitupMainViewObserver observer : this.mObservers) {
-                observer.notifyRequestUserConnexion(nameField.getText(), passwordField.getPassword(), nbConnexion);
-            }
-        }
+        LoginComponent loginComponent = new LoginComponent(this.mBundle, nbConnexion);
+        loginComponent.addObserver(this);
+        loginComponent.open();
+        loginComponent.deleteObserver(this);
     }
 
     private void handlerQuitter() {
@@ -258,5 +235,42 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
     public void notifyRequestConnexion() {
         this.handlerConnection(0);
     }
+
+    /**
+     * Handler
+     */
+    public void notifyRequestUserConnexion(String name, char[] password, Integer nbConnexion) {
+        Set<User> users = this.mDatabase.getUsers();
+        for (User user : users) {
+            if(user.getName().equals(name) && user.getUserPassword().equals(new String(password))){
+                this.handlerSuccessConnexion(user);
+                return;
+            }
+        }
+        this.handlerConnection(++nbConnexion);
+    }
+
+    private void handlerSuccessConnexion(User user){
+        CenterComponent centerComponent = new CenterComponent(this.mDatabase,this.mEntityManager,this.mBundle, user);
+        centerComponent.addObserver(this);
+        this.setCenterComponent(centerComponent);
+
+        for (ITwitupMainViewObserver observer : this.mObservers) {
+            observer.notifySuccessConnexion(user);
+        }
+    }
+
+    /**
+     * Methode de ICenterComponentObserver
+     */
+    @Override
+    public void notifyViewChange() {
+        this.revalidate();
+        this.repaint();
+    }
+
+    /**
+     * Methode ILoginComponentObserver
+     */
 
 }
