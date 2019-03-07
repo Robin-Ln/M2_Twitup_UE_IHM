@@ -8,8 +8,6 @@ public interface ITwitupMainViewObserver {
 
     void notifyEchangeDirectoryChange(File file);
 
-    void notifyWindowClosing(ITwitupMainView observable);
-
     void notifySuccessConnexion(User user);
 
 }

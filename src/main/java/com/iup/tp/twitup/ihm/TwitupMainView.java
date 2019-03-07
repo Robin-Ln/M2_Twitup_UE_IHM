@@ -182,12 +182,6 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
     }
 
     private void handlerQuitter() {
-
-        // notifier les observer que l'application va se fermer
-        for (ITwitupMainViewObserver observer : this.mObservers) {
-            observer.notifyWindowClosing(this);
-        }
-
         System.exit(0);
     }
 
@@ -229,11 +223,22 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
     }
 
     /**
-     * Oberve le composant north
+     * Methode de l'interface INorthComponentObserver
      */
     @Override
     public void notifyRequestConnexion() {
         this.handlerConnection(0);
+    }
+
+    @Override
+    public void notifyRequestLogout() {
+        BorderLayout layout = (BorderLayout) this.getLayout();
+        this.remove(layout.getLayoutComponent(BorderLayout.CENTER));
+    }
+
+    @Override
+    public void notifySearchRequest(String search) {
+
     }
 
     /**
@@ -249,6 +254,10 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
         }
         this.handlerConnection(++nbConnexion);
     }
+
+    /**
+     * handler
+     */
 
     private void handlerSuccessConnexion(User user){
         CenterComponent centerComponent = new CenterComponent(this.mDatabase,this.mEntityManager,this.mBundle, user);

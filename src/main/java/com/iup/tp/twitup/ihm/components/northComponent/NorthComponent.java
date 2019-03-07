@@ -37,24 +37,25 @@ public class NorthComponent extends JPanel implements INorthComponent, ITwitupMa
     private EntityManager mEntityManager;
 
     /**
-     * JTextField searchTextField
+     * Pannel connecter
      */
-    private JTextField searchTextField;
+    private JPanel logedPanel;
 
     /**
-     * JButton searchButton
+     * Pannel deonnecter
      */
-    private JButton searchButton;
+    private JPanel logoutPanel;
 
     /**
-     * JButton siginButton
+     * Pannel deonnecter
      */
-    private JButton siginButton;
+    private JPanel contenue;
+
+
 
     /**
-     * JButton connexionButton
+     * Pannel deconnecter
      */
-    private JButton connexionButton;
 
     /**
      * Configurer la langue de l'aplication
@@ -94,35 +95,40 @@ public class NorthComponent extends JPanel implements INorthComponent, ITwitupMa
         /**
          * Barre de recherche
          */
-        this.searchTextField = new JTextField();
-        this.searchTextField.setVisible(false);
+        JTextField searchTextField = new JTextField();
 
         /**
          * Bouton de recherche
          */
-        this.searchButton = new JButton(this.mBundle.getString("button.rechercher.libelle"));
-        this.searchButton.addActionListener(new ActionListener() {
+        JButton searchButton = new JButton(this.mBundle.getString("button.rechercher.libelle"));
+        searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                for (INorthComponentObserver observer : NorthComponent.this.mObservers) {
+                    observer.notifySearchRequest(searchTextField.getText());
+                }
             }
         });
-        this.searchButton.setVisible(false);
 
         /**
          * Bouton de s'inscrire
          */
-        this.siginButton = new JButton(this.mBundle.getString("button.inscription.libelle"));
-        this.siginButton.addActionListener(new ActionListener() {
+        JButton siginButton = new JButton(this.mBundle.getString("button.inscription.libelle"));
+        siginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                NorthComponent.this.handlerLogout();
+                for (INorthComponentObserver observer : NorthComponent.this.mObservers) {
+                    observer.notifyRequestLogout();
+                }
             }
         });
 
         /**
          * Bouton de connexion
          */
-        this.connexionButton = new JButton(this.mBundle.getString("button.connexion.libelle"));
-        this.connexionButton.addActionListener(new ActionListener() {
+        JButton connexionButton = new JButton(this.mBundle.getString("button.connexion.libelle"));
+        connexionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (INorthComponentObserver observer : NorthComponent.this.mObservers) {
@@ -131,44 +137,81 @@ public class NorthComponent extends JPanel implements INorthComponent, ITwitupMa
             }
         });
 
+        /**
+         * Bouton de deconnexion
+         */
+        JButton logoutButton = new JButton(this.mBundle.getString("button.logout.libelle"));
+        logoutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (INorthComponentObserver observer : NorthComponent.this.mObservers) {
+                }
+            }
+        });
+
 
         /**
          * Ajout dans le layout
          */
-        JPanel contenue = new JPanel();
-        contenue.setLayout(new GridBagLayout());
+        this.contenue = new JPanel();
+        this.contenue.setLayout(new GridBagLayout());
 
-        contenue.add(this.searchTextField,
+        this.logedPanel = new JPanel();
+        this.logedPanel.setLayout(new GridBagLayout());
+
+        this.logoutPanel = new JPanel();
+        logoutPanel.setLayout(new GridBagLayout());
+
+        this.logedPanel.add(searchTextField,
                 new GridBagConstraints(0, 0, 1, 1, 1, 0,
                         GridBagConstraints.NORTH,
                         GridBagConstraints.HORIZONTAL,
                         new Insets(5, 5, 0, 5), 0, 0));
 
-        contenue.add(this.searchButton,
+        this.logedPanel.add(searchButton,
                 new GridBagConstraints(1, 0, 1, 1, 0, 0,
                         GridBagConstraints.NORTH,
                         GridBagConstraints.NONE,
                         new Insets(5, 5, 0, 5), 0, 0));
 
-        contenue.add(this.siginButton,
+        this.logedPanel.add(logoutButton,
                 new GridBagConstraints(2, 0, 1, 1, 0, 0,
                         GridBagConstraints.NORTH,
                         GridBagConstraints.NONE,
                         new Insets(5, 5, 0, 5), 0, 0));
 
-        contenue.add(this.connexionButton,
-                new GridBagConstraints(3, 0, 1, 1, 0, 0,
-                        GridBagConstraints.NORTH,
+        this.logoutPanel.add(siginButton,
+                new GridBagConstraints(0, 0, 1, 1, 0, 0,
+                        GridBagConstraints.NORTHEAST,
+                        GridBagConstraints.NONE,
+                        new Insets(5, 5, 0, 5), 0, 0));
+
+        this.logoutPanel.add(connexionButton,
+                new GridBagConstraints(1, 0, 1, 1, 0, 0,
+                        GridBagConstraints.NORTHEAST,
                         GridBagConstraints.NONE,
                         new Insets(5, 5, 0, 5), 0, 0));
 
         /**
          * Ajout du contenue
          */
-        this.add(contenue,
+        this.handlerLogout();
+    }
+
+    /**
+     * handler logout
+     */
+    private void handlerLogout(){
+        this.contenue.add(this.logoutPanel,
+                new GridBagConstraints(0, 0, 1, 1, 0, 0,
+                        GridBagConstraints.EAST,
+                        GridBagConstraints.NONE,
+                        new Insets(0, 0, 0, 0), 0, 0));
+
+        this.add(this.contenue,
                 new GridBagConstraints(0, 0, 1, 1, 1, 0,
-                        GridBagConstraints.NORTH,
-                        GridBagConstraints.HORIZONTAL,
+                        GridBagConstraints.EAST,
+                        GridBagConstraints.NONE,
                         new Insets(0, 0, 0, 0), 0, 0));
     }
 
@@ -179,15 +222,22 @@ public class NorthComponent extends JPanel implements INorthComponent, ITwitupMa
     public void notifyEchangeDirectoryChange(File file) {
     }
 
-    @Override
-    public void notifyWindowClosing(ITwitupMainView observable) {
-    }
 
     @Override
     public void notifySuccessConnexion(User user) {
-        this.searchTextField.setVisible(true);
-        this.searchButton.setVisible(true);
-        this.connexionButton.setVisible(false);
-        this.siginButton.setVisible(false);
+        this.contenue.removeAll();
+        this.removeAll();
+
+        this.contenue.add(this.logedPanel,
+                new GridBagConstraints(0, 0, 1, 1, 1, 0,
+                        GridBagConstraints.NORTH,
+                        GridBagConstraints.HORIZONTAL,
+                        new Insets(0, 0, 0, 0), 0, 0));
+
+        this.add(this.contenue,
+                new GridBagConstraints(0, 0, 1, 1, 1, 0,
+                        GridBagConstraints.NORTH,
+                        GridBagConstraints.HORIZONTAL,
+                        new Insets(0, 0, 0, 0), 0, 0));
     }
 }

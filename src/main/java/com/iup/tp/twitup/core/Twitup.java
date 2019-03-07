@@ -172,9 +172,9 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 
 		// initialisation du composent north
 		this.mMainView.setNorthComponent(this.mNorthCompoent);
-		this.mMainView.addObserver(this.mNorthCompoent);
 		this.mNorthCompoent.addObserver(this.mMainView);
 
+		this.mMainView.addObserver(this.mNorthCompoent);
 		this.mMainView.addObserver(this);
 		this.mDatabase.addObserver(this);
 	}
@@ -292,13 +292,6 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 		}  else {
 			throw new RuntimeException("notifyEchangeDirectoryChange Fail");
 		}
-	}
-
-	@Override
-	public void notifyWindowClosing(ITwitupMainView observable) {
-		observable.deleteObserver(this);
-		String path = getClass().getClassLoader().getResource("configuration.properties").getPath();
-		PropertiesManager.writeProperties(this.mProperties, path);
 	}
 
 	@Override
