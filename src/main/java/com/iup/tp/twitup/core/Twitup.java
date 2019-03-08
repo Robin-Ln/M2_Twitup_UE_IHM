@@ -15,6 +15,8 @@ import com.iup.tp.twitup.ihm.components.northComponent.NorthComponent;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.net.URL;
 import java.util.Locale;
@@ -318,7 +320,5 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 	}
 
 	@Override
-	public void notifySuccessConnexion(User user) {
-
-	}
+	public void notifySuccessConnexion(User user) {}
 }
