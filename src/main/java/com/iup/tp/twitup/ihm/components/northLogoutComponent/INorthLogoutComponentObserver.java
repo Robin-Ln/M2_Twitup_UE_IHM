@@ -4,4 +4,5 @@ public interface INorthLogoutComponentObserver {
 
     void notifyRequestConnexion();
 
+    void notifyRequestInscription();
 }

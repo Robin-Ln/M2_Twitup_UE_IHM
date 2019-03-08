@@ -38,6 +38,7 @@ public class NorthLogoutComponent extends JPanel implements INorthLogoutComponen
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (INorthLogoutComponentObserver observer : NorthLogoutComponent.this.mObservers) {
+                    observer.notifyRequestInscription();
                 }
             }
         });

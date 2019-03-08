@@ -6,4 +6,6 @@ public interface INorthComponentObserver {
     void notifyRequestLogout();
 
     void notifySearchRequest(String search);
+
+    void notifyRequestInscription();
 }

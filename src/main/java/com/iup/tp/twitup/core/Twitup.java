@@ -5,12 +5,12 @@ import com.iup.tp.twitup.common.PropertiesManager;
 import com.iup.tp.twitup.datamodel.*;
 import com.iup.tp.twitup.events.file.IWatchableDirectory;
 import com.iup.tp.twitup.events.file.WatchableDirectory;
-import com.iup.tp.twitup.ihm.ITwitupMainView;
 import com.iup.tp.twitup.ihm.ITwitupMainViewObserver;
 import com.iup.tp.twitup.ihm.TwitupMainView;
 import com.iup.tp.twitup.ihm.TwitupMock;
 import com.iup.tp.twitup.ihm.components.centerComponent.CenterComponent;
-import com.iup.tp.twitup.ihm.components.centerComponent.ICenterComponentObserver;
+import com.iup.tp.twitup.ihm.components.fileChooserComponent.FileChooserComponent;
+import com.iup.tp.twitup.ihm.components.fileChooserComponent.IFileChooserComponentObserver;
 import com.iup.tp.twitup.ihm.components.northComponent.NorthComponent;
 import org.apache.commons.lang3.StringUtils;
 
@@ -19,7 +19,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.Locale;
 import java.util.Properties;
-import java.util.Set;
+import java.util.ResourceBundle;
 
 /**
  * Classe principale l'application.
@@ -30,17 +30,17 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 	/**
 	 * Base de données.
 	 */
-	protected IDatabase mDatabase;
+	private IDatabase mDatabase;
 
 	/**
 	 * Gestionnaire des entités contenu de la base de données.
 	 */
-	protected EntityManager mEntityManager;
+	private EntityManager mEntityManager;
 
 	/**
 	 * Vue principale de l'application.
 	 */
-	protected TwitupMainView mMainView;
+	private TwitupMainView mMainView;
 
 	/**
 	 * mNorthCompoent
@@ -56,32 +56,32 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 	/**
 	 * Classe de surveillance de répertoire
 	 */
-	protected IWatchableDirectory mWatchableDirectory;
+	private IWatchableDirectory mWatchableDirectory;
 
 	/**
 	 * Répertoire d'échange de l'application.
 	 */
-	protected String mExchangeDirectoryPath;
+	private String mExchangeDirectoryPath;
 
 	/**
 	 * Idnique si le mode bouchoné est activé.
 	 */
-	protected boolean mIsMockEnabled = false;
+	private Boolean mIsMockEnabled = false;
 
 	/**
 	 * Nom de la classe de l'UI.
 	 */
-	protected String mUiClassName;
+	private String mUiClassName;
 
 	/**
 	 * Properties de l'application
 	 */
-	Properties mProperties;
+	private Properties mProperties;
 
 	/**
 	 * Conficuration de la langue
 	 */
-	Locale mLocale;
+	private String mLocale;
 
 	/**
 	 * Constructeur.
@@ -91,7 +91,7 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 		this.initProperties();
 
 		// Init la langue
-		this.initLocal();
+		this.initProperties();
 
 		// Init du look and feel de l'application
 		this.initLookAndFeel();
@@ -99,8 +99,6 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 		// Initialisation de la base de données
 		this.initDatabase();
 
-		// Init du fu boolean mock
-		this.initMockEnabled();
 
 		if (this.mIsMockEnabled) {
 			// Initialisation du bouchon de travail
@@ -112,50 +110,47 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 
 		// Initialisation du répertoire d'échange
 		this.initDirectory();
-	}
 
-	/**
-	 * Initialisation du du boolean mock
-	 */
-	private void initMockEnabled() {
-		String mock = this.mProperties.getProperty(Constants.CONFIGURATION_KEY_MOCK_ENABLED);
-		this.mIsMockEnabled = Boolean.parseBoolean(mock);
+		// Sauvegarde des paramètre de l'application
+		this.saveProperties();
 	}
 
 	/**
 	 * Initialisation du properties de l'application.
 	 */
 	private void initProperties() {
-		URL url = getClass().getClassLoader().getResource("configuration.properties");
+		URL url = getClass().getClassLoader().getResource(Constants.CONFIGURATION_FILE);
 		String path = url.getPath();
 		this.mProperties = PropertiesManager.loadProperties(path);
+
+		this.mLocale = this.mProperties.getProperty(Constants.CONFIGURATION_KEY_LOCAL);
+		this.mExchangeDirectoryPath = this.mProperties.getProperty(Constants.CONFIGURATION_KEY_EXCHANGE_DIRECTORY);
+		this.mUiClassName = this.mProperties.getProperty(Constants.CONFIGURATION_KEY_UI_CLASS_NAME);
+		this.mIsMockEnabled = Boolean.parseBoolean(this.mProperties.getProperty(Constants.CONFIGURATION_KEY_MOCK_ENABLED));
 	}
 
-	/**
-	 * Initialisation de la langue de l'application.
-	 */
-	private void initLocal() {
-		String langue = this.mProperties.getProperty("LOCAL");
 
-		if (StringUtils.isNotBlank(langue)){
-			this.mLocale = new Locale(langue, langue.toUpperCase(),"");
-		}else {
-			throw new RuntimeException("initLocal Fail");
-		}
+	/**
+	 * Sauvegarde du fichier de properties de l'application.
+	 */
+	private void saveProperties() {
+		this.mProperties.setProperty(Constants.CONFIGURATION_KEY_LOCAL, this.mLocale);
+		this.mProperties.setProperty(Constants.CONFIGURATION_KEY_EXCHANGE_DIRECTORY, this.mExchangeDirectoryPath);
+		this.mProperties.setProperty(Constants.CONFIGURATION_KEY_UI_CLASS_NAME, this.mUiClassName);
+		this.mProperties.setProperty(Constants.CONFIGURATION_KEY_MOCK_ENABLED, this.mIsMockEnabled.toString());
 	}
 
 	/**
 	 * Initialisation du look and feel de l'application.
 	 */
-	protected void initLookAndFeel() {
+	private void initLookAndFeel() {
 		try {
-			String lookAndFeel = this.mProperties.getProperty(Constants.CONFIGURATION_KEY_UI_CLASS_NAME);
-			if (StringUtils.isBlank(lookAndFeel)) {
-				lookAndFeel = UIManager.getSystemLookAndFeelClassName();
+			if (StringUtils.isBlank(this.mUiClassName)) {
+				this.mUiClassName = UIManager.getSystemLookAndFeelClassName();
 			}
-			UIManager.setLookAndFeel(lookAndFeel);
-			this.mProperties.setProperty("UI_CLASS_NAME", lookAndFeel);
+			UIManager.setLookAndFeel(this.mUiClassName);
 		} catch (Exception e) {
+			System.err.println("Il y a un problème avec le look and feel : ");
 			e.printStackTrace();
 		}
 	}
@@ -163,11 +158,11 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 	/**
 	 * Initialisation de l'interface graphique.
 	 */
-	protected void initGui() {
+	private void initGui() {
 		// this.mMainView...
-		this.mMainView = new TwitupMainView(this.mDatabase,this.mEntityManager,this.mLocale);
+		this.mMainView = new TwitupMainView(this.mDatabase,this.mEntityManager,this.createResourceBundle());
 		this.mMainView.initGUI();
-		this.mNorthCompoent = new NorthComponent(this.mDatabase,this.mEntityManager,this.mLocale);
+		this.mNorthCompoent = new NorthComponent(this.mDatabase,this.mEntityManager,this.createResourceBundle());
 
 
 		// initialisation du composent north
@@ -185,17 +180,31 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 	 * <b>Le chemin doit obligatoirement avoir été saisi et être valide avant de
 	 * pouvoir utiliser l'application</b>
 	 */
-	protected void initDirectory() {
-
-		String path = this.mProperties.getProperty(Constants.CONFIGURATION_KEY_EXCHANGE_DIRECTORY);
-
-		if (StringUtils.isNotBlank(path)){
-			this.initDirectory(path);
-		}
-
+	private void initDirectory() {
 		if (StringUtils.isBlank(this.mExchangeDirectoryPath)) {
-			this.mMainView.handlerFileChooser();
+			FileChooserComponent fileChooserComponent = new FileChooserComponent(this.createResourceBundle());
+			fileChooserComponent.addObserver(new IFileChooserComponentObserver() {
+				@Override
+				public void notifyFileSelected(File file) {
+					if (Twitup.this.isValideExchangeDirectory(file)) {
+						Twitup.this.mExchangeDirectoryPath = file.getAbsolutePath();
+					}
+				}
+
+				@Override
+				public void notifySelectCanceled() {
+					fileChooserComponent.deleteObserver(this);
+				}
+			});
+			fileChooserComponent.show();
 		}
+
+		if (StringUtils.isNotBlank(this.mExchangeDirectoryPath)) {
+			this.initDirectory(this.mExchangeDirectoryPath);
+		} else {
+			System.exit(0);
+		}
+
 	}
 
 	/**
@@ -205,7 +214,7 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 	 * @param directory
 	 *            , Répertoire à tester.
 	 */
-	protected boolean isValideExchangeDirectory(File directory) {
+	private boolean isValideExchangeDirectory(File directory) {
 		// Valide si répertoire disponible en lecture et écriture
 		return directory != null && directory.exists() && directory.isDirectory() && directory.canRead()
 				&& directory.canWrite();
@@ -214,15 +223,16 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 	/**
 	 * Initialisation du mode bouchoné de l'application
 	 */
-	protected void initMock() {
+	private void initMock() {
 		TwitupMock mock = new TwitupMock(this.mDatabase, this.mEntityManager);
 		mock.showGUI();
+
 	}
 
 	/**
 	 * Initialisation de la base de données
 	 */
-	protected void initDatabase() {
+	private void initDatabase() {
 		mDatabase = new Database();
 		mEntityManager = new EntityManager(mDatabase);
 	}
@@ -245,6 +255,19 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 
 	public void show() {
 		this.mMainView.showGUI();
+	}
+
+	/**
+	 * Permet de créer le bundle resource de l'application
+	 */
+	private ResourceBundle createResourceBundle() {
+		Locale locale = null;
+		if (StringUtils.isNotBlank(this.mLocale)) {
+			locale = new Locale(this.mLocale, this.mLocale, "");
+		} else {
+			locale = Locale.getDefault();
+		}
+		return ResourceBundle.getBundle("local", locale);
 	}
 
 	/**

@@ -5,6 +5,8 @@ import com.iup.tp.twitup.datamodel.IDatabase;
 import com.iup.tp.twitup.datamodel.User;
 import com.iup.tp.twitup.ihm.components.centerComponent.CenterComponent;
 import com.iup.tp.twitup.ihm.components.centerComponent.ICenterComponentObserver;
+import com.iup.tp.twitup.ihm.components.inscriptionComponent.IInscriptionComponentObserver;
+import com.iup.tp.twitup.ihm.components.inscriptionComponent.InscriptionComponent;
 import com.iup.tp.twitup.ihm.components.loginConponent.ILoginComponentObserver;
 import com.iup.tp.twitup.ihm.components.loginConponent.LoginComponent;
 import com.iup.tp.twitup.ihm.components.northComponent.INorthComponentObserver;
@@ -23,7 +25,7 @@ import java.util.Set;
 /**
  * Classe de la vue principale de l'application.
  */
-public class TwitupMainView extends JFrame implements ITwitupMainView, INorthComponentObserver, ICenterComponentObserver, ILoginComponentObserver {
+public class TwitupMainView extends JFrame implements ITwitupMainView, INorthComponentObserver, ICenterComponentObserver, ILoginComponentObserver, IInscriptionComponentObserver {
 
     /**
      * Base de donénes de l'application.
@@ -55,11 +57,11 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
      *
      * @param database , Base de données de l'application.
      */
-    public TwitupMainView(IDatabase database, EntityManager entityManager, Locale locale) {
+    public TwitupMainView(IDatabase database, EntityManager entityManager, ResourceBundle bundle) {
         this.mDatabase = database;
         this.mEntityManager = entityManager;
         this.mObservers = new HashSet<>();
-        this.mBundle = ResourceBundle.getBundle("local", locale);
+        this.mBundle = bundle;
     }
 
     public void showGUI() {
@@ -187,6 +189,13 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
         loginComponent.deleteObserver(this);
     }
 
+    public void handlerInscription() {
+        InscriptionComponent inscriptionComponent = new InscriptionComponent(this.mBundle);
+        inscriptionComponent.addObserver(this);
+        inscriptionComponent.open();
+        inscriptionComponent.deleteObserver(this);
+    }
+
     private void handlerQuitter() {
         System.exit(0);
     }
@@ -237,6 +246,11 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
     }
 
     @Override
+    public void notifyRequestInscription() {
+        this.handlerInscription();
+    }
+
+    @Override
     public void notifyRequestLogout() {
         this.centerComponent.removeAll();
         this.notifyViewChange();
@@ -272,6 +286,8 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
             CenterComponent centerComponent = new CenterComponent(this.mDatabase,this.mEntityManager,this.mBundle, user);
             centerComponent.addObserver(this);
             this.setCenterComponent(centerComponent);
+        }else {
+            this.centerComponent.init();
         }
 
         for (ITwitupMainViewObserver observer : this.mObservers) {
@@ -289,7 +305,10 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
     }
 
     /**
-     * Methode ILoginComponentObserver
+     * Methode IInscriptionComponentObserver
      */
+    @Override
+    public void notifyRequestUserInscription(User user) {
 
+    }
 }

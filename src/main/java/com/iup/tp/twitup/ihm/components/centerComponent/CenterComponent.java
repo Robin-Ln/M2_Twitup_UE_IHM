@@ -74,7 +74,7 @@ public class CenterComponent extends JPanel implements ICenterComponent, IListTw
     /**
      * Initialisation du composant
      */
-    private void init(){
+    public void init(){
         this.setOpaque(true);
         this.setBackground(new Color(50,150,200,70));
         this.setBorder(new LineBorder(Color.BLUE, 4,true));
@@ -85,14 +85,13 @@ public class CenterComponent extends JPanel implements ICenterComponent, IListTw
          * Liste des twits
          */
         Set<Twit> twits = this.mDatabase.getTwits();
-        this.listTwitComponent = new ListTwitComponent(twits,this.mDatabase,this.mEntityManager);
+        this.listTwitComponent = new ListTwitComponent(twits,this.mDatabase,this.mEntityManager,this.mBundle, this.mUser);
         this.listTwitComponent.addObserver(this);
 
         /**
          * ajouter un twit
          */
-        this.twitAddComponent = new TwitAddComponent(this.mBundle, this.mUser);
-        this.twitAddComponent.addObserver(listTwitComponent);
+        this.twitAddComponent = new TwitAddComponent(this.mBundle, this.mUser, this.mEntityManager);
 
         /**
          * Ajout des composents
@@ -138,5 +137,9 @@ public class CenterComponent extends JPanel implements ICenterComponent, IListTw
     @Override
     public void notifySearchRequest(String search) {
         this.listTwitComponent.handlerSreachTwit(search);
+    }
+
+    @Override
+    public void notifyRequestInscription() {
     }
 }

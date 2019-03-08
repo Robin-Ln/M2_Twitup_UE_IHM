@@ -52,12 +52,12 @@ public class NorthComponent extends JPanel implements INorthComponent, ITwitupMa
      */
     private ResourceBundle mBundle;
 
-    public NorthComponent(IDatabase database, EntityManager entityManager, Locale locale) {
+    public NorthComponent(IDatabase database, EntityManager entityManager, ResourceBundle bundle) {
         super();
         this.mDatabase = database;
         this.mEntityManager = entityManager;
         this.mObservers = new HashSet<>();
-        this.mBundle = ResourceBundle.getBundle("local", locale);
+        this.mBundle = bundle;
         this.init();
     }
 
@@ -149,6 +149,13 @@ public class NorthComponent extends JPanel implements INorthComponent, ITwitupMa
     public void notifyRequestConnexion() {
         for (INorthComponentObserver observer : this.mObservers) {
             observer.notifyRequestConnexion();
+        }
+    }
+
+    @Override
+    public void notifyRequestInscription() {
+        for (INorthComponentObserver observer : this.mObservers) {
+            observer.notifyRequestInscription();
         }
     }
 }

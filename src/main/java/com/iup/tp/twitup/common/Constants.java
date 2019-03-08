@@ -51,7 +51,7 @@ public interface Constants {
 	/**
 	 * Fichier de configuration de l'application.
 	 */
-	public static final String CONFIGURATION_FILE = "src/resources/configuration.properties";
+	public static final String CONFIGURATION_FILE = "configuration.properties";
 
 	/**
 	 * Clé de configuration pour la sauvegarde du répertoire d'échange.
@@ -67,4 +67,9 @@ public interface Constants {
 	 * Clé de configuration pour le mode bouchoné
 	 */
 	public static final String CONFIGURATION_KEY_MOCK_ENABLED = "MOCK_ENABLED";
+
+	/**
+	 * Clé de configuration pour la langue
+	 */
+	public static final String CONFIGURATION_KEY_LOCAL = "LOCAL";
 }

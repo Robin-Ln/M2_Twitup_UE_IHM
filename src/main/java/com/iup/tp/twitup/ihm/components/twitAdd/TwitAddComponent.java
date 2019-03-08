@@ -1,5 +1,6 @@
 package com.iup.tp.twitup.ihm.components.twitAdd;
 
+import com.iup.tp.twitup.core.EntityManager;
 import com.iup.tp.twitup.datamodel.Twit;
 import com.iup.tp.twitup.datamodel.User;
 
@@ -31,8 +32,13 @@ public class TwitAddComponent extends JPanel implements ITwitAddComponent {
      */
     private User mUser;
 
+    /**
+     * Gestionnaire de bdd et de fichier.
+     */
+    private EntityManager mEntityManager;
 
-    public TwitAddComponent(ResourceBundle bundle, User user) {
+
+    public TwitAddComponent(ResourceBundle bundle, User user, EntityManager entityManager) {
         super();
 
         this.mObservers = new HashSet<>();
@@ -40,6 +46,8 @@ public class TwitAddComponent extends JPanel implements ITwitAddComponent {
         this.mBundle = bundle;
 
         this.mUser = user;
+
+        this.mEntityManager = entityManager;
 
         this.init();
     }
@@ -108,10 +116,9 @@ public class TwitAddComponent extends JPanel implements ITwitAddComponent {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (textArea.getText().length() < 250) {
-                    for (ITwitAddComponentObserver observer : TwitAddComponent.this.mObservers) {
-                        Twit twit = new Twit(TwitAddComponent.this.mUser, textArea.getText());
-                        observer.notifyNewTwit(twit);
-                    }
+                    Twit twit = new Twit(TwitAddComponent.this.mUser, textArea.getText());
+                    TwitAddComponent.this.mEntityManager.sendTwit(twit);
+                    textArea.setText("");
                 }
             }
         });
