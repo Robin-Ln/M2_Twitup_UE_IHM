@@ -4,4 +4,6 @@ public interface ILoginComponentObserver {
 
     void notifyRequestUserConnexion(String name, char[] password, Integer nbConnexion);
 
+    void notifySelectCanceled();
+
 }

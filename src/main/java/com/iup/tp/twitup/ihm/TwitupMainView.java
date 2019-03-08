@@ -4,28 +4,22 @@ import com.iup.tp.twitup.core.EntityManager;
 import com.iup.tp.twitup.datamodel.IDatabase;
 import com.iup.tp.twitup.datamodel.User;
 import com.iup.tp.twitup.ihm.components.centerComponent.CenterComponent;
-import com.iup.tp.twitup.ihm.components.centerComponent.ICenterComponentObserver;
-import com.iup.tp.twitup.ihm.components.inscriptionComponent.IInscriptionComponentObserver;
-import com.iup.tp.twitup.ihm.components.inscriptionComponent.InscriptionComponent;
-import com.iup.tp.twitup.ihm.components.loginConponent.ILoginComponentObserver;
-import com.iup.tp.twitup.ihm.components.loginConponent.LoginComponent;
-import com.iup.tp.twitup.ihm.components.northComponent.INorthComponentObserver;
+import com.iup.tp.twitup.ihm.components.centerComponent.CenterComponentAdapter;
+import com.iup.tp.twitup.ihm.components.northComponent.NorthComponent;
+import com.iup.tp.twitup.ihm.components.northComponent.NorthComponentAdapter;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Set;
 
 /**
  * Classe de la vue principale de l'application.
  */
-public class TwitupMainView extends JFrame implements ITwitupMainView, INorthComponentObserver, ICenterComponentObserver, ILoginComponentObserver, IInscriptionComponentObserver {
+public class TwitupMainView extends JFrame implements ITwitupMainView {
 
     /**
      * Base de donénes de l'application.
@@ -51,6 +45,11 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
      * Center panel
      */
     private CenterComponent centerComponent;
+
+    /**
+     * north panel
+     */
+    private NorthComponent northComponent;
 
     /**
      * Constructeur.
@@ -87,11 +86,37 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
         // Création de la fenetre principale
         this.setTitle(this.mBundle.getString("titre"));
 
+        /**
+         * Création du composant nord
+         */
+        this.northComponent = new NorthComponent(this.mDatabase, this.mEntityManager, this.mBundle);
+        this.northComponent.addObserver(new NorthComponentAdapter() {
+            @Override
+            public void notifySuccessConnexion(User user) {
+                TwitupMainView.this.handlerSuccessConnexion(user);
+            }
+
+            @Override
+            public void notifyRequestLogout() {
+                TwitupMainView.this.handlerLogout();
+            }
+
+            @Override
+            public void notifySearchRequest(String search) {
+                TwitupMainView.this.centerComponent.handlerSreachTwit(search);
+            }
+        });
+        this.add(this.northComponent, BorderLayout.NORTH);
+
+        /**
+         * TODO: notifier Twithup
+         */
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 TwitupMainView.this.handlerQuitter();
             }
         });
+
 
         /**
          * Menu
@@ -116,11 +141,11 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
         /**
          * Menu Connection
          */
-
-        JMenuItem itemConnection = new JMenuItem(this.mBundle.getString("menu.connection"));
-        itemConnection.setIcon(iconEditer);
-        itemConnection.addActionListener(e -> TwitupMainView.this.handlerConnection(0));
-        menu.add(itemConnection);
+        // TODO
+//        JMenuItem itemConnection = new JMenuItem(this.mBundle.getString("menu.connection"));
+//        itemConnection.setIcon(iconEditer);
+//        itemConnection.addActionListener(e -> TwitupMainView.this.handlerConnection(0));
+//        menu.add(itemConnection);
 
         /**
          * Menu Quitter
@@ -135,66 +160,17 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
         JMenuItem itemInfo = new JMenuItem("?");
         itemInfo.addActionListener(e -> TwitupMainView.this.handlerDialogInfo());
         menuBar.add(itemInfo);
-
-
-        /**
-         * Bouton de connexion
-         */
-
-        JButton connexionButton = new JButton(this.mBundle.getString("button.connexion.libelle"));
-        connexionButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TwitupMainView.this.handlerConnection(0);
-            }
-        });
     }
 
-    /**
-     * Méthodes pour instancier les composants de la vus principale
-     */
-    public void setNorthComponent(JPanel component){
-        this.getContentPane().add(component, BorderLayout.NORTH);
-        this.revalidate();
-        this.repaint();
+    private void handlerLogout() {
+        this.centerComponent.removeAll();
+        this.centerComponent.revalidate();
+        this.centerComponent.repaint();
     }
-
-    public void setCenterComponent(CenterComponent component){
-        this.centerComponent = component;
-        this.getContentPane().add(component, BorderLayout.CENTER);
-        this.revalidate();
-        this.repaint();
-    }
-
-    public void setEastComponent(JPanel component){
-        this.getContentPane().add(component, BorderLayout.EAST);
-        this.revalidate();
-        this.repaint();
-    }
-
-    public void setWestComponent(JPanel component){
-        this.getContentPane().add(component, BorderLayout.WEST);
-        this.revalidate();
-        this.repaint();
-    }
-
 
     /**
      * Methodes handler
      */
-    public void handlerConnection(Integer nbConnexion) {
-        LoginComponent loginComponent = new LoginComponent(this.mBundle, nbConnexion);
-        loginComponent.addObserver(this);
-        loginComponent.open();
-        loginComponent.deleteObserver(this);
-    }
-
-    public void handlerInscription() {
-        InscriptionComponent inscriptionComponent = new InscriptionComponent(this.mBundle);
-        inscriptionComponent.addObserver(this);
-        inscriptionComponent.open();
-        inscriptionComponent.deleteObserver(this);
-    }
 
     private void handlerQuitter() {
         System.exit(0);
@@ -237,78 +213,19 @@ public class TwitupMainView extends JFrame implements ITwitupMainView, INorthCom
         this.mObservers.remove(observer);
     }
 
-    /**
-     * Methode de l'interface INorthLogoutComponentObserver
-     */
-    @Override
-    public void notifyRequestConnexion() {
-        this.handlerConnection(0);
-    }
-
-    @Override
-    public void notifyRequestInscription() {
-        this.handlerInscription();
-    }
-
-    @Override
-    public void notifyRequestLogout() {
-        this.centerComponent.removeAll();
-        this.notifyViewChange();
-
-    }
-
-    @Override
-    public void notifySearchRequest(String search) {
-        this.centerComponent.notifySearchRequest(search);
-    }
-
-    /**
-     * Handler
-     */
-    public void notifyRequestUserConnexion(String name, char[] password, Integer nbConnexion) {
-        Set<User> users = this.mDatabase.getUsers();
-        for (User user : users) {
-            if(user.getName().equals(name) && user.getUserPassword().equals(new String(password))){
-                this.handlerSuccessConnexion(user);
-                return;
-            }
-        }
-        this.handlerConnection(++nbConnexion);
-    }
 
     /**
      * handler
      */
 
     private void handlerSuccessConnexion(User user){
-
         if(this.centerComponent == null){
-            CenterComponent centerComponent = new CenterComponent(this.mDatabase,this.mEntityManager,this.mBundle, user);
-            centerComponent.addObserver(this);
-            this.setCenterComponent(centerComponent);
+            this.centerComponent = new CenterComponent(this.mDatabase,this.mEntityManager,this.mBundle, user);
+            this.centerComponent.addObserver(new CenterComponentAdapter() {});
+            this.add(this.centerComponent, BorderLayout.CENTER);
         }else {
+            this.centerComponent.removeAll();
             this.centerComponent.init();
         }
-
-        for (ITwitupMainViewObserver observer : this.mObservers) {
-            observer.notifySuccessConnexion(user);
-        }
-    }
-
-    /**
-     * Methode de ICenterComponentObserver
-     */
-    @Override
-    public void notifyViewChange() {
-        this.revalidate();
-        this.repaint();
-    }
-
-    /**
-     * Methode IInscriptionComponentObserver
-     */
-    @Override
-    public void notifyRequestUserInscription(User user) {
-
     }
 }

@@ -36,7 +36,7 @@ public class LoginComponent implements ILoginComponent {
     /**
      * Methodes
      */
-    public void open() {
+    public void show() {
         JPanel dialogPanel = new JPanel();
 
         JTextField nameField = new JTextField("MockUser75509");

@@ -4,6 +4,9 @@ import com.iup.tp.twitup.ihm.ITwitupMainViewObserver;
 import com.iup.tp.twitup.ihm.components.inscriptionComponent.IInscriptionComponentObserver;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;

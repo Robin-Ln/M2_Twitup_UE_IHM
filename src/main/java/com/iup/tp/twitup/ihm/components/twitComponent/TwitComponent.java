@@ -79,9 +79,13 @@ public class TwitComponent extends JPanel implements ITwitComponent {
         deletebutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                TwitComponent.this.removeAll();
+                TwitComponent.this.revalidate();
+                TwitComponent.this.repaint();
                 for (ITwitComponentObserver observer : TwitComponent.this.mObservers) {
                     observer.notifyDeleteTwitComponent(TwitComponent.this);
                 }
+
             }
         });
 

@@ -2,29 +2,20 @@ package com.iup.tp.twitup.ihm.components.northComponent;
 
 import com.iup.tp.twitup.core.EntityManager;
 import com.iup.tp.twitup.datamodel.IDatabase;
-import com.iup.tp.twitup.datamodel.Twit;
 import com.iup.tp.twitup.datamodel.User;
-import com.iup.tp.twitup.ihm.ITwitupMainView;
-import com.iup.tp.twitup.ihm.ITwitupMainViewObserver;
-import com.iup.tp.twitup.ihm.components.northLogedComponent.INorthLogedComponentObserver;
 import com.iup.tp.twitup.ihm.components.northLogedComponent.NorthLogedComponent;
-import com.iup.tp.twitup.ihm.components.northLogoutComponent.INorthLogoutComponent;
-import com.iup.tp.twitup.ihm.components.northLogoutComponent.INorthLogoutComponentObserver;
+import com.iup.tp.twitup.ihm.components.northLogedComponent.NorthLogedComponentAdapter;
 import com.iup.tp.twitup.ihm.components.northLogoutComponent.NorthLogoutComponent;
-import com.iup.tp.twitup.ihm.components.twitComponent.TwitComponent;
+import com.iup.tp.twitup.ihm.components.northLogoutComponent.NorthLogoutComponentAdapter;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-public class NorthComponent extends JPanel implements INorthComponent, ITwitupMainViewObserver, INorthLogoutComponentObserver, INorthLogedComponentObserver {
+public class NorthComponent extends JPanel implements INorthComponent {
 
     /**
      * Liste des observateurs de modifications de la base.
@@ -90,8 +81,17 @@ public class NorthComponent extends JPanel implements INorthComponent, ITwitupMa
     private void handlerLogout(){
         this.removeAll();
 
-        NorthLogoutComponent northLogoutComponent = new NorthLogoutComponent(this.mBundle);
-        northLogoutComponent.addObserver(this);
+        NorthLogoutComponent northLogoutComponent = new NorthLogoutComponent(this.mDatabase, this.mBundle);
+        northLogoutComponent.addObserver(new NorthLogoutComponentAdapter() {
+            @Override
+            public void notifySuccessConnexion(User user) {
+                NorthComponent.this.handlerLogin(user);
+
+                for (INorthComponentObserver observer : NorthComponent.this.mObservers) {
+                    observer.notifySuccessConnexion(user);
+                }
+            }
+        });
 
         this.add(northLogoutComponent,
                 new GridBagConstraints(0, 0, 1, 1, 1, 0,
@@ -100,62 +100,34 @@ public class NorthComponent extends JPanel implements INorthComponent, ITwitupMa
                         new Insets(0, 0, 0, 0), 0, 0));
 
         this.revalidate();
+        this.repaint();
     }
 
-    /**
-     * Méthodes de l'interface ITwitupMainViewObserver
-     */
-    @Override
-    public void notifyEchangeDirectoryChange(File file) {
-    }
-
-
-    @Override
-    public void notifySuccessConnexion(User user) {
+    private void handlerLogin(User user) {
         this.removeAll();
-
         NorthLogedComponent northLogedComponent = new NorthLogedComponent(this.mBundle);
-        northLogedComponent.addObserver(this);
+        northLogedComponent.addObserver(new NorthLogedComponentAdapter() {
+            @Override
+            public void notifyRequestLogout() {
+                NorthComponent.this.handlerLogout();
+                for (INorthComponentObserver observer : NorthComponent.this.mObservers) {
+                    observer.notifyRequestLogout();
+                }
+            }
 
+            @Override
+            public void notifySearchRequest(String search) {
+                for (INorthComponentObserver observer : NorthComponent.this.mObservers) {
+                    observer.notifySearchRequest(search);
+                }
+            }
+        });
         this.add(northLogedComponent,
                 new GridBagConstraints(0, 0, 1, 1, 1, 0,
-                        GridBagConstraints.NORTH,
+                        GridBagConstraints.NORTHWEST,
                         GridBagConstraints.HORIZONTAL,
                         new Insets(0, 0, 0, 0), 0, 0));
-
         this.revalidate();
-    }
-
-    /**
-     * Methode de INorthLogoutComponentObserver, INorthLogedComponentObserver
-     */
-
-    @Override
-    public void notifyRequestLogout() {
-        this.handlerLogout();
-        for (INorthComponentObserver observer : this.mObservers) {
-            observer.notifyRequestLogout();
-        }
-    }
-
-    @Override
-    public void notifySearchRequest(String search) {
-        for (INorthComponentObserver observer : this.mObservers) {
-            observer.notifySearchRequest(search);
-        }
-    }
-
-    @Override
-    public void notifyRequestConnexion() {
-        for (INorthComponentObserver observer : this.mObservers) {
-            observer.notifyRequestConnexion();
-        }
-    }
-
-    @Override
-    public void notifyRequestInscription() {
-        for (INorthComponentObserver observer : this.mObservers) {
-            observer.notifyRequestInscription();
-        }
+        this.repaint();
     }
 }

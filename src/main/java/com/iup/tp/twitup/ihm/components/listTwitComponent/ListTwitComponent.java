@@ -1,8 +1,8 @@
 package com.iup.tp.twitup.ihm.components.listTwitComponent;
 
 import com.iup.tp.twitup.core.EntityManager;
+import com.iup.tp.twitup.datamodel.DatabaseAdapter;
 import com.iup.tp.twitup.datamodel.IDatabase;
-import com.iup.tp.twitup.datamodel.IDatabaseObserver;
 import com.iup.tp.twitup.datamodel.Twit;
 import com.iup.tp.twitup.datamodel.User;
 import com.iup.tp.twitup.ihm.components.twitComponent.ITwitComponentObserver;
@@ -16,7 +16,7 @@ import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-public class ListTwitComponent extends JPanel implements IListTwitComponent, IDatabaseObserver, ITwitComponentObserver {
+public class ListTwitComponent extends JPanel implements IListTwitComponent {
 
 
 
@@ -34,7 +34,7 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent, IDa
     /**
      * Contenue de la liste
      */
-    JPanel contenu;
+    private JPanel contenu;
 
     /**
      * Gestionnaire de bdd et de fichier.
@@ -47,6 +47,8 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent, IDa
     private ResourceBundle mBundle;
 
     private User mUser;
+
+    private final ITwitComponentObserver iTwitComponentObserver;
 
     /**
      * Data base
@@ -63,6 +65,12 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent, IDa
         this.mEntityManager = entityManager;
         this.mBundle = bundle;
         this.mUser = user;
+        this.iTwitComponentObserver = new ITwitComponentObserver() {
+            @Override
+            public void notifyDeleteTwitComponent(TwitComponent twitComponent) {
+                ListTwitComponent.this.handlerDeleteTwith(twitComponent);
+            }
+        };
         this.init(twits);
 
     }
@@ -87,7 +95,12 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent, IDa
             this.handlerAddTwit(twit);
         }
 
-        this.mDatabase.addObserver(this);
+        this.mDatabase.addObserver(new DatabaseAdapter() {
+            @Override
+            public void notifyTwitAdded(Twit addedTwit) {
+                ListTwitComponent.this.handlerAddTwit(addedTwit);
+            }
+        });
     }
 
     /**
@@ -114,15 +127,14 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent, IDa
         for (Twit twit : twits) {
             this.handlerAddTwit(twit);
         }
-        for (IListTwitComponentObserver observer : this.mObservers) {
-            observer.notifyViewChange();
-        }
+        this.revalidate();
+        this.repaint();
     }
 
     private void handlerAddTwit(Twit twit){
 
         TwitComponent twitComponent = new TwitComponent(twit, this.mUser, this.mBundle);
-        twitComponent.addObserver(this);
+        twitComponent.addObserver(this.iTwitComponentObserver);
         this.nbTwit++;
         this.contenu.add(twitComponent,
                 new GridBagConstraints(0, this.nbTwit, 1, 1, 1, 0,
@@ -135,11 +147,12 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent, IDa
     }
 
     private void handlerDeleteTwith(TwitComponent twitComponent) {
-        twitComponent.deleteObserver(this);
+        twitComponent.deleteObserver(this.iTwitComponentObserver);
         twitComponent.removeAll();
         this.contenu.remove(twitComponent);
         this.mDatabase.removeTwit(twitComponent.getTwit());
         this.revalidate();
+        this.repaint();
     }
 
 
@@ -156,44 +169,4 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent, IDa
         this.mObservers.remove(observer);
     }
 
-    /**
-     * Methode de l'inteface IDatabaseObserver
-     */
-    @Override
-    public void notifyTwitAdded(Twit addedTwit) {
-        this.handlerAddTwit(addedTwit);
-    }
-
-    @Override
-    public void notifyTwitDeleted(Twit deletedTwit) {
-
-    }
-
-    @Override
-    public void notifyTwitModified(Twit modifiedTwit) {
-
-    }
-
-    @Override
-    public void notifyUserAdded(User addedUser) {
-
-    }
-
-    @Override
-    public void notifyUserDeleted(User deletedUser) {
-
-    }
-
-    @Override
-    public void notifyUserModified(User modifiedUser) {
-
-    }
-
-    /**
-     * Methode de l'interface ITwitComponentObserver
-     */
-    @Override
-    public void notifyDeleteTwitComponent(TwitComponent twitComponent) {
-        this.handlerDeleteTwith(twitComponent);
-    }
 }

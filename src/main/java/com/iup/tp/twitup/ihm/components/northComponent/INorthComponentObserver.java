@@ -1,5 +1,7 @@
 package com.iup.tp.twitup.ihm.components.northComponent;
 
+import com.iup.tp.twitup.datamodel.User;
+
 public interface INorthComponentObserver {
     void notifyRequestConnexion();
 
@@ -8,4 +10,6 @@ public interface INorthComponentObserver {
     void notifySearchRequest(String search);
 
     void notifyRequestInscription();
+
+    void notifySuccessConnexion(User user);
 }

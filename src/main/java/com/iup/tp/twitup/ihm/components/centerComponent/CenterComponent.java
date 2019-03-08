@@ -4,9 +4,8 @@ import com.iup.tp.twitup.core.EntityManager;
 import com.iup.tp.twitup.datamodel.IDatabase;
 import com.iup.tp.twitup.datamodel.Twit;
 import com.iup.tp.twitup.datamodel.User;
-import com.iup.tp.twitup.ihm.components.listTwitComponent.IListTwitComponentObserver;
 import com.iup.tp.twitup.ihm.components.listTwitComponent.ListTwitComponent;
-import com.iup.tp.twitup.ihm.components.northComponent.INorthComponentObserver;
+import com.iup.tp.twitup.ihm.components.listTwitComponent.ListTwitComponentAdapter;
 import com.iup.tp.twitup.ihm.components.twitAdd.TwitAddComponent;
 
 import javax.swing.*;
@@ -16,7 +15,7 @@ import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-public class CenterComponent extends JPanel implements ICenterComponent, IListTwitComponentObserver, INorthComponentObserver {
+public class CenterComponent extends JPanel implements ICenterComponent {
 
     /**
      * Liste des observateurs de modifications de la base.
@@ -86,7 +85,14 @@ public class CenterComponent extends JPanel implements ICenterComponent, IListTw
          */
         Set<Twit> twits = this.mDatabase.getTwits();
         this.listTwitComponent = new ListTwitComponent(twits,this.mDatabase,this.mEntityManager,this.mBundle, this.mUser);
-        this.listTwitComponent.addObserver(this);
+        this.listTwitComponent.addObserver(new ListTwitComponentAdapter() {
+            @Override
+            public void notifyViewChange() {
+                for (ICenterComponentObserver observer : CenterComponent.this.mObservers) {
+                    observer.notifyViewChange();
+                }
+            }
+        });
 
         /**
          * ajouter un twit
@@ -113,33 +119,12 @@ public class CenterComponent extends JPanel implements ICenterComponent, IListTw
     }
 
     /**
-     * Methode de IListTwitComponentObserver
-     */
-    @Override
-    public void notifyViewChange() {
-        for (ICenterComponentObserver observer : this.mObservers){
-            observer.notifyViewChange();
-        }
-    }
-
-    /**
-     * Methode de INorthComponentObserver
+     * Handlers
      */
 
-    @Override
-    public void notifyRequestConnexion() {
+    public void handlerSreachTwit(String serach) {
+        this.listTwitComponent.handlerSreachTwit(serach);
     }
 
-    @Override
-    public void notifyRequestLogout() {
-    }
 
-    @Override
-    public void notifySearchRequest(String search) {
-        this.listTwitComponent.handlerSreachTwit(search);
-    }
-
-    @Override
-    public void notifyRequestInscription() {
-    }
 }

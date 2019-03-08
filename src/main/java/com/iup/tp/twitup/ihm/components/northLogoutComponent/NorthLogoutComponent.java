@@ -1,5 +1,10 @@
 package com.iup.tp.twitup.ihm.components.northLogoutComponent;
 
+import com.iup.tp.twitup.datamodel.IDatabase;
+import com.iup.tp.twitup.datamodel.User;
+import com.iup.tp.twitup.ihm.components.loginConponent.ILoginComponentObserver;
+import com.iup.tp.twitup.ihm.components.loginConponent.LoginComponent;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,14 +22,20 @@ public class NorthLogoutComponent extends JPanel implements INorthLogoutComponen
     private ResourceBundle mBundle;
 
     /**
+     * Base de données.
+     */
+    private IDatabase mDatabase;
+
+    /**
      * observer
      */
     private final Set<INorthLogoutComponentObserver> mObservers;
 
-    public NorthLogoutComponent(ResourceBundle bundle) {
+    public NorthLogoutComponent(IDatabase database, ResourceBundle bundle) {
         super();
         this.mObservers = new HashSet<>();
         this.mBundle = bundle;
+        this.mDatabase = database;
         this.init();
     }
 
@@ -33,13 +44,11 @@ public class NorthLogoutComponent extends JPanel implements INorthLogoutComponen
         /**
          * Bouton de s'inscrire
          */
-        JButton siginButton = new JButton(this.mBundle.getString("button.inscription.libelle"));
-        siginButton.addActionListener(new ActionListener() {
+        JButton suscribeButton = new JButton(this.mBundle.getString("button.inscription.libelle"));
+        suscribeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (INorthLogoutComponentObserver observer : NorthLogoutComponent.this.mObservers) {
-                    observer.notifyRequestInscription();
-                }
+                // TODO
             }
         });
 
@@ -50,9 +59,7 @@ public class NorthLogoutComponent extends JPanel implements INorthLogoutComponen
         connexionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (INorthLogoutComponentObserver observer : NorthLogoutComponent.this.mObservers) {
-                    observer.notifyRequestConnexion();
-                }
+                NorthLogoutComponent.this.handlerRequestUserConnexion(0);
             }
         });
 
@@ -62,7 +69,7 @@ public class NorthLogoutComponent extends JPanel implements INorthLogoutComponen
          */
         this.setLayout(new GridBagLayout());
 
-        this.add(siginButton,
+        this.add(suscribeButton,
                 new GridBagConstraints(0, 0, 1, 1, 0, 0,
                         GridBagConstraints.EAST,
                         GridBagConstraints.NONE,
@@ -87,5 +94,45 @@ public class NorthLogoutComponent extends JPanel implements INorthLogoutComponen
     @Override
     public void deleteObserver(INorthLogoutComponentObserver observer) {
         this.mObservers.remove(observer);
+    }
+
+    /**
+     * Handler
+     */
+
+    /**
+     * Handler
+     */
+    public void handlerRequestUserConnexion(Integer nbConnexion) {
+        LoginComponent loginComponent = new LoginComponent(this.mBundle, nbConnexion);
+        loginComponent.addObserver(new ILoginComponentObserver() {
+            @Override
+            public void notifyRequestUserConnexion(String name, char[] password, Integer nbConnexion) {
+                NorthLogoutComponent.this.handlerUserConnexion(name, password, nbConnexion);
+            }
+
+            @Override
+            public void notifySelectCanceled() {
+                loginComponent.deleteObserver(this);
+            }
+        });
+        loginComponent.show();
+    }
+
+    public void handlerUserConnexion(String name, char[] password, Integer nbConnexion) {
+        Set<User> users = this.mDatabase.getUsers();
+        for (User user : users) {
+            if(user.getName().equals(name) && user.getUserPassword().equals(new String(password))){
+                this.handlerSuccessConnexion(user);
+                return;
+            }
+        }
+        this.handlerRequestUserConnexion(++nbConnexion);
+    }
+
+    private void handlerSuccessConnexion(User user){
+        for (INorthLogoutComponentObserver observer : this.mObservers) {
+            observer.notifySuccessConnexion(user);
+        }
     }
 }

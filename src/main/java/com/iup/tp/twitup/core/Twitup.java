@@ -7,6 +7,7 @@ import com.iup.tp.twitup.events.file.IWatchableDirectory;
 import com.iup.tp.twitup.events.file.WatchableDirectory;
 import com.iup.tp.twitup.ihm.ITwitupMainViewObserver;
 import com.iup.tp.twitup.ihm.TwitupMainView;
+import com.iup.tp.twitup.ihm.TwitupMainViewAdapter;
 import com.iup.tp.twitup.ihm.TwitupMock;
 import com.iup.tp.twitup.ihm.components.centerComponent.CenterComponent;
 import com.iup.tp.twitup.ihm.components.fileChooserComponent.FileChooserComponent;
@@ -28,7 +29,7 @@ import java.util.ResourceBundle;
  * 
  * @author S.Lucas
  */
-public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
+public class Twitup {
 	/**
 	 * Base de données.
 	 */
@@ -164,16 +165,47 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 		// this.mMainView...
 		this.mMainView = new TwitupMainView(this.mDatabase,this.mEntityManager,this.createResourceBundle());
 		this.mMainView.initGUI();
-		this.mNorthCompoent = new NorthComponent(this.mDatabase,this.mEntityManager,this.createResourceBundle());
 
+		this.mMainView.addObserver(new TwitupMainViewAdapter() {
+			@Override
+			public void notifyEchangeDirectoryChange(File file) {
+				if (Twitup.this.isValideExchangeDirectory(file)) {
+					Twitup.this.initDirectory(file.getAbsolutePath());
+				}
+			}
+		});
 
-		// initialisation du composent north
-		this.mMainView.setNorthComponent(this.mNorthCompoent);
-		this.mNorthCompoent.addObserver(this.mMainView);
+		this.mDatabase.addObserver(new DatabaseAdapter() {
+			@Override
+			public void notifyTwitAdded(Twit addedTwit) {
+				System.out.println("addedTwit :" + addedTwit);
+			}
 
-		this.mMainView.addObserver(this.mNorthCompoent);
-		this.mMainView.addObserver(this);
-		this.mDatabase.addObserver(this);
+			@Override
+			public void notifyTwitDeleted(Twit deletedTwit) {
+				System.out.println("deletedTwit :" + deletedTwit);
+			}
+
+			@Override
+			public void notifyTwitModified(Twit modifiedTwit) {
+				System.out.println("modifiedTwit :" + modifiedTwit);
+			}
+
+			@Override
+			public void notifyUserAdded(User addedUser) {
+				System.out.println("addedUser :" + addedUser);
+			}
+
+			@Override
+			public void notifyUserDeleted(User deletedUser) {
+				System.out.println("deletedUser :" + deletedUser);
+			}
+
+			@Override
+			public void notifyUserModified(User modifiedUser) {
+				System.out.println("modifiedUser :" + modifiedUser);
+			}
+		});
 	}
 
 	/**
@@ -272,53 +304,4 @@ public class Twitup implements IDatabaseObserver, ITwitupMainViewObserver {
 		return ResourceBundle.getBundle("local", locale);
 	}
 
-	/**
-	 * Methodes de l'interface IDatabaseObserver
-	 */
-
-	@Override
-	public void notifyTwitAdded(Twit addedTwit) {
-		System.out.println("addedTwit :" + addedTwit);
-	}
-
-	@Override
-	public void notifyTwitDeleted(Twit deletedTwit) {
-		System.out.println("deletedTwit :" + deletedTwit);
-	}
-
-	@Override
-	public void notifyTwitModified(Twit modifiedTwit) {
-		System.out.println("modifiedTwit :" + modifiedTwit);
-	}
-
-	@Override
-	public void notifyUserAdded(User addedUser) {
-		System.out.println("addedUser :" + addedUser);
-	}
-
-	@Override
-	public void notifyUserDeleted(User deletedUser) {
-		System.out.println("deletedUser :" + deletedUser);
-	}
-
-	@Override
-	public void notifyUserModified(User modifiedUser) {
-		System.out.println("modifiedUser :" + modifiedUser);
-	}
-
-	/**
-	 * Methodes de l'interface ITwitupMainViewObserver
-	 */
-
-	@Override
-	public void notifyEchangeDirectoryChange(File file) {
-		if (file.isDirectory()) {
-			this.initDirectory(file.getAbsolutePath());
-		}  else {
-			throw new RuntimeException("notifyEchangeDirectoryChange Fail");
-		}
-	}
-
-	@Override
-	public void notifySuccessConnexion(User user) {}
 }
