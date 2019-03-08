@@ -51,7 +51,7 @@ public interface Constants {
 	/**
 	 * Fichier de configuration de l'application.
 	 */
-	public static final String CONFIGURATION_FILE = "configuration.properties";
+	public static final String CONFIGURATION_FILE = "src/resources/configuration.properties";
 
 	/**
 	 * Clé de configuration pour la sauvegarde du répertoire d'échange.

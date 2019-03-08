@@ -5,7 +5,6 @@ import com.iup.tp.twitup.common.PropertiesManager;
 import com.iup.tp.twitup.datamodel.*;
 import com.iup.tp.twitup.events.file.IWatchableDirectory;
 import com.iup.tp.twitup.events.file.WatchableDirectory;
-import com.iup.tp.twitup.ihm.ITwitupMainViewObserver;
 import com.iup.tp.twitup.ihm.TwitupMainView;
 import com.iup.tp.twitup.ihm.TwitupMainViewAdapter;
 import com.iup.tp.twitup.ihm.TwitupMock;
@@ -16,8 +15,6 @@ import com.iup.tp.twitup.ihm.components.northComponent.NorthComponent;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.File;
 import java.net.URL;
 import java.util.Locale;
@@ -122,7 +119,7 @@ public class Twitup {
 	 * Initialisation du properties de l'application.
 	 */
 	private void initProperties() {
-		URL url = getClass().getClassLoader().getResource(Constants.CONFIGURATION_FILE);
+		URL url = getClass().getClassLoader().getResource("configuration.properties");
 		String path = url.getPath();
 		this.mProperties = PropertiesManager.loadProperties(path);
 
@@ -141,6 +138,9 @@ public class Twitup {
 		this.mProperties.setProperty(Constants.CONFIGURATION_KEY_EXCHANGE_DIRECTORY, this.mExchangeDirectoryPath);
 		this.mProperties.setProperty(Constants.CONFIGURATION_KEY_UI_CLASS_NAME, this.mUiClassName);
 		this.mProperties.setProperty(Constants.CONFIGURATION_KEY_MOCK_ENABLED, this.mIsMockEnabled.toString());
+
+		PropertiesManager.writeProperties(this.mProperties, Constants.CONFIGURATION_FILE);
+
 	}
 
 	/**
@@ -283,8 +283,6 @@ public class Twitup {
 
 		mWatchableDirectory.initWatching();
 		mWatchableDirectory.addObserver(mEntityManager);
-
-		this.mProperties.setProperty("EXCHANGE_DIRECTORY", directoryPath);
 	}
 
 	public void show() {
