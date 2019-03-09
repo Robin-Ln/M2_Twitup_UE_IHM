@@ -256,7 +256,7 @@ public class Twitup {
 					fileChooserComponent.deleteObserver(this);
 				}
 			});
-			fileChooserComponent.show();
+			fileChooserComponent.show(JFileChooser.DIRECTORIES_ONLY);
 		}
 
 		if (StringUtils.isNotBlank(this.mExchangeDirectoryPath)) {

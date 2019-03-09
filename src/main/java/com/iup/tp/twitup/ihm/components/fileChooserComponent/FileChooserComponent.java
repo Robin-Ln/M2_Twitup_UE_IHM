@@ -36,10 +36,10 @@ public class FileChooserComponent implements IFileChooserComponent {
     /**
      * Méthodes
      */
-    public void show(){
+    public void show(Integer type){
         JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle(this.mBundle.getString("dialog.file.choser.tilte"));
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooser.setFileSelectionMode(type);
         int returnVal = chooser.showOpenDialog(null);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             for (IFileChooserComponentObserver observer : this.mObservers) {

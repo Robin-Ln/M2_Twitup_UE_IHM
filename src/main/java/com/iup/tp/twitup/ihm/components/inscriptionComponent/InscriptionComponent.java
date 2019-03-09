@@ -1,9 +1,15 @@
 package com.iup.tp.twitup.ihm.components.inscriptionComponent;
 
+import com.iup.tp.twitup.core.Twitup;
 import com.iup.tp.twitup.datamodel.User;
+import com.iup.tp.twitup.ihm.components.fileChooserComponent.FileChooserComponent;
+import com.iup.tp.twitup.ihm.components.fileChooserComponent.IFileChooserComponentObserver;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.*;
 
 public class InscriptionComponent implements IInscriptionComponent {
@@ -35,7 +41,7 @@ public class InscriptionComponent implements IInscriptionComponent {
     /**
      * Methodes
      */
-    public void show() {
+    public void show(JPanel parent) {
         JPanel dialogPanel = new JPanel();
         dialogPanel.setLayout(new GridBagLayout());
 
@@ -47,6 +53,28 @@ public class InscriptionComponent implements IInscriptionComponent {
 
         JLabel passwordLabel = new JLabel(this.mBundle.getString("dialog.inscription.label.password"));
         JPasswordField password = new JPasswordField();
+
+        JLabel imagePath = new JLabel();
+        JButton imageButton  = new JButton(this.mBundle.getString("button.inscription.image.libelle"));
+        imageButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FileChooserComponent fileChooserComponent = new FileChooserComponent(InscriptionComponent.this.mBundle);
+                fileChooserComponent.addObserver(new IFileChooserComponentObserver() {
+                    @Override
+                    public void notifyFileSelected(File file) {
+                        imagePath.setText(file.getAbsolutePath());
+                    }
+
+                    @Override
+                    public void notifySelectCanceled() {
+                        fileChooserComponent.deleteObserver(this);
+                    }
+                });
+                fileChooserComponent.show(JFileChooser.FILES_ONLY);
+            }
+        });
+
 
         /**
          * Ajout des composant
@@ -87,13 +115,25 @@ public class InscriptionComponent implements IInscriptionComponent {
                         GridBagConstraints.BOTH,
                         new Insets(5, 5, 0, 5), 0, 0));
 
+        dialogPanel.add(imageButton,
+                new GridBagConstraints(0, 3, 1, 1, 0, 0,
+                        GridBagConstraints.NORTHEAST,
+                        GridBagConstraints.NONE,
+                        new Insets(5, 5, 0, 5), 0, 0));
+
+        dialogPanel.add(imagePath,
+                new GridBagConstraints(1, 3, 1, 1, 1, 0,
+                        GridBagConstraints.NORTH,
+                        GridBagConstraints.BOTH,
+                        new Insets(5, 5, 0, 5), 0, 0));
 
 
 
 
 
 
-        int result = JOptionPane.showConfirmDialog(null, dialogPanel, this.mBundle.getString("dialog.inscription.label.title"),
+
+        int result = JOptionPane.showConfirmDialog(parent, dialogPanel, this.mBundle.getString("dialog.inscription.label.title"),
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             int randomInt = new Random().nextInt(999999);
@@ -102,7 +142,7 @@ public class InscriptionComponent implements IInscriptionComponent {
                     new String(password.getPassword()),
                     name.getText(),
                     new HashSet<String>(),
-                    "");
+                    imagePath.getText());
             this.handlerInscription(newUser);
         }
     }

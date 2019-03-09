@@ -100,7 +100,7 @@ public class NorthLogoutComponent extends JPanel implements INorthLogoutComponen
                 NorthLogoutComponent.this.mEntityManager.sendUser(user);
             }
         });
-        inscriptionComponent.show();
+        inscriptionComponent.show(this);
     }
 
     /**
@@ -136,7 +136,7 @@ public class NorthLogoutComponent extends JPanel implements INorthLogoutComponen
                 loginComponent.deleteObserver(this);
             }
         });
-        loginComponent.show();
+        loginComponent.show(this);
     }
 
     public void handlerUserConnexion(String name, char[] password, Integer nbConnexion, Boolean remember) {
