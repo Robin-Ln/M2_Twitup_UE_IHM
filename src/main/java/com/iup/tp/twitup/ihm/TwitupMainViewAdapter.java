@@ -15,4 +15,9 @@ public abstract class TwitupMainViewAdapter implements ITwitupMainViewObserver {
     public void notifySuccessConnexion(User user) {
 
     }
+
+    @Override
+    public void notifyRememberUser(User user, Boolean remember) {
+
+    }
 }

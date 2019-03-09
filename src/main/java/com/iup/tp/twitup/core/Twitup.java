@@ -83,6 +83,10 @@ public class Twitup {
 	 */
 	private String mLocale;
 
+	private Boolean mRemember;
+
+	private String mUserName;
+
 	/**
 	 * Constructeur.
 	 */
@@ -127,6 +131,9 @@ public class Twitup {
 		this.mExchangeDirectoryPath = this.mProperties.getProperty(Constants.CONFIGURATION_KEY_EXCHANGE_DIRECTORY);
 		this.mUiClassName = this.mProperties.getProperty(Constants.CONFIGURATION_KEY_UI_CLASS_NAME);
 		this.mIsMockEnabled = Boolean.parseBoolean(this.mProperties.getProperty(Constants.CONFIGURATION_KEY_MOCK_ENABLED));
+
+		this.mRemember = Boolean.parseBoolean(this.mProperties.getProperty(Constants.CONFIGURATION_KEY_REMEMBER));
+		this.mUserName = this.mProperties.getProperty(Constants.CONFIGURATION_KEY_USER_REMEMBER);
 	}
 
 
@@ -138,6 +145,9 @@ public class Twitup {
 		this.mProperties.setProperty(Constants.CONFIGURATION_KEY_EXCHANGE_DIRECTORY, this.mExchangeDirectoryPath);
 		this.mProperties.setProperty(Constants.CONFIGURATION_KEY_UI_CLASS_NAME, this.mUiClassName);
 		this.mProperties.setProperty(Constants.CONFIGURATION_KEY_MOCK_ENABLED, this.mIsMockEnabled.toString());
+
+		this.mProperties.setProperty(Constants.CONFIGURATION_KEY_REMEMBER, this.mRemember.toString());
+		this.mProperties.setProperty(Constants.CONFIGURATION_KEY_USER_REMEMBER, this.mUserName);
 
 		PropertiesManager.writeProperties(this.mProperties, Constants.CONFIGURATION_FILE);
 
@@ -173,6 +183,11 @@ public class Twitup {
 					Twitup.this.initDirectory(file.getAbsolutePath());
 				}
 			}
+
+			@Override
+			public void notifyRememberUser(User user, Boolean remember) {
+				Twitup.this.handlerRememberUser(user, remember);
+			}
 		});
 
 		this.mDatabase.addObserver(new DatabaseAdapter() {
@@ -206,6 +221,12 @@ public class Twitup {
 				System.out.println("modifiedUser :" + modifiedUser);
 			}
 		});
+	}
+
+	private void handlerRememberUser(User user, Boolean remember) {
+		this.mUserName = user.getName();
+		this.mRemember = remember;
+		this.saveProperties();
 	}
 
 	/**
@@ -297,6 +318,7 @@ public class Twitup {
 		if (StringUtils.isNotBlank(this.mLocale)) {
 			locale = new Locale(this.mLocale, this.mLocale, "");
 		} else {
+			this.mLocale = Locale.getDefault().getCountry().toString().toLowerCase();
 			locale = Locale.getDefault();
 		}
 		return ResourceBundle.getBundle("local", locale);

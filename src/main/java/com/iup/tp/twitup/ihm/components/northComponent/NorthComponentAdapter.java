@@ -24,7 +24,7 @@ public abstract class NorthComponentAdapter implements INorthComponentObserver {
     }
 
     @Override
-    public void notifySuccessConnexion(User user) {
+    public void notifySuccessConnexion(User user,Boolean remember) {
 
     }
 }

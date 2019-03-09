@@ -14,7 +14,7 @@ public abstract class NorthLogoutComponentAdapter implements INorthLogoutCompone
     }
 
     @Override
-    public void notifySuccessConnexion(User user) {
+    public void notifySuccessConnexion(User user, Boolean remember) {
 
     }
 }

@@ -84,11 +84,11 @@ public class NorthComponent extends JPanel implements INorthComponent {
         NorthLogoutComponent northLogoutComponent = new NorthLogoutComponent(this.mDatabase, this.mBundle);
         northLogoutComponent.addObserver(new NorthLogoutComponentAdapter() {
             @Override
-            public void notifySuccessConnexion(User user) {
+            public void notifySuccessConnexion(User user,Boolean remember) {
                 NorthComponent.this.handlerLogin(user);
 
                 for (INorthComponentObserver observer : NorthComponent.this.mObservers) {
-                    observer.notifySuccessConnexion(user);
+                    observer.notifySuccessConnexion(user,remember);
                 }
             }
         });

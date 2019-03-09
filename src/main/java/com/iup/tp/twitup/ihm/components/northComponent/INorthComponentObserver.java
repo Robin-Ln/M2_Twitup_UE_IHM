@@ -11,5 +11,5 @@ public interface INorthComponentObserver {
 
     void notifyRequestInscription();
 
-    void notifySuccessConnexion(User user);
+    void notifySuccessConnexion(User user,Boolean remember);
 }

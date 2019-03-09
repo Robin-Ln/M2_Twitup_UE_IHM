@@ -8,5 +8,5 @@ public interface INorthLogoutComponentObserver {
 
     void notifyRequestInscription();
 
-    void notifySuccessConnexion(User user);
+    void notifySuccessConnexion(User user, Boolean remember);
 }

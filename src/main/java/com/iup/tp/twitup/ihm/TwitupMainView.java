@@ -66,7 +66,11 @@ public class TwitupMainView extends JFrame implements ITwitupMainView {
     public void showGUI() {
         // dimenssion
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        screenSize.height /= 2;
+        screenSize.width /= 2;
         this.setSize(screenSize);
+        this.setLocation(this.getWidth() * 2,
+                screenSize.height / 4);
 
         // Affichage dans l'EDT
         SwingUtilities.invokeLater(new Runnable() {
@@ -92,8 +96,8 @@ public class TwitupMainView extends JFrame implements ITwitupMainView {
         this.northComponent = new NorthComponent(this.mDatabase, this.mEntityManager, this.mBundle);
         this.northComponent.addObserver(new NorthComponentAdapter() {
             @Override
-            public void notifySuccessConnexion(User user) {
-                TwitupMainView.this.handlerSuccessConnexion(user);
+            public void notifySuccessConnexion(User user,Boolean remember) {
+                TwitupMainView.this.handlerSuccessConnexion(user,remember);
             }
 
             @Override
@@ -137,15 +141,6 @@ public class TwitupMainView extends JFrame implements ITwitupMainView {
         itemConfigurer.setIcon(iconEditer);
         itemConfigurer.addActionListener(e -> TwitupMainView.this.handlerFileChooser());
         menu.add(itemConfigurer);
-
-        /**
-         * Menu Connection
-         */
-        // TODO
-//        JMenuItem itemConnection = new JMenuItem(this.mBundle.getString("menu.connection"));
-//        itemConnection.setIcon(iconEditer);
-//        itemConnection.addActionListener(e -> TwitupMainView.this.handlerConnection(0));
-//        menu.add(itemConnection);
 
         /**
          * Menu Quitter
@@ -218,7 +213,7 @@ public class TwitupMainView extends JFrame implements ITwitupMainView {
      * handler
      */
 
-    private void handlerSuccessConnexion(User user){
+    private void handlerSuccessConnexion(User user,Boolean remember){
         if(this.centerComponent == null){
             this.centerComponent = new CenterComponent(this.mDatabase,this.mEntityManager,this.mBundle, user);
             this.centerComponent.addObserver(new CenterComponentAdapter() {});
@@ -227,5 +222,11 @@ public class TwitupMainView extends JFrame implements ITwitupMainView {
             this.centerComponent.removeAll();
             this.centerComponent.init();
         }
+
+
+        for (ITwitupMainViewObserver observer : this.mObservers) {
+            observer.notifyRememberUser(user,remember);
+        }
+
     }
 }

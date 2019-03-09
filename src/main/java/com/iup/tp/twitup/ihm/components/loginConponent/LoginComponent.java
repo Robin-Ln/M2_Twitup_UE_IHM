@@ -39,7 +39,7 @@ public class LoginComponent implements ILoginComponent {
     public void show() {
         JPanel dialogPanel = new JPanel();
 
-        JTextField nameField = new JTextField("MockUser75509");
+        JTextField nameField = new JTextField("MockUser94660");
         JPasswordField passwordField = new JPasswordField("--");
         dialogPanel.setLayout(new GridLayout(0, 2));
 
@@ -53,11 +53,16 @@ public class LoginComponent implements ILoginComponent {
             dialogPanel.add(nbConnexionLabel);
         }
 
+        JCheckBox checkBox = new JCheckBox();
+
 
         dialogPanel.add(new JLabel(this.mBundle.getString("dialog.connexion.label.name")));
         dialogPanel.add(nameField);
         dialogPanel.add(new JLabel(this.mBundle.getString("dialog.connexion.label.password")));
         dialogPanel.add(passwordField);
+        dialogPanel.add(new JLabel(this.mBundle.getString("dialog.connexion.label.checkBox")));
+        dialogPanel.add(checkBox);
+
 
         int result = JOptionPane.showConfirmDialog(null, dialogPanel, this.mBundle.getString("dialog.connexion.label.title"),
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
@@ -66,7 +71,8 @@ public class LoginComponent implements ILoginComponent {
                 observer.notifyRequestUserConnexion(
                         nameField.getText(),
                         passwordField.getPassword(),
-                        LoginComponent.this.mNbConnexion
+                        LoginComponent.this.mNbConnexion,
+                        checkBox.isSelected()
                 );
             }
         }

@@ -107,8 +107,8 @@ public class NorthLogoutComponent extends JPanel implements INorthLogoutComponen
         LoginComponent loginComponent = new LoginComponent(this.mBundle, nbConnexion);
         loginComponent.addObserver(new ILoginComponentObserver() {
             @Override
-            public void notifyRequestUserConnexion(String name, char[] password, Integer nbConnexion) {
-                NorthLogoutComponent.this.handlerUserConnexion(name, password, nbConnexion);
+            public void notifyRequestUserConnexion(String name, char[] password, Integer nbConnexion, Boolean remember) {
+                NorthLogoutComponent.this.handlerUserConnexion(name, password, nbConnexion, remember);
             }
 
             @Override
@@ -119,20 +119,20 @@ public class NorthLogoutComponent extends JPanel implements INorthLogoutComponen
         loginComponent.show();
     }
 
-    public void handlerUserConnexion(String name, char[] password, Integer nbConnexion) {
+    public void handlerUserConnexion(String name, char[] password, Integer nbConnexion, Boolean remember) {
         Set<User> users = this.mDatabase.getUsers();
         for (User user : users) {
             if(user.getName().equals(name) && user.getUserPassword().equals(new String(password))){
-                this.handlerSuccessConnexion(user);
+                this.handlerSuccessConnexion(user, remember);
                 return;
             }
         }
         this.handlerRequestUserConnexion(++nbConnexion);
     }
 
-    private void handlerSuccessConnexion(User user){
+    private void handlerSuccessConnexion(User user, Boolean remember){
         for (INorthLogoutComponentObserver observer : this.mObservers) {
-            observer.notifySuccessConnexion(user);
+            observer.notifySuccessConnexion(user,remember);
         }
     }
 }
