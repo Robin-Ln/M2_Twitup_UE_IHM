@@ -3,12 +3,15 @@ package com.iup.tp.twitup.ihm.components.twitComponent;
 import com.iup.tp.twitup.core.EntityManager;
 import com.iup.tp.twitup.datamodel.Twit;
 import com.iup.tp.twitup.datamodel.User;
+import com.iup.tp.twitup.ihm.ImagePanel;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -57,6 +60,13 @@ public class TwitComponent extends JPanel implements ITwitComponent {
         this.contenue = new JPanel();
         this.contenue.setBorder(new LineBorder(Color.BLUE, 4, true));
         this.contenue.setLayout(new GridBagLayout());
+
+        JPanel image = ImagePanel.getUserImage(this.twit.getTwiter());
+        this.contenue.add(image,
+                new GridBagConstraints(0, 0, 1, 2, 0, 0,
+                        GridBagConstraints.NORTHWEST,
+                        GridBagConstraints.NONE,
+                        new Insets(5, 5, 0, 5), 0, 0));
 
         JLabel userTag = new JLabel(this.twit.getTwiter().getUserTag());
         this.contenue.add(userTag,

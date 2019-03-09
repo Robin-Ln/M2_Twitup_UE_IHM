@@ -1,5 +1,8 @@
 package com.iup.tp.twitup.ihm;
 
+import com.iup.tp.twitup.datamodel.User;
+import org.apache.commons.lang3.StringUtils;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -14,6 +17,17 @@ public class ImagePanel extends JPanel {
     protected File mFile;
 
     protected BufferedImage mImage;
+
+    static public ImagePanel getUserImage(User user) {
+        ImagePanel image;
+        Dimension dimension = new Dimension(50, 100);
+        if (StringUtils.isBlank(user.getAvatarPath())) {
+            image = new ImagePanel(new File(ImagePanel.class.getResource("/images/logoIUP_50.jpg").getPath()), dimension);
+        } else {
+            image = new ImagePanel(new File(user.getAvatarPath()), dimension);
+        }
+        return image;
+    }
 
     public ImagePanel(File file, Dimension dimension) {
         this.mFile = file;

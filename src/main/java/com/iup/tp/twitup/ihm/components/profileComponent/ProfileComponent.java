@@ -62,14 +62,7 @@ public class ProfileComponent extends JPanel implements IProfileComponent {
 
     private void init() {
 
-        JPanel image = new JPanel();
-        Dimension dimension = new Dimension(50, 100);
-
-        if (StringUtils.isBlank(this.mUser.getAvatarPath())) {
-            image.add(new ImagePanel(new File(getClass().getResource("/images/logoIUP_50.jpg").getPath()), dimension));
-        } else {
-            image.add(new ImagePanel(new File(this.mUser.getAvatarPath()), dimension));
-        }
+        JPanel image = ImagePanel.getUserImage(this.mUser);
 
 
         JLabel name = new JLabel(this.mUser.getName());
