@@ -133,7 +133,7 @@ public class NorthLogoutComponent extends JPanel implements INorthLogoutComponen
             }
         });
 
-        loginComponent.show(this);
+        loginComponent.show();
 
     }
 

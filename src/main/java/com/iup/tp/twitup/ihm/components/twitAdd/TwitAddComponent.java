@@ -68,9 +68,10 @@ public class TwitAddComponent extends JPanel implements ITwitAddComponent {
      */
     private void init(){
 
-        this.setBackground(new Color(50,150,200,70));
-        this.setBorder(new LineBorder(Color.CYAN, 4,true));
         this.setLayout(new GridBagLayout());
+
+        this.setBackground(new Color(50,150,200));
+        this.setBorder(new LineBorder(Color.BLUE, 4,true));
 
         /**
          * Labelle pas plus de 100 caractère
@@ -130,7 +131,7 @@ public class TwitAddComponent extends JPanel implements ITwitAddComponent {
         this.add(textArea, new GridBagConstraints(0, 0, 1, 1, 1, 1,
                 GridBagConstraints.NORTH,
                 GridBagConstraints.BOTH,
-                new Insets(5, 5, 0, 5), 0, 0));
+                new Insets(5, 5, 5, 5), 0, 0));
 
 
         this.add(errorLabel, new GridBagConstraints(0, 1, 1, 1, 1, 1,

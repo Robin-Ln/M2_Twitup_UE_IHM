@@ -77,9 +77,7 @@ public class CenterComponent extends JPanel implements ICenterComponent {
      * Initialisation du composant
      */
     public void init(){
-        this.setOpaque(true);
-        this.setBackground(new Color(50,150,200,70));
-        this.setBorder(new LineBorder(Color.BLUE, 4,true));
+
         this.setLayout(new GridBagLayout());
 
 
@@ -115,7 +113,7 @@ public class CenterComponent extends JPanel implements ICenterComponent {
                 new GridBagConstraints(0, 0, 1, 2, 1, 0,
                         GridBagConstraints.NORTH,
                         GridBagConstraints.BOTH,
-                        new Insets(5, 5, 0, 5), 0, 0));
+                        new Insets(5, 5, 5, 5), 0, 0));
 
 
         this.add(this.twitAddComponent,

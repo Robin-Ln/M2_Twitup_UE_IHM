@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:twitXml xmlns:ns2="http://www.example.org/twitAdd/">
+    <ID>ab35ecd1-1b36-44f8-8c7a-0acbb175dbfc</ID>
+    <EmissionDate>1552165871546</EmissionDate>
+    <Twiter>eec2c238-f223-4952-a41b-a4b416028101</Twiter>
+    <Text>Salut @tag comment ça va ?</Text>
+</ns2:twitXml>

@@ -49,8 +49,10 @@ public class TwitComponent extends JPanel implements ITwitComponent {
     }
 
     private void init() {
-        this.setBackground(new Color(50,150,200,70));
-        this.setBorder(new LineBorder(Color.GREEN, 4, true));
+
+        this.setBackground(new Color(50,150,200));
+        this.setBorder(new LineBorder(Color.BLUE, 4,true));
+
         this.setLayout(new GridBagLayout());
 
         /**
@@ -58,8 +60,9 @@ public class TwitComponent extends JPanel implements ITwitComponent {
          */
 
         this.contenue = new JPanel();
-        this.contenue.setBorder(new LineBorder(Color.BLUE, 4, true));
         this.contenue.setLayout(new GridBagLayout());
+
+        this.contenue.setBackground(new Color(50,150,200));
 
         JPanel image = ImagePanel.getUserImage(this.twit.getTwiter());
         this.contenue.add(image,
@@ -88,6 +91,8 @@ public class TwitComponent extends JPanel implements ITwitComponent {
          */
         this.actions = new JPanel();
         this.actions.setLayout(new GridBagLayout());
+
+        this.actions.setBackground(new Color(50,150,200));
 
         JButton deletebutton = new JButton(this.mBundle.getString("button.twit.component.delete.libelle"));
         deletebutton.addActionListener(new ActionListener() {

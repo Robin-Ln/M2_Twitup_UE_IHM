@@ -36,7 +36,7 @@ public class LoginComponent implements ILoginComponent {
     /**
      * Methodes
      */
-    public void show(JPanel parent) {
+    public void show() {
         JPanel dialogPanel = new JPanel();
 
         JTextField nameField = new JTextField();
@@ -64,7 +64,7 @@ public class LoginComponent implements ILoginComponent {
         dialogPanel.add(checkBox);
 
 
-        int result = JOptionPane.showConfirmDialog(parent, dialogPanel, this.mBundle.getString("dialog.connexion.label.title"),
+        int result = JOptionPane.showConfirmDialog(null, dialogPanel, this.mBundle.getString("dialog.connexion.label.title"),
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             for (ILoginComponentObserver observer : LoginComponent.this.mObservers) {

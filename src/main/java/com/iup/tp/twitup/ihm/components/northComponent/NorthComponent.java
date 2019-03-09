@@ -72,9 +72,7 @@ public class NorthComponent extends JPanel implements INorthComponent {
      * Initialisation du composant
      */
     private void init(){
-        this.setOpaque(true);
-        this.setBackground(new Color(50,150,200,70));
-        this.setBorder(new LineBorder(Color.BLUE, 4,true));
+
         this.setLayout(new GridBagLayout());
 
         if (this.mRemember) {

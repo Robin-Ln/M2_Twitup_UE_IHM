@@ -8,6 +8,7 @@ import com.iup.tp.twitup.datamodel.User;
 import com.iup.tp.twitup.ihm.ImagePanel;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.HashSet;
 import java.util.ResourceBundle;
@@ -61,6 +62,9 @@ public class ProfileComponent extends JPanel implements IProfileComponent {
     private void init() {
 
         JPanel image = ImagePanel.getUserImage(this.mUser);
+
+        this.setBackground(new Color(50,150,200));
+        this.setBorder(new LineBorder(Color.BLUE, 4,true));
 
 
         JLabel name = new JLabel(this.mUser.getName());

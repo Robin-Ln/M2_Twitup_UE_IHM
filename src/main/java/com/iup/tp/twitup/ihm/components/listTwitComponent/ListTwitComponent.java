@@ -81,7 +81,6 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent {
         JScrollPane scrollPane = new JScrollPane();
 
         this.contenu = new JPanel(new GridBagLayout());
-        this.contenu.setBorder(new LineBorder(Color.DARK_GRAY, 4, true));
 
         scrollPane.getViewport().add(this.contenu);
 
