@@ -35,7 +35,7 @@ public class InscriptionComponent implements IInscriptionComponent {
     /**
      * Methodes
      */
-    public void open() {
+    public void show() {
         JPanel dialogPanel = new JPanel();
         dialogPanel.setLayout(new GridBagLayout());
 
@@ -96,25 +96,25 @@ public class InscriptionComponent implements IInscriptionComponent {
         int result = JOptionPane.showConfirmDialog(null, dialogPanel, this.mBundle.getString("dialog.inscription.label.title"),
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
-
+            int randomInt = new Random().nextInt(999999);
+            User newUser = new User(UUID.randomUUID(),
+                    tag.getText(),
+                    new String(password.getPassword()),
+                    name.getText(),
+                    new HashSet<String>(),
+                    "");
+            this.handlerInscription(newUser);
         }
     }
 
     /**
      * handler
      */
-    private void handlerSuccessInscription(User user) {
-//        for (IInscriptionComponentObserver observer : InscriptionComponent.this.mObservers) {
-//            int randomInt = new Random().nextInt(999999);
-//            User newUser = new User(UUID.randomUUID(),
-//                    tag.getText(),
-//                    new String(password.getPassword()),
-//                    name.getText(),
-//                    new HashSet<String>(),
-//                    "");
-//            observer.notifyRequestUserInscription(newUser);
-//        }
-    };
+    private void handlerInscription(User user) {
+        for (IInscriptionComponentObserver observer : InscriptionComponent.this.mObservers) {
+            observer.notifyRequestUserInscription(user);
+        }
+    }
 
 
     /**

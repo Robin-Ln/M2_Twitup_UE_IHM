@@ -90,7 +90,7 @@ public class NorthComponent extends JPanel implements INorthComponent {
     private void handlerLogout(){
         this.removeAll();
 
-        NorthLogoutComponent northLogoutComponent = new NorthLogoutComponent(this.mDatabase, this.mBundle);
+        NorthLogoutComponent northLogoutComponent = new NorthLogoutComponent(this.mDatabase, this.mEntityManager, this.mBundle);
         northLogoutComponent.addObserver(new NorthLogoutComponentAdapter() {
             @Override
             public void notifySuccessConnexion(User user,Boolean remember) {

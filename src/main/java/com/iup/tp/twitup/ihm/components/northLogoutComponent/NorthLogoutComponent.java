@@ -1,7 +1,10 @@
 package com.iup.tp.twitup.ihm.components.northLogoutComponent;
 
+import com.iup.tp.twitup.core.EntityManager;
 import com.iup.tp.twitup.datamodel.IDatabase;
 import com.iup.tp.twitup.datamodel.User;
+import com.iup.tp.twitup.ihm.components.inscriptionComponent.InscriptionComponent;
+import com.iup.tp.twitup.ihm.components.inscriptionComponent.InscriptionComponentAdapter;
 import com.iup.tp.twitup.ihm.components.loginConponent.ILoginComponentObserver;
 import com.iup.tp.twitup.ihm.components.loginConponent.LoginComponent;
 
@@ -27,15 +30,21 @@ public class NorthLogoutComponent extends JPanel implements INorthLogoutComponen
     private IDatabase mDatabase;
 
     /**
+     * Gestionnaire de bdd et de fichier.
+     */
+    private EntityManager mEntityManager;
+
+    /**
      * observer
      */
     private final Set<INorthLogoutComponentObserver> mObservers;
 
-    public NorthLogoutComponent(IDatabase database, ResourceBundle bundle) {
+    public NorthLogoutComponent(IDatabase database, EntityManager entityManager, ResourceBundle bundle) {
         super();
         this.mObservers = new HashSet<>();
         this.mBundle = bundle;
         this.mDatabase = database;
+        this.mEntityManager = entityManager;
         this.init();
     }
 
@@ -48,7 +57,7 @@ public class NorthLogoutComponent extends JPanel implements INorthLogoutComponen
         suscribeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO
+                NorthLogoutComponent.this.handlerRequestInscription();
             }
         });
 
@@ -81,6 +90,17 @@ public class NorthLogoutComponent extends JPanel implements INorthLogoutComponen
                         GridBagConstraints.NONE,
                         new Insets(5, 5, 0, 5), 0, 0));
 
+    }
+
+    private void handlerRequestInscription() {
+        InscriptionComponent inscriptionComponent = new InscriptionComponent(this.mBundle);
+        inscriptionComponent.addObserver(new InscriptionComponentAdapter() {
+            @Override
+            public void notifyRequestUserInscription(User user) {
+                NorthLogoutComponent.this.mEntityManager.sendUser(user);
+            }
+        });
+        inscriptionComponent.show();
     }
 
     /**
