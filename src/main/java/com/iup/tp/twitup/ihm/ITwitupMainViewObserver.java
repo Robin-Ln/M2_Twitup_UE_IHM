@@ -11,4 +11,6 @@ public interface ITwitupMainViewObserver {
     void notifySuccessConnexion(User user);
 
     void notifyRememberUser(User user, Boolean remember);
+
+    void notifyLogout();
 }

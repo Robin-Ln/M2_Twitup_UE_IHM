@@ -6,13 +6,10 @@ import com.iup.tp.twitup.datamodel.IDatabase;
 import com.iup.tp.twitup.datamodel.Twit;
 import com.iup.tp.twitup.datamodel.User;
 import com.iup.tp.twitup.ihm.ImagePanel;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -57,8 +54,9 @@ public class ProfileComponent extends JPanel implements IProfileComponent {
         this.init();
     }
 
+    //TODO il manque les followers
     private JLabel nbTwitsLabel;
-    private JLabel nbFollowersLabel;
+    private JLabel nbSuscribersLabel;
 
     private void init() {
 
@@ -74,8 +72,8 @@ public class ProfileComponent extends JPanel implements IProfileComponent {
         JLabel nbTwitsLibelle = new JLabel(this.mBundle.getString("label.profile.nbTwits.libelle"));
 
 
-        this.nbFollowersLabel = new JLabel();
-        JLabel nbFollowersLibelle = new JLabel(this.mBundle.getString("label.profile.nbFollowers.libelle"));
+        this.nbSuscribersLabel = new JLabel();
+        JLabel nbSuscribersLibelle = new JLabel(this.mBundle.getString("label.profile.nbFollowers.libelle"));
 
         this.handlerInitCpts();
 
@@ -126,13 +124,13 @@ public class ProfileComponent extends JPanel implements IProfileComponent {
                         GridBagConstraints.NONE,
                         new Insets(5, 5, 0, 5), 0, 0));
 
-        this.add(nbFollowersLibelle,
+        this.add(nbSuscribersLibelle,
                 new GridBagConstraints(0, 3, 1, 1, 0, 0,
                         GridBagConstraints.NORTHWEST,
                         GridBagConstraints.NONE,
                         new Insets(5, 5, 0, 5), 0, 0));
 
-        this.add(nbFollowersLabel,
+        this.add(nbSuscribersLabel,
                 new GridBagConstraints(0, 4, 1, 1, 0, 0,
                         GridBagConstraints.NORTHWEST,
                         GridBagConstraints.NONE,
@@ -157,10 +155,10 @@ public class ProfileComponent extends JPanel implements IProfileComponent {
      */
 
     private void handlerInitCpts(){
-        Integer nbFollowers = this.mUser.getFollows().size();
+        Integer nbSuscribers = this.mUser.getFollows().size();
         Integer nbTwits = this.mDatabase.getUserTwits(ProfileComponent.this.mUser).size();
         this.nbTwitsLabel.setText(nbTwits.toString());
-        this.nbFollowersLabel.setText(nbFollowers.toString());
+        this.nbSuscribersLabel.setText(nbSuscribers.toString());
     }
 
     @Override

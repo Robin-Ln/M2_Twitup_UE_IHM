@@ -192,6 +192,11 @@ public class Twitup {
 			public void notifyRememberUser(User user, Boolean remember) {
 				Twitup.this.handlerRememberUser(user, remember);
 			}
+
+			@Override
+			public void notifyLogout() {
+				Twitup.this.handlerLogout();
+			}
 		});
 
 		this.mDatabase.addObserver(new DatabaseAdapter() {
@@ -225,6 +230,11 @@ public class Twitup {
 				System.out.println("modifiedUser :" + modifiedUser);
 			}
 		});
+	}
+
+	private void handlerLogout() {
+		this.mRemember = false;
+		this.saveProperties();
 	}
 
 	private void handlerRememberUser(User user, Boolean remember) {

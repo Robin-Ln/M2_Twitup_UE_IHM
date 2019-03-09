@@ -246,8 +246,8 @@ public class InscriptionComponent extends JFrame implements IInscriptionComponen
         screenSize.height /= 4;
         screenSize.width /= 4;
         this.setSize(screenSize);
-        this.setLocation(screenSize.height * 2,
-                screenSize.width);
+
+        this.setLocationRelativeTo(null);
 
         // Affichage dans l'EDT
         SwingUtilities.invokeLater(new Runnable() {

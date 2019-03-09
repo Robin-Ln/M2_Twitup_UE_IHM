@@ -5,4 +5,5 @@
     <UserPassword>azerty</UserPassword>
     <Name>robin</Name>
     <AvatarPath></AvatarPath>
+    <follows>kevin</follows>
 </ns2:userXml>

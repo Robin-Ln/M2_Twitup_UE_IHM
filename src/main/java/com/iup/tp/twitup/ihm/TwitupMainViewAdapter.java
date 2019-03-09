@@ -20,4 +20,9 @@ public abstract class TwitupMainViewAdapter implements ITwitupMainViewObserver {
     public void notifyRememberUser(User user, Boolean remember) {
 
     }
+
+    @Override
+    public void notifyLogout() {
+
+    }
 }

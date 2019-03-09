@@ -80,8 +80,8 @@ public class TwitupMainView extends JFrame implements ITwitupMainView {
         screenSize.height /= 2;
         screenSize.width /= 2;
         this.setSize(screenSize);
-        this.setLocation(this.getWidth() * 2,
-                screenSize.height / 4);
+
+        this.setLocationRelativeTo(null);
 
         // Affichage dans l'EDT
         SwingUtilities.invokeLater(new Runnable() {
@@ -133,9 +133,6 @@ public class TwitupMainView extends JFrame implements ITwitupMainView {
             this.handlerSuccessConnexion(this.mUser, this.mRemember);
         }
 
-        /**
-         * TODO: notifier Twithup
-         */
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 TwitupMainView.this.handlerQuitter();
@@ -182,6 +179,9 @@ public class TwitupMainView extends JFrame implements ITwitupMainView {
         this.centerComponent.removeAll();
         this.centerComponent.revalidate();
         this.centerComponent.repaint();
+        for (ITwitupMainViewObserver observer : this.mObservers) {
+            observer.notifyLogout();
+        }
     }
 
     /**
