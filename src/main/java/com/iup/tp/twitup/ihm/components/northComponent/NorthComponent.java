@@ -95,6 +95,7 @@ public class NorthComponent extends JPanel implements INorthComponent {
             @Override
             public void notifySuccessConnexion(User user,Boolean remember) {
                 NorthComponent.this.handlerLogin(user);
+                NorthComponent.this.mUser = user;
 
                 for (INorthComponentObserver observer : NorthComponent.this.mObservers) {
                     observer.notifySuccessConnexion(user,remember);

@@ -3,6 +3,7 @@ package com.iup.tp.twitup.ihm.components.profileComponent;
 import com.iup.tp.twitup.core.EntityManager;
 import com.iup.tp.twitup.datamodel.DatabaseAdapter;
 import com.iup.tp.twitup.datamodel.IDatabase;
+import com.iup.tp.twitup.datamodel.Twit;
 import com.iup.tp.twitup.datamodel.User;
 import com.iup.tp.twitup.ihm.ImagePanel;
 import org.apache.commons.lang3.StringUtils;
@@ -91,9 +92,22 @@ public class ProfileComponent extends JPanel implements IProfileComponent {
         mDatabase.addObserver(new DatabaseAdapter() {
             @Override
             public void notifyUserModified(User modifiedUser) {
-                if (Objects.equals(ProfileComponent.this.mUser.getName(), modifiedUser.getName())) {
-                    ProfileComponent.this.handlerInitCpts();
-                }
+                ProfileComponent.this.handlerInitCpts();
+            }
+
+            @Override
+            public void notifyTwitAdded(Twit addedTwit) {
+                ProfileComponent.this.handlerInitCpts();
+            }
+
+            @Override
+            public void notifyTwitDeleted(Twit deletedTwit) {
+                ProfileComponent.this.handlerInitCpts();
+            }
+
+            @Override
+            public void notifyTwitModified(Twit modifiedTwit) {
+                ProfileComponent.this.handlerInitCpts();
             }
         });
 
@@ -151,7 +165,7 @@ public class ProfileComponent extends JPanel implements IProfileComponent {
 
     private void handlerInitCpts(){
         Integer nbFollowers = this.mUser.getFollows().size();
-        Integer nbTwits = this.mDatabase.getTwitsWithUserTag(this.mUser.getUserTag()).size();
+        Integer nbTwits = this.mDatabase.getUserTwits(ProfileComponent.this.mUser).size();
         this.nbTwitsLabel.setText(nbTwits.toString());
         this.nbFollowersLabel.setText(nbFollowers.toString());
     }

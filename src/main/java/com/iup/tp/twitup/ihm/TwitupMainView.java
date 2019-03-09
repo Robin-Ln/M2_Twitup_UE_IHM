@@ -113,6 +113,7 @@ public class TwitupMainView extends JFrame implements ITwitupMainView {
         this.northComponent.addObserver(new NorthComponentAdapter() {
             @Override
             public void notifySuccessConnexion(User user,Boolean remember) {
+                TwitupMainView.this.mUser = user;
                 TwitupMainView.this.handlerSuccessConnexion(user,remember);
             }
 
@@ -240,6 +241,7 @@ public class TwitupMainView extends JFrame implements ITwitupMainView {
             this.add(this.centerComponent, BorderLayout.CENTER);
         }else {
             this.centerComponent.removeAll();
+            this.centerComponent.setmUser(user);
             this.centerComponent.init();
         }
 

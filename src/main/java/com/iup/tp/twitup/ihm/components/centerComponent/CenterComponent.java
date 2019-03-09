@@ -141,4 +141,7 @@ public class CenterComponent extends JPanel implements ICenterComponent {
     }
 
 
+    public void setmUser(User mUser) {
+        this.mUser = mUser;
+    }
 }
