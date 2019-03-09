@@ -4,9 +4,12 @@ import com.iup.tp.twitup.core.EntityManager;
 import com.iup.tp.twitup.datamodel.DatabaseAdapter;
 import com.iup.tp.twitup.datamodel.IDatabase;
 import com.iup.tp.twitup.datamodel.User;
+import com.iup.tp.twitup.ihm.ImagePanel;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -54,14 +57,15 @@ public class ProfileComponent extends JPanel implements IProfileComponent {
 
     private void init() {
 
-        mDatabase.addObserver(new DatabaseAdapter() {
-            @Override
-            public void notifyUserModified(User modifiedUser) {
-                // TODO metre a jour les iformation personelle de l'utilosateur si elle sont modifier
-            }
-        });
-
         JPanel image = new JPanel();
+        Dimension dimension = new Dimension(50, 100);
+
+        if (StringUtils.isBlank(this.mUser.getAvatarPath())) {
+            image.add(new ImagePanel(new File(getClass().getResource("/images/logoIUP_50.jpg").getPath()), dimension));
+        } else {
+            image.add(new ImagePanel(new File(this.mUser.getAvatarPath()), dimension));
+        }
+
 
         JLabel name = new JLabel(this.mUser.getName());
 
@@ -74,6 +78,16 @@ public class ProfileComponent extends JPanel implements IProfileComponent {
         Integer nbFollowers = this.mUser.getFollows().size();
         JLabel nbFollowersLabel = new JLabel(nbFollowers.toString());
         JLabel nbFollowersLibelle = new JLabel(this.mBundle.getString("label.profile.nbFollowers.libelle"));
+
+        /**
+         * Observer
+         */
+        mDatabase.addObserver(new DatabaseAdapter() {
+            @Override
+            public void notifyUserModified(User modifiedUser) {
+                // TODO metre a jour les iformation personelle de l'utilosateur si elle sont modifier
+            }
+        });
 
         /**
          * Layout
