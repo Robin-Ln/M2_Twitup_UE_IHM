@@ -39,8 +39,8 @@ public class LoginComponent implements ILoginComponent {
     public void show(JPanel parent) {
         JPanel dialogPanel = new JPanel();
 
-        JTextField nameField = new JTextField("MockUser94660");
-        JPasswordField passwordField = new JPasswordField("--");
+        JTextField nameField = new JTextField();
+        JPasswordField passwordField = new JPasswordField();
         dialogPanel.setLayout(new GridLayout(0, 2));
 
         if (this.mNbConnexion > 0) {

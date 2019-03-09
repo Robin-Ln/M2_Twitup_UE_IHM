@@ -93,14 +93,9 @@ public class NorthLogoutComponent extends JPanel implements INorthLogoutComponen
     }
 
     private void handlerRequestInscription() {
-        InscriptionComponent inscriptionComponent = new InscriptionComponent(this.mBundle);
-        inscriptionComponent.addObserver(new InscriptionComponentAdapter() {
-            @Override
-            public void notifyRequestUserInscription(User user) {
-                NorthLogoutComponent.this.mEntityManager.sendUser(user);
-            }
-        });
-        inscriptionComponent.show(this);
+        InscriptionComponent inscriptionComponent = new InscriptionComponent(this.mBundle,this.mDatabase,this.mEntityManager);
+        inscriptionComponent.addObserver(new InscriptionComponentAdapter() {});
+        inscriptionComponent.showGUI();
     }
 
     /**
@@ -124,6 +119,7 @@ public class NorthLogoutComponent extends JPanel implements INorthLogoutComponen
      * Handler
      */
     public void handlerRequestUserConnexion(Integer nbConnexion) {
+
         LoginComponent loginComponent = new LoginComponent(this.mBundle, nbConnexion);
         loginComponent.addObserver(new ILoginComponentObserver() {
             @Override
@@ -136,7 +132,9 @@ public class NorthLogoutComponent extends JPanel implements INorthLogoutComponen
                 loginComponent.deleteObserver(this);
             }
         });
+
         loginComponent.show(this);
+
     }
 
     public void handlerUserConnexion(String name, char[] password, Integer nbConnexion, Boolean remember) {
