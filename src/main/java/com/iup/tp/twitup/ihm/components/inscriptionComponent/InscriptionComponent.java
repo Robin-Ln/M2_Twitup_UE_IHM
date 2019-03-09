@@ -16,20 +16,17 @@ import java.util.*;
 public class InscriptionComponent extends JFrame implements IInscriptionComponent {
 
     /**
+     * Liste des observateurs de modifications de la base.
+     */
+    private final Set<IInscriptionComponentObserver> mObservers;
+    /**
      * Configurer la langue de l'aplication
      */
     private ResourceBundle mBundle;
-
     /**
      * Nombre de tentavise de connexion
      */
     private Integer mNbConnexion;
-
-    /**
-     * Liste des observateurs de modifications de la base.
-     */
-    private final Set<IInscriptionComponentObserver> mObservers;
-
     /**
      * Base de données.
      */
@@ -111,7 +108,7 @@ public class InscriptionComponent extends JFrame implements IInscriptionComponen
         this.passwordRequired.setVisible(false);
 
         this.imagePath = new JLabel();
-        JButton imageButton  = new JButton(this.mBundle.getString("button.inscription.image.libelle"));
+        JButton imageButton = new JButton(this.mBundle.getString("button.inscription.image.libelle"));
         imageButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -20,24 +20,21 @@ public class NorthLogoutComponent extends JPanel implements INorthLogoutComponen
 
 
     /**
+     * observer
+     */
+    private final Set<INorthLogoutComponentObserver> mObservers;
+    /**
      * Configurer la langue de l'aplication
      */
     private ResourceBundle mBundle;
-
     /**
      * Base de données.
      */
     private IDatabase mDatabase;
-
     /**
      * Gestionnaire de bdd et de fichier.
      */
     private EntityManager mEntityManager;
-
-    /**
-     * observer
-     */
-    private final Set<INorthLogoutComponentObserver> mObservers;
 
     public NorthLogoutComponent(IDatabase database, EntityManager entityManager, ResourceBundle bundle) {
         super();
@@ -93,8 +90,9 @@ public class NorthLogoutComponent extends JPanel implements INorthLogoutComponen
     }
 
     private void handlerRequestInscription() {
-        InscriptionComponent inscriptionComponent = new InscriptionComponent(this.mBundle,this.mDatabase,this.mEntityManager);
-        inscriptionComponent.addObserver(new InscriptionComponentAdapter() {});
+        InscriptionComponent inscriptionComponent = new InscriptionComponent(this.mBundle, this.mDatabase, this.mEntityManager);
+        inscriptionComponent.addObserver(new InscriptionComponentAdapter() {
+        });
         inscriptionComponent.showGUI();
     }
 
@@ -140,7 +138,7 @@ public class NorthLogoutComponent extends JPanel implements INorthLogoutComponen
     public void handlerUserConnexion(String name, char[] password, Integer nbConnexion, Boolean remember) {
         Set<User> users = this.mDatabase.getUsers();
         for (User user : users) {
-            if(user.getName().equals(name) && user.getUserPassword().equals(new String(password))){
+            if (user.getName().equals(name) && user.getUserPassword().equals(new String(password))) {
                 this.handlerSuccessConnexion(user, remember);
                 return;
             }
@@ -148,9 +146,9 @@ public class NorthLogoutComponent extends JPanel implements INorthLogoutComponen
         this.handlerRequestUserConnexion(++nbConnexion);
     }
 
-    private void handlerSuccessConnexion(User user, Boolean remember){
+    private void handlerSuccessConnexion(User user, Boolean remember) {
         for (INorthLogoutComponentObserver observer : this.mObservers) {
-            observer.notifySuccessConnexion(user,remember);
+            observer.notifySuccessConnexion(user, remember);
         }
     }
 }

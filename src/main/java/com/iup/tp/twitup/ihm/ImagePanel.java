@@ -18,17 +18,6 @@ public class ImagePanel extends JPanel {
 
     protected BufferedImage mImage;
 
-    static public ImagePanel getUserImage(User user) {
-        ImagePanel image;
-        Dimension dimension = new Dimension(50, 100);
-        if (StringUtils.isBlank(user.getAvatarPath())) {
-            image = new ImagePanel(new File(ImagePanel.class.getResource("/images/logoIUP_50.jpg").getPath()), dimension);
-        } else {
-            image = new ImagePanel(new File(user.getAvatarPath()), dimension);
-        }
-        return image;
-    }
-
     public ImagePanel(File file, Dimension dimension) {
         this.mFile = file;
 
@@ -38,6 +27,17 @@ public class ImagePanel extends JPanel {
             mImage = new BufferedImage(1, 1, 1);
             t.printStackTrace();
         }
+    }
+
+    static public ImagePanel getUserImage(User user) {
+        ImagePanel image;
+        Dimension dimension = new Dimension(50, 100);
+        if (StringUtils.isBlank(user.getAvatarPath())) {
+            image = new ImagePanel(new File(ImagePanel.class.getResource("/images/logoIUP_50.jpg").getPath()), dimension);
+        } else {
+            image = new ImagePanel(new File(user.getAvatarPath()), dimension);
+        }
+        return image;
     }
 
     protected void load(Dimension dimension) {

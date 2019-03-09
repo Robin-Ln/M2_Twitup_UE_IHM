@@ -10,7 +10,6 @@ import com.iup.tp.twitup.ihm.components.twitComponent.TwitComponent;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.HashSet;
 import java.util.ResourceBundle;
@@ -19,36 +18,28 @@ import java.util.Set;
 public class ListTwitComponent extends JPanel implements IListTwitComponent {
 
 
-
     /**
      * Liste des observateurs de modifications de la base.
      */
     private final Set<IListTwitComponentObserver> mObservers;
-
+    private final ITwitComponentObserver iTwitComponentObserver;
     /**
      * Nonbre de twit
      */
     private Integer nbTwit;
-
-
     /**
      * Contenue de la liste
      */
     private JPanel contenu;
-
     /**
      * Gestionnaire de bdd et de fichier.
      */
     private EntityManager mEntityManager;
-
     /**
      * Configurer la langue de l'aplication
      */
     private ResourceBundle mBundle;
-
     private User mUser;
-
-    private final ITwitComponentObserver iTwitComponentObserver;
 
     /**
      * Data base
@@ -75,7 +66,7 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent {
 
     }
 
-    private void init(Set<Twit> twits){
+    private void init(Set<Twit> twits) {
 
         this.setLayout(new GridBagLayout());
         JScrollPane scrollPane = new JScrollPane();
@@ -85,9 +76,9 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent {
         scrollPane.getViewport().add(this.contenu);
 
         this.add(scrollPane, new GridBagConstraints(0, 0, 1, 1, 1, 1,
-                        GridBagConstraints.NORTH,
-                        GridBagConstraints.BOTH,
-                        new Insets(5, 5, 0, 5), 0, 0));
+                GridBagConstraints.NORTH,
+                GridBagConstraints.BOTH,
+                new Insets(5, 5, 0, 5), 0, 0));
 
 
         for (Twit twit : twits) {
@@ -106,7 +97,7 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent {
      * Handler
      */
 
-    public void handlerSreachTwit(String search){
+    public void handlerSreachTwit(String search) {
 
         Set<Twit> twits = new HashSet<>();
 
@@ -130,7 +121,7 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent {
         this.repaint();
     }
 
-    private void handlerAddTwit(Twit twit){
+    private void handlerAddTwit(Twit twit) {
 
         TwitComponent twitComponent = new TwitComponent(twit, this.mUser, this.mBundle, this.mEntityManager);
         twitComponent.addObserver(this.iTwitComponentObserver);

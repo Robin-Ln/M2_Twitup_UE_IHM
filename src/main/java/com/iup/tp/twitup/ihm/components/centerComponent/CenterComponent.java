@@ -10,7 +10,6 @@ import com.iup.tp.twitup.ihm.components.profileComponent.ProfileComponent;
 import com.iup.tp.twitup.ihm.components.twitAdd.TwitAddComponent;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.HashSet;
 import java.util.ResourceBundle;
@@ -76,7 +75,7 @@ public class CenterComponent extends JPanel implements ICenterComponent {
     /**
      * Initialisation du composant
      */
-    public void init(){
+    public void init() {
 
         this.setLayout(new GridBagLayout());
 
@@ -85,7 +84,7 @@ public class CenterComponent extends JPanel implements ICenterComponent {
          * Liste des twits
          */
         Set<Twit> twits = this.mDatabase.getTwits();
-        this.listTwitComponent = new ListTwitComponent(twits,this.mDatabase,this.mEntityManager,this.mBundle, this.mUser);
+        this.listTwitComponent = new ListTwitComponent(twits, this.mDatabase, this.mEntityManager, this.mBundle, this.mUser);
         this.listTwitComponent.addObserver(new ListTwitComponentAdapter() {
             @Override
             public void notifyViewChange() {

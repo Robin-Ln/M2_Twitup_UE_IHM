@@ -22,20 +22,17 @@ import java.util.Set;
 public class TwitupMainView extends JFrame implements ITwitupMainView {
 
     /**
+     * Liste des observateurs de modifications de la base.
+     */
+    protected final Set<ITwitupMainViewObserver> mObservers;
+    /**
      * Base de donénes de l'application.
      */
     private IDatabase mDatabase;
-
     /**
      * Gestionnaire de bdd et de fichier.
      */
     private EntityManager mEntityManager;
-
-    /**
-     * Liste des observateurs de modifications de la base.
-     */
-    protected final Set<ITwitupMainViewObserver> mObservers;
-
     /**
      * Configurer la langue de l'aplication
      */
@@ -112,9 +109,9 @@ public class TwitupMainView extends JFrame implements ITwitupMainView {
         );
         this.northComponent.addObserver(new NorthComponentAdapter() {
             @Override
-            public void notifySuccessConnexion(User user,Boolean remember) {
+            public void notifySuccessConnexion(User user, Boolean remember) {
                 TwitupMainView.this.mUser = user;
-                TwitupMainView.this.handlerSuccessConnexion(user,remember);
+                TwitupMainView.this.handlerSuccessConnexion(user, remember);
             }
 
             @Override
@@ -234,12 +231,13 @@ public class TwitupMainView extends JFrame implements ITwitupMainView {
      * handler
      */
 
-    private void handlerSuccessConnexion(User user,Boolean remember){
-        if(this.centerComponent == null){
-            this.centerComponent = new CenterComponent(this.mDatabase,this.mEntityManager,this.mBundle, user);
-            this.centerComponent.addObserver(new CenterComponentAdapter() {});
+    private void handlerSuccessConnexion(User user, Boolean remember) {
+        if (this.centerComponent == null) {
+            this.centerComponent = new CenterComponent(this.mDatabase, this.mEntityManager, this.mBundle, user);
+            this.centerComponent.addObserver(new CenterComponentAdapter() {
+            });
             this.add(this.centerComponent, BorderLayout.CENTER);
-        }else {
+        } else {
             this.centerComponent.removeAll();
             this.centerComponent.setmUser(user);
             this.centerComponent.init();
@@ -247,7 +245,7 @@ public class TwitupMainView extends JFrame implements ITwitupMainView {
 
 
         for (ITwitupMainViewObserver observer : this.mObservers) {
-            observer.notifyRememberUser(user,remember);
+            observer.notifyRememberUser(user, remember);
         }
 
     }

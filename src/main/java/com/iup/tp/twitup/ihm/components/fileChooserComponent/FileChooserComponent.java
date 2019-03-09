@@ -1,12 +1,6 @@
 package com.iup.tp.twitup.ihm.components.fileChooserComponent;
 
-import com.iup.tp.twitup.ihm.ITwitupMainViewObserver;
-import com.iup.tp.twitup.ihm.components.inscriptionComponent.IInscriptionComponentObserver;
-
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -36,7 +30,7 @@ public class FileChooserComponent implements IFileChooserComponent {
     /**
      * Méthodes
      */
-    public void show(Integer type){
+    public void show(Integer type) {
         JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle(this.mBundle.getString("dialog.file.choser.tilte"));
         chooser.setFileSelectionMode(type);

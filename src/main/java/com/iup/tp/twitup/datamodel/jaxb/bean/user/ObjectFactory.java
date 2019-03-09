@@ -21,37 +21,33 @@ import javax.xml.namespace.QName;
  * can consist of schema derived interfaces and classes representing the binding
  * of schema type definitions, element declarations and model groups. Factory
  * methods for each of these are provided in this class.
- * 
  */
 @XmlRegistry
 public class ObjectFactory {
 
-	private final static QName _User_QNAME = new QName("http://www.example.org/twitAdd/", "User");
+    private final static QName _User_QNAME = new QName("http://www.example.org/twitAdd/", "User");
 
-	/**
-	 * Create a new ObjectFactory that can be used to create new instances of
-	 * schema derived classes for package: com.iup.tp.twitup.jaxb.bean.user
-	 * 
-	 */
-	public ObjectFactory() {
-	}
+    /**
+     * Create a new ObjectFactory that can be used to create new instances of
+     * schema derived classes for package: com.iup.tp.twitup.jaxb.bean.user
+     */
+    public ObjectFactory() {
+    }
 
-	/**
-	 * Create an instance of {@link UserXml }
-	 * 
-	 */
-	public UserXml createUserXml() {
-		return new UserXml();
-	}
+    /**
+     * Create an instance of {@link UserXml }
+     */
+    public UserXml createUserXml() {
+        return new UserXml();
+    }
 
-	/**
-	 * Create an instance of {@link JAXBElement }{@code <}{@link UserXml }
-	 * {@code >}}
-	 * 
-	 */
-	@XmlElementDecl(namespace = "http://www.example.org/twitAdd/", name = "User")
-	public JAXBElement<UserXml> createUser(UserXml value) {
-		return new JAXBElement<UserXml>(_User_QNAME, UserXml.class, null, value);
-	}
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UserXml }
+     * {@code >}}
+     */
+    @XmlElementDecl(namespace = "http://www.example.org/twitAdd/", name = "User")
+    public JAXBElement<UserXml> createUser(UserXml value) {
+        return new JAXBElement<UserXml>(_User_QNAME, UserXml.class, null, value);
+    }
 
 }

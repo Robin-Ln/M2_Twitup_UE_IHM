@@ -9,7 +9,6 @@ import com.iup.tp.twitup.ihm.components.northLogoutComponent.NorthLogoutComponen
 import com.iup.tp.twitup.ihm.components.northLogoutComponent.NorthLogoutComponentAdapter;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.HashSet;
 import java.util.ResourceBundle;
@@ -71,7 +70,7 @@ public class NorthComponent extends JPanel implements INorthComponent {
     /**
      * Initialisation du composant
      */
-    private void init(){
+    private void init() {
 
         this.setLayout(new GridBagLayout());
 
@@ -85,18 +84,18 @@ public class NorthComponent extends JPanel implements INorthComponent {
     /**
      * handler logout
      */
-    private void handlerLogout(){
+    private void handlerLogout() {
         this.removeAll();
 
         NorthLogoutComponent northLogoutComponent = new NorthLogoutComponent(this.mDatabase, this.mEntityManager, this.mBundle);
         northLogoutComponent.addObserver(new NorthLogoutComponentAdapter() {
             @Override
-            public void notifySuccessConnexion(User user,Boolean remember) {
+            public void notifySuccessConnexion(User user, Boolean remember) {
                 NorthComponent.this.handlerLogin(user);
                 NorthComponent.this.mUser = user;
 
                 for (INorthComponentObserver observer : NorthComponent.this.mObservers) {
-                    observer.notifySuccessConnexion(user,remember);
+                    observer.notifySuccessConnexion(user, remember);
                 }
             }
         });

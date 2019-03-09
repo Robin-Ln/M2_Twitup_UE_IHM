@@ -37,8 +37,9 @@ public class ProfileComponent extends JPanel implements IProfileComponent {
     private EntityManager mEntityManager;
 
     private IDatabase mDatabase;
-
-
+    //TODO il manque les followers
+    private JLabel nbTwitsLabel;
+    private JLabel nbSuscribersLabel;
     public ProfileComponent(ResourceBundle bundle, User user, EntityManager entityManager, IDatabase database) {
         super();
 
@@ -55,16 +56,12 @@ public class ProfileComponent extends JPanel implements IProfileComponent {
         this.init();
     }
 
-    //TODO il manque les followers
-    private JLabel nbTwitsLabel;
-    private JLabel nbSuscribersLabel;
-
     private void init() {
 
         JPanel image = ImagePanel.getUserImage(this.mUser);
 
-        this.setBackground(new Color(50,150,200));
-        this.setBorder(new LineBorder(Color.BLUE, 4,true));
+        this.setBackground(new Color(50, 150, 200));
+        this.setBorder(new LineBorder(Color.BLUE, 4, true));
 
 
         JLabel name = new JLabel(this.mUser.getName());
@@ -158,7 +155,7 @@ public class ProfileComponent extends JPanel implements IProfileComponent {
      * handler
      */
 
-    private void handlerInitCpts(){
+    private void handlerInitCpts() {
         Integer nbSuscribers = this.mUser.getFollows().size();
         Integer nbTwits = this.mDatabase.getUserTwits(ProfileComponent.this.mUser).size();
         this.nbTwitsLabel.setText(nbTwits.toString());

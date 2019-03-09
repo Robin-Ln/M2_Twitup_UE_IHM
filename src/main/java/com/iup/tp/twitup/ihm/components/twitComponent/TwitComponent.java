@@ -4,31 +4,25 @@ import com.iup.tp.twitup.core.EntityManager;
 import com.iup.tp.twitup.datamodel.Twit;
 import com.iup.tp.twitup.datamodel.User;
 import com.iup.tp.twitup.ihm.ImagePanel;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
 
 public class TwitComponent extends JPanel implements ITwitComponent {
 
-    private Twit twit;
-
-    private JPanel contenue;
-
-    private JPanel actions;
-
     /**
      * Liste des observateurs de modifications de la base.
      */
     private final Set<ITwitComponentObserver> mObservers;
-
+    private Twit twit;
+    private JPanel contenue;
+    private JPanel actions;
     /**
      * Configurer la langue de l'aplication
      */
@@ -50,8 +44,8 @@ public class TwitComponent extends JPanel implements ITwitComponent {
 
     private void init() {
 
-        this.setBackground(new Color(50,150,200));
-        this.setBorder(new LineBorder(Color.BLUE, 4,true));
+        this.setBackground(new Color(50, 150, 200));
+        this.setBorder(new LineBorder(Color.BLUE, 4, true));
 
         this.setLayout(new GridBagLayout());
 
@@ -62,7 +56,7 @@ public class TwitComponent extends JPanel implements ITwitComponent {
         this.contenue = new JPanel();
         this.contenue.setLayout(new GridBagLayout());
 
-        this.contenue.setBackground(new Color(50,150,200));
+        this.contenue.setBackground(new Color(50, 150, 200));
 
         JPanel image = ImagePanel.getUserImage(this.twit.getTwiter());
         this.contenue.add(image,
@@ -92,7 +86,7 @@ public class TwitComponent extends JPanel implements ITwitComponent {
         this.actions = new JPanel();
         this.actions.setLayout(new GridBagLayout());
 
-        this.actions.setBackground(new Color(50,150,200));
+        this.actions.setBackground(new Color(50, 150, 200));
 
         JButton deletebutton = new JButton(this.mBundle.getString("button.twit.component.delete.libelle"));
         deletebutton.addActionListener(new ActionListener() {

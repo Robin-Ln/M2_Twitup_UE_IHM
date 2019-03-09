@@ -9,19 +9,17 @@ import java.util.Set;
 public class LoginComponent implements ILoginComponent {
 
     /**
+     * Liste des observateurs de modifications de la base.
+     */
+    private final Set<ILoginComponentObserver> mObservers;
+    /**
      * Configurer la langue de l'aplication
      */
     private ResourceBundle mBundle;
-
     /**
      * Nombre de tentavise de connexion
      */
     private Integer mNbConnexion;
-
-    /**
-     * Liste des observateurs de modifications de la base.
-     */
-    private final Set<ILoginComponentObserver> mObservers;
 
     /**
      * Constructeur

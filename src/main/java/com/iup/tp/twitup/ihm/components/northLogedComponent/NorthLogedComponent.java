@@ -12,14 +12,13 @@ public class NorthLogedComponent extends JPanel implements INorthLogedComponent 
 
 
     /**
-     * Configurer la langue de l'aplication
-     */
-    private ResourceBundle mBundle;
-
-    /**
      * observer
      */
     private final Set<INorthLogedComponentObserver> mObservers;
+    /**
+     * Configurer la langue de l'aplication
+     */
+    private ResourceBundle mBundle;
 
     public NorthLogedComponent(ResourceBundle bundle) {
         super();
