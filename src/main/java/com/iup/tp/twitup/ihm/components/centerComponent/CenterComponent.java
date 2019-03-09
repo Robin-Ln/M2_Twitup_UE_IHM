@@ -6,6 +6,7 @@ import com.iup.tp.twitup.datamodel.Twit;
 import com.iup.tp.twitup.datamodel.User;
 import com.iup.tp.twitup.ihm.components.listTwitComponent.ListTwitComponent;
 import com.iup.tp.twitup.ihm.components.listTwitComponent.ListTwitComponentAdapter;
+import com.iup.tp.twitup.ihm.components.profileComponent.ProfileComponent;
 import com.iup.tp.twitup.ihm.components.twitAdd.TwitAddComponent;
 
 import javax.swing.*;
@@ -48,6 +49,8 @@ public class CenterComponent extends JPanel implements ICenterComponent {
     private ListTwitComponent listTwitComponent;
 
     private TwitAddComponent twitAddComponent;
+
+    private ProfileComponent profileComponent;
 
     public CenterComponent(IDatabase database, EntityManager entityManager, ResourceBundle bundle, User user) {
         super();
@@ -100,18 +103,29 @@ public class CenterComponent extends JPanel implements ICenterComponent {
         this.twitAddComponent = new TwitAddComponent(this.mBundle, this.mUser, this.mEntityManager);
 
         /**
+         * Profile Component
+         */
+        this.profileComponent = new ProfileComponent(this.mBundle, this.mUser, this.mEntityManager, this.mDatabase);
+
+        /**
          * Ajout des composents
          */
 
+        this.add(this.profileComponent,
+                new GridBagConstraints(0, 0, 1, 2, 1, 0,
+                        GridBagConstraints.NORTH,
+                        GridBagConstraints.BOTH,
+                        new Insets(5, 5, 0, 5), 0, 0));
+
 
         this.add(this.twitAddComponent,
-                new GridBagConstraints(0, 0, 1, 1, 1, 0,
+                new GridBagConstraints(1, 0, 1, 1, 1, 0,
                         GridBagConstraints.NORTH,
                         GridBagConstraints.BOTH,
                         new Insets(5, 5, 0, 5), 0, 0));
 
         this.add(this.listTwitComponent,
-                new GridBagConstraints(0, 1, 1, 1, 1, 1,
+                new GridBagConstraints(1, 1, 1, 1, 1, 1,
                         GridBagConstraints.NORTH,
                         GridBagConstraints.BOTH,
                         new Insets(5, 5, 0, 5), 0, 0));

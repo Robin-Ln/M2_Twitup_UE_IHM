@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95a424cd-6fed-4602-8f49-771fb3128deb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/profileComponent/IProfileComponent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/profileComponent/IProfileComponentObserver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/profileComponent/ProfileComponent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/profileComponent/ProfileComponentAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/core/Twitup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/core/Twitup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/TwitupMainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/TwitupMainView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/northComponent/NorthComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/northComponent/NorthComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/centerComponent/CenterComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/centerComponent/CenterComponent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/configuration.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/configuration.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/local_fr_FR.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/local_fr_FR.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -43,18 +35,12 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/profileComponent/ProfileComponent.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/centerComponent/CenterComponent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="118" column="40" selection-start-line="118" selection-start-column="40" selection-end-line="118" selection-end-column="40" />
+            <state relative-caret-position="188">
+              <caret line="113" column="38" selection-start-line="113" selection-start-column="38" selection-end-line="113" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1231#1396#0" expanded="true" />
-                <element signature="e#1395#1396#0" expanded="true" />
-                <element signature="e#2058#2059#0" expanded="true" />
-                <element signature="e#2103#2104#0" expanded="true" />
-                <element signature="e#2188#2189#0" expanded="true" />
-                <element signature="e#2236#2237#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -143,7 +129,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/northLogoutComponent/INorthLogoutComponent.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/centerComponent/CenterComponentAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/listTwitComponent/ListTwitComponentAdapter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/centerComponent/CenterComponent.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/twitComponent/TwitComponent.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/listTwitComponent/ListTwitComponent.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/loginConponent/ILoginComponentObserver.java" />
@@ -165,6 +150,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/profileComponent/IProfileComponent.java" />
         <option value="$PROJECT_DIR$/src/main/resources/local_fr_FR.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/profileComponent/ProfileComponent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/centerComponent/CenterComponent.java" />
       </list>
     </option>
   </component>
@@ -275,29 +261,7 @@
               <item name="twitup" type="462c0819:PsiDirectoryNode" />
               <item name="ihm" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="profileComponent" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="M2_Twitup_UE_IHM" type="b2602c69:ProjectViewProjectNode" />
-              <item name="M2_Twitup_UE_IHM" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="twitup" type="462c0819:PsiDirectoryNode" />
-              <item name="ihm" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="twitAdd" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="M2_Twitup_UE_IHM" type="b2602c69:ProjectViewProjectNode" />
-              <item name="M2_Twitup_UE_IHM" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="twitup" type="462c0819:PsiDirectoryNode" />
-              <item name="ihm" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="twitComponent" type="462c0819:PsiDirectoryNode" />
+              <item name="centerComponent" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="M2_Twitup_UE_IHM" type="b2602c69:ProjectViewProjectNode" />
@@ -317,7 +281,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552123682774" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552124093565" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -396,12 +360,12 @@
       <workItem from="1551949765119" duration="8482000" />
       <workItem from="1552029038899" duration="12589000" />
       <workItem from="1552065017287" duration="13927000" />
-      <workItem from="1552085143345" duration="9937000" />
+      <workItem from="1552085143345" duration="10323000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="123692000" />
+    <option name="totallyTimeSpent" value="124078000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -416,7 +380,7 @@
     <frame x="1280" y="-23" width="1600" height="877" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20924261" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20924261" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -426,7 +390,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32876712" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3260274" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.28407642" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.28407642" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3299363" />
@@ -633,16 +597,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/centerComponent/CenterComponent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1605">
-          <caret line="125" column="39" selection-start-line="125" selection-start-column="39" selection-end-line="125" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -900,9 +854,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/twitComponent/TwitComponent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="65" column="8" selection-start-line="65" selection-start-column="8" selection-end-line="69" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/TwitupMainView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-53">
+        <state relative-caret-position="15">
           <caret line="126" column="13" lean-forward="true" selection-start-line="126" selection-start-column="13" selection-end-line="126" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -916,28 +880,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/twitComponent/TwitComponent.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/profileComponent/ProfileComponent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="65" column="8" selection-start-line="65" selection-start-column="8" selection-end-line="69" selection-end-column="55" />
+        <state relative-caret-position="179">
+          <caret line="38" column="28" lean-forward="true" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="109" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/profileComponent/ProfileComponent.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/iup/tp/twitup/ihm/components/centerComponent/CenterComponent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="118" column="40" selection-start-line="118" selection-start-column="40" selection-end-line="118" selection-end-column="40" />
+        <state relative-caret-position="188">
+          <caret line="113" column="38" selection-start-line="113" selection-start-column="38" selection-end-line="113" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1231#1396#0" expanded="true" />
-            <element signature="e#1395#1396#0" expanded="true" />
-            <element signature="e#2058#2059#0" expanded="true" />
-            <element signature="e#2103#2104#0" expanded="true" />
-            <element signature="e#2188#2189#0" expanded="true" />
-            <element signature="e#2236#2237#0" expanded="true" />
           </folding>
         </state>
       </provider>
