@@ -51,16 +51,27 @@ public class TwitupMainView extends JFrame implements ITwitupMainView {
      */
     private NorthComponent northComponent;
 
+    private Boolean mRemember;
+
+    private User mUser;
+
     /**
      * Constructeur.
      *
      * @param database , Base de données de l'application.
      */
-    public TwitupMainView(IDatabase database, EntityManager entityManager, ResourceBundle bundle) {
+    public TwitupMainView(IDatabase database,
+                          EntityManager entityManager,
+                          ResourceBundle bundle,
+                          Boolean remember,
+                          User user
+    ) {
         this.mDatabase = database;
         this.mEntityManager = entityManager;
         this.mObservers = new HashSet<>();
         this.mBundle = bundle;
+        this.mRemember = remember;
+        this.mUser = user;
     }
 
     public void showGUI() {
@@ -93,7 +104,12 @@ public class TwitupMainView extends JFrame implements ITwitupMainView {
         /**
          * Création du composant nord
          */
-        this.northComponent = new NorthComponent(this.mDatabase, this.mEntityManager, this.mBundle);
+        this.northComponent = new NorthComponent(this.mDatabase,
+                this.mEntityManager,
+                this.mBundle,
+                this.mRemember,
+                this.mUser
+        );
         this.northComponent.addObserver(new NorthComponentAdapter() {
             @Override
             public void notifySuccessConnexion(User user,Boolean remember) {
@@ -111,6 +127,10 @@ public class TwitupMainView extends JFrame implements ITwitupMainView {
             }
         });
         this.add(this.northComponent, BorderLayout.NORTH);
+
+        if (this.mRemember) {
+            this.handlerSuccessConnexion(this.mUser, this.mRemember);
+        }
 
         /**
          * TODO: notifier Twithup

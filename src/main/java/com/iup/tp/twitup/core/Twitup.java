@@ -17,9 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 import javax.swing.*;
 import java.io.File;
 import java.net.URL;
-import java.util.Locale;
-import java.util.Properties;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Classe principale l'application.
@@ -109,11 +107,11 @@ public class Twitup {
 			this.initMock();
 		}
 
-		// Initialisation de l'IHM
-		this.initGui();
-
 		// Initialisation du répertoire d'échange
 		this.initDirectory();
+
+		// Initialisation de l'IHM
+		this.initGui();
 
 		// Sauvegarde des paramètre de l'application
 		this.saveProperties();
@@ -173,7 +171,13 @@ public class Twitup {
 	 */
 	private void initGui() {
 		// this.mMainView...
-		this.mMainView = new TwitupMainView(this.mDatabase,this.mEntityManager,this.createResourceBundle());
+		this.mMainView = new TwitupMainView(
+				this.mDatabase,
+				this.mEntityManager,
+				this.createResourceBundle(),
+				this.mRemember,
+				this.getUserByName()
+		);
 		this.mMainView.initGUI();
 
 		this.mMainView.addObserver(new TwitupMainViewAdapter() {
@@ -224,6 +228,7 @@ public class Twitup {
 	}
 
 	private void handlerRememberUser(User user, Boolean remember) {
+		this.mEntityManager.sendUser(user);
 		this.mUserName = user.getName();
 		this.mRemember = remember;
 		this.saveProperties();
@@ -322,6 +327,19 @@ public class Twitup {
 			locale = Locale.getDefault();
 		}
 		return ResourceBundle.getBundle("local", locale);
+	}
+
+	private User getUserByName() {
+		if (this.mRemember) {
+			Set<User> users = this.mDatabase.getUsers();
+			for (User user : users) {
+				if (Objects.equals(user.getName(), this.mUserName)) {
+					return user;
+				}
+			}
+			throw new RuntimeException("L'utilisateur n'existe plus");
+		}
+		return null;
 	}
 
 }

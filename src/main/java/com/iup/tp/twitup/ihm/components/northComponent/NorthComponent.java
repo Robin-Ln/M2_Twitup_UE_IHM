@@ -32,23 +32,28 @@ public class NorthComponent extends JPanel implements INorthComponent {
      */
     private EntityManager mEntityManager;
 
+    private Boolean mRemember;
 
-
-    /**
-     * Pannel deconnecter
-     */
+    private User mUser;
 
     /**
      * Configurer la langue de l'aplication
      */
     private ResourceBundle mBundle;
 
-    public NorthComponent(IDatabase database, EntityManager entityManager, ResourceBundle bundle) {
+    public NorthComponent(IDatabase database,
+                          EntityManager entityManager,
+                          ResourceBundle bundle,
+                          Boolean remember,
+                          User user
+    ) {
         super();
         this.mDatabase = database;
         this.mEntityManager = entityManager;
         this.mObservers = new HashSet<>();
         this.mBundle = bundle;
+        this.mRemember = remember;
+        this.mUser = user;
         this.init();
     }
 
@@ -72,7 +77,11 @@ public class NorthComponent extends JPanel implements INorthComponent {
         this.setBorder(new LineBorder(Color.BLUE, 4,true));
         this.setLayout(new GridBagLayout());
 
-        this.handlerLogout();
+        if (this.mRemember) {
+            this.handlerLogin(this.mUser);
+        } else {
+            this.handlerLogout();
+        }
     }
 
     /**
