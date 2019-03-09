@@ -133,7 +133,7 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent {
 
     private void handlerAddTwit(Twit twit){
 
-        TwitComponent twitComponent = new TwitComponent(twit, this.mUser, this.mBundle);
+        TwitComponent twitComponent = new TwitComponent(twit, this.mUser, this.mBundle, this.mEntityManager);
         twitComponent.addObserver(this.iTwitComponentObserver);
         this.nbTwit++;
         this.contenu.add(twitComponent,

@@ -5,4 +5,5 @@
     <UserPassword>qsd</UserPassword>
     <Name>qsd</Name>
     <AvatarPath></AvatarPath>
+    <follows>qsd</follows>
 </ns2:userXml>

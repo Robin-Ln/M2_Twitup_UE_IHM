@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -55,6 +56,9 @@ public class ProfileComponent extends JPanel implements IProfileComponent {
         this.init();
     }
 
+    private JLabel nbTwitsLabel;
+    private JLabel nbFollowersLabel;
+
     private void init() {
 
         JPanel image = new JPanel();
@@ -71,13 +75,15 @@ public class ProfileComponent extends JPanel implements IProfileComponent {
 
         JLabel tag = new JLabel(this.mUser.getUserTag());
 
-        Integer nbTwits = this.mDatabase.getTwitsWithUserTag(this.mUser.getUserTag()).size();
-        JLabel nbTwitsLabel = new JLabel(nbTwits.toString());
+
+        this.nbTwitsLabel = new JLabel();
         JLabel nbTwitsLibelle = new JLabel(this.mBundle.getString("label.profile.nbTwits.libelle"));
 
-        Integer nbFollowers = this.mUser.getFollows().size();
-        JLabel nbFollowersLabel = new JLabel(nbFollowers.toString());
+
+        this.nbFollowersLabel = new JLabel();
         JLabel nbFollowersLibelle = new JLabel(this.mBundle.getString("label.profile.nbFollowers.libelle"));
+
+        this.handlerInitCpts();
 
         /**
          * Observer
@@ -85,7 +91,9 @@ public class ProfileComponent extends JPanel implements IProfileComponent {
         mDatabase.addObserver(new DatabaseAdapter() {
             @Override
             public void notifyUserModified(User modifiedUser) {
-                // TODO metre a jour les iformation personelle de l'utilosateur si elle sont modifier
+                if (Objects.equals(ProfileComponent.this.mUser.getName(), modifiedUser.getName())) {
+                    ProfileComponent.this.handlerInitCpts();
+                }
             }
         });
 
@@ -135,6 +143,17 @@ public class ProfileComponent extends JPanel implements IProfileComponent {
                         GridBagConstraints.NONE,
                         new Insets(5, 5, 0, 5), 0, 0));
 
+    }
+
+    /**
+     * handler
+     */
+
+    private void handlerInitCpts(){
+        Integer nbFollowers = this.mUser.getFollows().size();
+        Integer nbTwits = this.mDatabase.getTwitsWithUserTag(this.mUser.getUserTag()).size();
+        this.nbTwitsLabel.setText(nbTwits.toString());
+        this.nbFollowersLabel.setText(nbFollowers.toString());
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.iup.tp.twitup.ihm.components.twitComponent;
 
+import com.iup.tp.twitup.core.EntityManager;
 import com.iup.tp.twitup.datamodel.Twit;
 import com.iup.tp.twitup.datamodel.User;
 
@@ -32,12 +33,15 @@ public class TwitComponent extends JPanel implements ITwitComponent {
 
     private User mUser;
 
-    public TwitComponent(Twit twit, User user, ResourceBundle bundle) {
+    private EntityManager mEntiteManager;
+
+    public TwitComponent(Twit twit, User user, ResourceBundle bundle, EntityManager entityManager) {
         this.mObservers = new HashSet<>();
 
         this.twit = twit;
         this.mUser = user;
         this.mBundle = bundle;
+        this.mEntiteManager = entityManager;
         this.init();
     }
 
@@ -94,6 +98,7 @@ public class TwitComponent extends JPanel implements ITwitComponent {
             @Override
             public void actionPerformed(ActionEvent e) {
                 TwitComponent.this.mUser.addFollowing(TwitComponent.this.twit.getTwiter().getUserTag());
+                TwitComponent.this.mEntiteManager.sendUser(TwitComponent.this.mUser);
             }
         });
 
