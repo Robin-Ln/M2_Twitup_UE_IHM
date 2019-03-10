@@ -20,6 +20,11 @@ public class NorthLogoutComponent extends JPanel implements INorthLogoutComponen
 
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
      * observer
      */
     private final Set<INorthLogoutComponentObserver> mObservers;

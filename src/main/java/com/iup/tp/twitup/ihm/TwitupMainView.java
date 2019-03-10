@@ -22,6 +22,11 @@ import java.util.Set;
 public class TwitupMainView extends JFrame implements ITwitupMainView {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
      * Liste des observateurs de modifications de la base.
      */
     protected final Set<ITwitupMainViewObserver> mObservers;
@@ -190,9 +195,8 @@ public class TwitupMainView extends JFrame implements ITwitupMainView {
     }
 
     private void handlerDialogInfo() {
-        JOptionPane jOptionPane = new JOptionPane();
         ImageIcon iconIUP = new ImageIcon(getClass().getResource("/images/logoIUP_50.jpg"));
-        jOptionPane.showMessageDialog(this,
+        JOptionPane.showMessageDialog(this,
                 this.mBundle.getString("dialog.info.contenu"),
                 this.mBundle.getString("dialog.info.title"),
                 JOptionPane.INFORMATION_MESSAGE,

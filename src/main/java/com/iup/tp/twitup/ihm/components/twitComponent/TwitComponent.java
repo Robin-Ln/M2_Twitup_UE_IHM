@@ -17,6 +17,11 @@ import java.util.Set;
 public class TwitComponent extends JPanel implements ITwitComponent {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
      * Liste des observateurs de modifications de la base.
      */
     private final Set<ITwitComponentObserver> mObservers;

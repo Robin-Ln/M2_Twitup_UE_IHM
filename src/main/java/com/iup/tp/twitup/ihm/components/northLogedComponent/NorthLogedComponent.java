@@ -12,6 +12,11 @@ public class NorthLogedComponent extends JPanel implements INorthLogedComponent 
 
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
      * observer
      */
     private final Set<INorthLogedComponentObserver> mObservers;

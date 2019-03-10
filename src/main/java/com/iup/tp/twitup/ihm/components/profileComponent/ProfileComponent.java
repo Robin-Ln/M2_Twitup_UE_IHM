@@ -17,6 +17,11 @@ import java.util.Set;
 public class ProfileComponent extends JPanel implements IProfileComponent {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Liste des observateurs de modifications de la base.
      */
     private final Set<IProfileComponentObserver> mObservers;

@@ -1,23 +1,32 @@
 package com.iup.tp.twitup.core;
 
+import java.io.File;
+import java.net.URL;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.Properties;
+import java.util.ResourceBundle;
+import java.util.Set;
+
+import javax.swing.JFileChooser;
+import javax.swing.UIManager;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.iup.tp.twitup.common.Constants;
 import com.iup.tp.twitup.common.PropertiesManager;
-import com.iup.tp.twitup.datamodel.*;
+import com.iup.tp.twitup.datamodel.Database;
+import com.iup.tp.twitup.datamodel.DatabaseAdapter;
+import com.iup.tp.twitup.datamodel.IDatabase;
+import com.iup.tp.twitup.datamodel.Twit;
+import com.iup.tp.twitup.datamodel.User;
 import com.iup.tp.twitup.events.file.IWatchableDirectory;
 import com.iup.tp.twitup.events.file.WatchableDirectory;
 import com.iup.tp.twitup.ihm.TwitupMainView;
 import com.iup.tp.twitup.ihm.TwitupMainViewAdapter;
 import com.iup.tp.twitup.ihm.TwitupMock;
-import com.iup.tp.twitup.ihm.components.centerComponent.CenterComponent;
 import com.iup.tp.twitup.ihm.components.fileChooserComponent.FileChooserComponent;
 import com.iup.tp.twitup.ihm.components.fileChooserComponent.IFileChooserComponentObserver;
-import com.iup.tp.twitup.ihm.components.northComponent.NorthComponent;
-import org.apache.commons.lang3.StringUtils;
-
-import javax.swing.*;
-import java.io.File;
-import java.net.URL;
-import java.util.*;
 
 /**
  * Classe principale l'application.
@@ -39,16 +48,6 @@ public class Twitup {
      * Vue principale de l'application.
      */
     private TwitupMainView mMainView;
-
-    /**
-     * mNorthCompoent
-     */
-    private NorthComponent mNorthCompoent;
-
-    /**
-     * mCenterCompoent
-     */
-    private CenterComponent mCenterComponent;
 
 
     /**

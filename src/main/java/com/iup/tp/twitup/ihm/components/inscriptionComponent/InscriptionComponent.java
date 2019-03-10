@@ -16,6 +16,11 @@ import java.util.*;
 public class InscriptionComponent extends JFrame implements IInscriptionComponent {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
      * Liste des observateurs de modifications de la base.
      */
     private final Set<IInscriptionComponentObserver> mObservers;
@@ -23,10 +28,7 @@ public class InscriptionComponent extends JFrame implements IInscriptionComponen
      * Configurer la langue de l'aplication
      */
     private ResourceBundle mBundle;
-    /**
-     * Nombre de tentavise de connexion
-     */
-    private Integer mNbConnexion;
+    
     /**
      * Base de données.
      */

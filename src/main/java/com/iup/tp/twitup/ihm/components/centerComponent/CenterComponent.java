@@ -18,6 +18,11 @@ import java.util.Set;
 public class CenterComponent extends JPanel implements ICenterComponent {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Liste des observateurs de modifications de la base.
      */
     private final Set<ICenterComponentObserver> mObservers;

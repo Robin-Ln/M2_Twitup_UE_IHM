@@ -19,6 +19,11 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent {
 
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
      * Liste des observateurs de modifications de la base.
      */
     private final Set<IListTwitComponentObserver> mObservers;
