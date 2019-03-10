@@ -88,8 +88,7 @@ public class CenterComponent extends JPanel implements ICenterComponent {
         /**
          * Liste des twits
          */
-        Set<Twit> twits = this.mDatabase.getTwits();
-        this.listTwitComponent = new ListTwitComponent(twits, this.mDatabase, this.mEntityManager, this.mBundle, this.mUser);
+        this.listTwitComponent = new ListTwitComponent(this.mDatabase, this.mEntityManager, this.mBundle, this.mUser);
         this.listTwitComponent.addObserver(new ListTwitComponentAdapter() {
             @Override
             public void notifyViewChange() {

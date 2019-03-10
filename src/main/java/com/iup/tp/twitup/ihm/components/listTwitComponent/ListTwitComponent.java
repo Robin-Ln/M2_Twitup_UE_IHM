@@ -1,19 +1,18 @@
 package com.iup.tp.twitup.ihm.components.listTwitComponent;
 
+import com.iup.tp.twitup.common.Constants;
+import com.iup.tp.twitup.common.MethodesUtils;
 import com.iup.tp.twitup.core.EntityManager;
 import com.iup.tp.twitup.datamodel.DatabaseAdapter;
 import com.iup.tp.twitup.datamodel.IDatabase;
 import com.iup.tp.twitup.datamodel.Twit;
 import com.iup.tp.twitup.datamodel.User;
-import com.iup.tp.twitup.ihm.components.twitComponent.ITwitComponentObserver;
 import com.iup.tp.twitup.ihm.components.twitComponent.TwitComponent;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashSet;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 
 public class ListTwitComponent extends JPanel implements IListTwitComponent {
 
@@ -27,7 +26,6 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent {
      * Liste des observateurs de modifications de la base.
      */
     private final Set<IListTwitComponentObserver> mObservers;
-    private final ITwitComponentObserver iTwitComponentObserver;
     /**
      * Nonbre de twit
      */
@@ -45,6 +43,7 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent {
      */
     private ResourceBundle mBundle;
     private User mUser;
+    private Map<Twit, TwitComponent> twits;
 
     /**
      * Data base
@@ -54,24 +53,19 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent {
      */
     private IDatabase mDatabase;
 
-    public ListTwitComponent(Set<Twit> twits, IDatabase database, EntityManager entityManager, ResourceBundle bundle, User user) {
+    public ListTwitComponent(IDatabase database, EntityManager entityManager, ResourceBundle bundle, User user) {
         this.mObservers = new HashSet<>();
         this.nbTwit = 0;
         this.mDatabase = database;
         this.mEntityManager = entityManager;
         this.mBundle = bundle;
         this.mUser = user;
-        this.iTwitComponentObserver = new ITwitComponentObserver() {
-            @Override
-            public void notifyDeleteTwitComponent(TwitComponent twitComponent) {
-                ListTwitComponent.this.handlerDeleteTwith(twitComponent);
-            }
-        };
-        this.init(twits);
+        this.twits = new HashMap<>();
+        this.init();
 
     }
 
-    private void init(Set<Twit> twits) {
+    private void init() {
 
         this.setLayout(new GridBagLayout());
         JScrollPane scrollPane = new JScrollPane();
@@ -86,14 +80,22 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent {
                 new Insets(5, 5, 0, 5), 0, 0));
 
 
-        for (Twit twit : twits) {
-            this.handlerAddTwit(twit);
-        }
+        this.handlerUpdateListTwith(this.mDatabase.getTwits());
 
         this.mDatabase.addObserver(new DatabaseAdapter() {
             @Override
             public void notifyTwitAdded(Twit addedTwit) {
                 ListTwitComponent.this.handlerAddTwit(addedTwit);
+            }
+
+            @Override
+            public void notifyTwitDeleted(Twit deletedTwit) {
+                ListTwitComponent.this.handlerDeleteTwit(deletedTwit);
+            }
+
+            @Override
+            public void notifyTwitModified(Twit modifiedTwit) {
+                ListTwitComponent.this.handlerUpdateTwit(modifiedTwit);
             }
         });
     }
@@ -104,17 +106,40 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent {
 
     public void handlerSreachTwit(String search) {
 
-        Set<Twit> twits = new HashSet<>();
-
+        // si la recherche est vide
         if (StringUtils.isBlank(search)) {
-            twits = this.mDatabase.getTwits();
-            this.handlerUpdateListTwith(twits);
+            this.handlerUpdateListTwith(this.mDatabase.getTwits());
             return;
         }
 
-        twits = this.mDatabase.getTwitsWithTag(search);
-        twits.addAll(this.mDatabase.getTwitsWithUserTag(search));
+        Set<String> userTags = MethodesUtils.extractTags(search, Constants.USER_TAG_DELIMITER);
+        Set<String> wordTags = MethodesUtils.extractTags(search, Constants.WORD_TAG_DELIMITER);
+
+        Set<Twit> twits = new HashSet<>();
+
+        for (Twit twit : this.mDatabase.getTwits()) {
+            // est ce que le tag du twiter correspond
+            if (userTags.contains(twit.getTwiter().getUserTag())) {
+                twits.add(twit);
+            }
+
+            // est ce que le twit contien le tag de lutilisateur
+            for (String usertag : twit.getUserTags()) {
+                if (userTags.contains(usertag)) {
+                    twits.add(twit);
+                }
+            }
+
+            // est ce que le twit contien les #
+            for (String wordTag : twit.getTags()) {
+                if (wordTags.contains(wordTag)) {
+                    twits.add(twit);
+                }
+            }
+        }
+
         this.handlerUpdateListTwith(twits);
+
     }
 
     private void handlerUpdateListTwith(Set<Twit> twits) {
@@ -127,9 +152,8 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent {
     }
 
     private void handlerAddTwit(Twit twit) {
-
         TwitComponent twitComponent = new TwitComponent(twit, this.mUser, this.mBundle, this.mEntityManager);
-        twitComponent.addObserver(this.iTwitComponentObserver);
+        this.twits.put(twit, twitComponent);
         this.nbTwit++;
         this.contenu.add(twitComponent,
                 new GridBagConstraints(0, this.nbTwit, 1, 1, 1, 0,
@@ -138,18 +162,24 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent {
                         new Insets(5, 5, 0, 5), 0, 0));
 
         this.revalidate();
-
     }
 
-    private void handlerDeleteTwith(TwitComponent twitComponent) {
-        twitComponent.deleteObserver(this.iTwitComponentObserver);
+    private void handlerDeleteTwit(Twit twit) {
+        // TODO ne marche pas très bien
+        TwitComponent twitComponent = this.twits.get(twit);
         twitComponent.removeAll();
         this.contenu.remove(twitComponent);
-        this.mDatabase.removeTwit(twitComponent.getTwit());
-        this.revalidate();
-        this.repaint();
+        this.contenu.revalidate();
+        this.contenu.repaint();
     }
 
+    private void handlerUpdateTwit(Twit twit) {
+        TwitComponent twitComponent = this.twits.get(twit);
+        twitComponent.removeAll();
+        twitComponent.setTwit(twit);
+        twitComponent.init();
+        this.revalidate();
+    }
 
     /**
      * Les methodes de mon interfaces

@@ -47,7 +47,7 @@ public class TwitComponent extends JPanel implements ITwitComponent {
         this.init();
     }
 
-    private void init() {
+    public void init() {
 
         this.setBackground(new Color(50, 150, 200));
         this.setBorder(new LineBorder(Color.BLUE, 4, true));
@@ -151,6 +151,10 @@ public class TwitComponent extends JPanel implements ITwitComponent {
 
     public Twit getTwit() {
         return twit;
+    }
+
+    public void setTwit(Twit twit) {
+        this.twit = twit;
     }
 
     @Override
