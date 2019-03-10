@@ -52,6 +52,8 @@ public class NorthLogoutComponent extends JPanel implements INorthLogoutComponen
 
     private void init() {
 
+        this.setBackground(new Color(144,193,217));
+
         /**
          * Bouton de s'inscrire
          */

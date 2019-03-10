@@ -65,8 +65,10 @@ public class ProfileComponent extends JPanel implements IProfileComponent {
 
         JPanel image = ImagePanel.getUserImage(this.mUser);
 
-        this.setBackground(new Color(50, 150, 200));
-        this.setBorder(new LineBorder(Color.BLUE, 4, true));
+        Color color = Color.WHITE;
+        this.setBackground(color);
+        this.setBorder(new LineBorder(color, 1, true));
+        this.setOpaque(true);
 
 
         JLabel name = new JLabel(this.mUser.getName());

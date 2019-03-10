@@ -78,6 +78,7 @@ public class NorthComponent extends JPanel implements INorthComponent {
     private void init() {
 
         this.setLayout(new GridBagLayout());
+        this.setBackground(new Color(144,193,217));
 
         if (this.mRemember) {
             this.handlerLogin(this.mUser);

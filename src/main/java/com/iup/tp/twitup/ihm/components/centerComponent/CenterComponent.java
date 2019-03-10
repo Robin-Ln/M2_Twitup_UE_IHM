@@ -83,6 +83,7 @@ public class CenterComponent extends JPanel implements ICenterComponent {
     public void init() {
 
         this.setLayout(new GridBagLayout());
+        this.setBackground(new Color(144,193,217));
 
 
         /**
@@ -123,13 +124,13 @@ public class CenterComponent extends JPanel implements ICenterComponent {
                 new GridBagConstraints(1, 0, 1, 1, 1, 0,
                         GridBagConstraints.NORTH,
                         GridBagConstraints.BOTH,
-                        new Insets(5, 5, 0, 5), 0, 0));
+                        new Insets(5, 5, 5, 5), 0, 0));
 
         this.add(this.listTwitComponent,
                 new GridBagConstraints(1, 1, 1, 1, 1, 1,
                         GridBagConstraints.NORTH,
                         GridBagConstraints.BOTH,
-                        new Insets(5, 5, 0, 5), 0, 0));
+                        new Insets(5, 5, 5, 5), 0, 0));
 
     }
 

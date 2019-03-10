@@ -33,6 +33,9 @@ public class NorthLogedComponent extends JPanel implements INorthLogedComponent 
     }
 
     private void init() {
+
+        this.setBackground(new Color(144,193,217));
+
         /**
          * Barre de recherche
          */

@@ -67,10 +67,14 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent {
 
     private void init() {
 
+        this.setBackground(new Color(144,193,217));
+
         this.setLayout(new GridBagLayout());
         JScrollPane scrollPane = new JScrollPane();
 
         this.contenu = new JPanel(new GridBagLayout());
+
+        this.contenu.setBackground(new Color(144,193,217));
 
         scrollPane.getViewport().add(this.contenu);
 
@@ -159,7 +163,7 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent {
                 new GridBagConstraints(0, this.nbTwit, 1, 1, 1, 0,
                         GridBagConstraints.NORTH,
                         GridBagConstraints.BOTH,
-                        new Insets(5, 5, 0, 5), 0, 0));
+                        new Insets(5, 5, 5, 5), 0, 0));
 
         this.revalidate();
     }

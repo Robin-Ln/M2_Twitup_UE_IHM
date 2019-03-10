@@ -75,8 +75,10 @@ public class TwitAddComponent extends JPanel implements ITwitAddComponent {
 
         this.setLayout(new GridBagLayout());
 
-        this.setBackground(new Color(50, 150, 200));
-        this.setBorder(new LineBorder(Color.BLUE, 4, true));
+        Color color = new Color(229,242,247);
+        this.setBackground(color);
+        this.setBorder(new LineBorder(color, 1, true));
+        this.setOpaque(true);
 
         /**
          * Labelle pas plus de 100 caractère
