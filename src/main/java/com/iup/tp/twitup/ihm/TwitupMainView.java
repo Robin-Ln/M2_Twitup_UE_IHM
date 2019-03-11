@@ -79,8 +79,6 @@ public class TwitupMainView extends JFrame implements ITwitupMainView {
     public void showGUI() {
         // dimenssion
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        screenSize.height /= 2;
-        screenSize.width /= 2;
         this.setSize(screenSize);
 
         this.setLocationRelativeTo(null);

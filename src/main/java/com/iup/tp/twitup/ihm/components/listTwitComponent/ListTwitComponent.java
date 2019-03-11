@@ -148,6 +148,7 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent {
 
     private void handlerUpdateListTwith(Set<Twit> twits) {
         this.contenu.removeAll();
+        this.twits.clear();
         for (Twit twit : twits) {
             this.handlerAddTwit(twit);
         }
@@ -156,6 +157,11 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent {
     }
 
     private void handlerAddTwit(Twit twit) {
+
+        if (this.twits.containsKey(twit)) {
+            return;
+        }
+
         TwitComponent twitComponent = new TwitComponent(twit, this.mUser, this.mBundle, this.mEntityManager);
         this.twits.put(twit, twitComponent);
         this.nbTwit++;
@@ -171,6 +177,7 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent {
     private void handlerDeleteTwit(Twit twit) {
         // TODO ne marche pas très bien
         TwitComponent twitComponent = this.twits.get(twit);
+        this.twits.remove(twit);
         twitComponent.removeAll();
         this.contenu.remove(twitComponent);
         this.contenu.revalidate();
@@ -179,6 +186,7 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent {
 
     private void handlerUpdateTwit(Twit twit) {
         TwitComponent twitComponent = this.twits.get(twit);
+        this.twits.remove(twit);
         twitComponent.removeAll();
         twitComponent.setTwit(twit);
         twitComponent.init();

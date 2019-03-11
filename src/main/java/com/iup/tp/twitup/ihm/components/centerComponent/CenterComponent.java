@@ -6,6 +6,7 @@ import com.iup.tp.twitup.datamodel.Twit;
 import com.iup.tp.twitup.datamodel.User;
 import com.iup.tp.twitup.ihm.components.listTwitComponent.ListTwitComponent;
 import com.iup.tp.twitup.ihm.components.listTwitComponent.ListTwitComponentAdapter;
+import com.iup.tp.twitup.ihm.components.listUserComponent.ListUserComponent;
 import com.iup.tp.twitup.ihm.components.profileComponent.ProfileComponent;
 import com.iup.tp.twitup.ihm.components.twitAdd.TwitAddComponent;
 
@@ -55,6 +56,8 @@ public class CenterComponent extends JPanel implements ICenterComponent {
     private TwitAddComponent twitAddComponent;
 
     private ProfileComponent profileComponent;
+
+    private ListUserComponent listUserComponent;
 
     public CenterComponent(IDatabase database, EntityManager entityManager, ResourceBundle bundle, User user) {
         super();
@@ -109,12 +112,21 @@ public class CenterComponent extends JPanel implements ICenterComponent {
          */
         this.profileComponent = new ProfileComponent(this.mBundle, this.mUser, this.mEntityManager, this.mDatabase);
 
+
+        this.listUserComponent = new ListUserComponent(this.mBundle, this.mDatabase, this.mEntityManager);
+
         /**
          * Ajout des composents
          */
 
         this.add(this.profileComponent,
-                new GridBagConstraints(0, 0, 1, 2, 1, 0,
+                new GridBagConstraints(0, 0, 1, 1, 1, 0,
+                        GridBagConstraints.NORTH,
+                        GridBagConstraints.BOTH,
+                        new Insets(5, 5, 5, 5), 0, 0));
+
+        this.add(this.listUserComponent,
+                new GridBagConstraints(0, 1, 1, 1, 1, 1,
                         GridBagConstraints.NORTH,
                         GridBagConstraints.BOTH,
                         new Insets(5, 5, 5, 5), 0, 0));

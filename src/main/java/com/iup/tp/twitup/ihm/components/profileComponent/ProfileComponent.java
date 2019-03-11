@@ -42,7 +42,7 @@ public class ProfileComponent extends JPanel implements IProfileComponent {
     private EntityManager mEntityManager;
 
     private IDatabase mDatabase;
-    //TODO il manque les followers
+    private JLabel nbFollowerLabel;
     private JLabel nbTwitsLabel;
     private JLabel nbSuscribersLabel;
     public ProfileComponent(ResourceBundle bundle, User user, EntityManager entityManager, IDatabase database) {
@@ -72,7 +72,6 @@ public class ProfileComponent extends JPanel implements IProfileComponent {
 
 
         JLabel name = new JLabel(this.mUser.getName());
-
         JLabel tag = new JLabel(this.mUser.getUserTag());
 
 
@@ -81,7 +80,10 @@ public class ProfileComponent extends JPanel implements IProfileComponent {
 
 
         this.nbSuscribersLabel = new JLabel();
-        JLabel nbSuscribersLibelle = new JLabel(this.mBundle.getString("label.profile.nbFollowers.libelle"));
+        JLabel nbSuscribersLibelle = new JLabel(this.mBundle.getString("label.profile.nbAbonne.libelle"));
+
+        this.nbFollowerLabel = new JLabel();
+        JLabel nbFollowerLibelle = new JLabel(this.mBundle.getString("label.profile.nbFollowers.libelle"));
 
         this.handlerInitCpts();
 
@@ -156,6 +158,18 @@ public class ProfileComponent extends JPanel implements IProfileComponent {
                         GridBagConstraints.NONE,
                         new Insets(5, 5, 0, 5), 0, 0));
 
+        this.add(nbFollowerLibelle,
+                new GridBagConstraints(2, 3, 1, 1, 0, 0,
+                        GridBagConstraints.NORTHWEST,
+                        GridBagConstraints.NONE,
+                        new Insets(5, 5, 0, 5), 0, 0));
+
+        this.add(nbFollowerLabel,
+                new GridBagConstraints(2, 4, 1, 1, 0, 0,
+                        GridBagConstraints.NORTHWEST,
+                        GridBagConstraints.NONE,
+                        new Insets(5, 5, 0, 5), 0, 0));
+
     }
 
     /**
@@ -165,8 +179,18 @@ public class ProfileComponent extends JPanel implements IProfileComponent {
     private void handlerInitCpts() {
         Integer nbSuscribers = this.mUser.getFollows().size();
         Integer nbTwits = this.mDatabase.getUserTwits(ProfileComponent.this.mUser).size();
+
+        Set<String> followers = new HashSet<>();
+        for (User user : this.mDatabase.getUsers()) {
+            if(user.getFollows().contains(this.mUser.getUserTag())) {
+                followers.add(user.getUserTag());
+            }
+        }
+        Integer nbFollowers = followers.size();
+
         this.nbTwitsLabel.setText(nbTwits.toString());
         this.nbSuscribersLabel.setText(nbSuscribers.toString());
+        this.nbFollowerLabel.setText(nbFollowers.toString());
     }
 
     @Override

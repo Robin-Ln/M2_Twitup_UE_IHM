@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="M2_Twitup_UE_IHM:jar">
+    <output-path>$PROJECT_DIR$/classes/artifacts/M2_Twitup_UE_IHM_jar</output-path>
+    <root id="archive" name="M2_Twitup_UE_IHM.jar">
+      <element id="module-output" name="M2_Twitup_UE_IHM" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/commons/commons-lang3/3.0/commons-lang3-3.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
