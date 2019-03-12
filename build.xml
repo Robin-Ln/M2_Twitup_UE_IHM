@@ -1,8 +1,30 @@
-<project name="TwitUp" default="compile" basedir=".">
+<project name="TwitUp" default="compile" basedir="." xmlns:sonar="antlib:org.sonar.ant">
     <!-- set global properties for this build -->
     <property name="src" location="src/main/java"/>
     <property name="build" location="build"/>
     <property name="jar" location="jar"/>
+
+    <!-- Define the SonarQube global properties (the most usual way is to pass these properties via the command line) -->
+    <property name="sonar.host.url" value="http://localhost:9000" />
+
+    <!-- Define the SonarQube project properties -->
+    <property name="sonar.projectKey" value="M2_Twitup_UE_IHM" />
+    <property name="sonar.projectName" value="M2_Twitup_UE_IHM" />
+    <property name="sonar.projectVersion" value="1.0" />
+    <property name="sonar.sources" value="${src}" />
+    <property name="sonar.java.binaries" value="${build}" />
+    <property name="sonar.java.libraries" value="lib/*.jar" />
+
+    <!-- Define SonarQube Scanner for Ant Target -->
+    <target name="sonar">
+        <taskdef uri="antlib:org.sonar.ant" resource="org/sonar/ant/antlib.xml">
+            <!-- Update the following line, or put the "sonarqube-ant-task-*.jar" file in your "$HOME/.ant/lib" folder -->
+            <classpath path="lib/sonarqube-ant-task-2.5.jar" />
+        </taskdef>
+
+        <!-- Execute SonarQube Scanner for Ant Analysis -->
+        <sonar:sonar />
+    </target>
 
     <path id="build.classpath">
         <fileset dir="lib">
@@ -40,4 +62,5 @@
         <delete dir="${build}"/>
         <delete dir="${jar}"/>
     </target>
+
 </project>
