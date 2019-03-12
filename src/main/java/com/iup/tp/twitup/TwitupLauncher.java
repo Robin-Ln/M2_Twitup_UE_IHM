@@ -15,6 +15,7 @@ public class TwitupLauncher {
      * @param args
      */
     public static void main(String[] args) {
+//        System.setProperty( "com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize", "true");
         Twitup twitup = new Twitup();
         twitup.show();
     }
