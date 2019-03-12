@@ -1,5 +1,7 @@
 package com.iup.tp.twitup.common;
 
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -12,6 +14,9 @@ import java.nio.channels.FileChannel;
  * @author S.Lucas
  */
 public class FilesUtils {
+
+    private static Logger logger = Logger.getLogger(FilesUtils.class);
+
     /**
      * Déplacement du fichier source vers le fichier destination.
      *
@@ -59,8 +64,8 @@ public class FilesUtils {
 
             isOk = true;
         } catch (Throwable t) {
-            System.err.println("Erreur lors de la copie du fichier '" + sourceFileName + "'");
-            t.printStackTrace();
+            FilesUtils.logger.trace("Erreur lors de la copie du fichier '" + sourceFileName + "'");
+            FilesUtils.logger.trace(t);
         } finally {
             // Fermeture des flux
             if (in != null) {

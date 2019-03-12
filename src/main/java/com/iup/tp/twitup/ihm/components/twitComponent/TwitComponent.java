@@ -95,26 +95,35 @@ public class TwitComponent extends JPanel implements ITwitComponent {
 
         this.actions.setBackground(Color.WHITE);
 
-        JButton deletebutton = new JButton(this.mBundle.getString("button.twit.component.delete.libelle"));
-        deletebutton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TwitComponent.this.removeAll();
-                TwitComponent.this.revalidate();
-                TwitComponent.this.repaint();
-                for (ITwitComponentObserver observer : TwitComponent.this.mObservers) {
-                    observer.notifyDeleteTwitComponent(TwitComponent.this);
-                }
-
-            }
-        });
 
         JButton followbutton = new JButton(this.mBundle.getString("button.twit.component.follow.libelle"));
+        JButton deletebutton = new JButton(this.mBundle.getString("button.twit.component.delete.libelle"));
+
+        if (this.mUser.getFollows().contains(this.twit.getTwiter().getUserTag())) {
+            followbutton.setVisible(false);
+            deletebutton.setVisible(true);
+        } else {
+            followbutton.setVisible(true);
+            deletebutton.setVisible(false);
+        }
+
         followbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 TwitComponent.this.mUser.addFollowing(TwitComponent.this.twit.getTwiter().getUserTag());
                 TwitComponent.this.mEntiteManager.sendUser(TwitComponent.this.mUser);
+                followbutton.setVisible(false);
+                deletebutton.setVisible(true);
+            }
+        });
+
+        deletebutton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TwitComponent.this.mUser.removeFollowing(TwitComponent.this.twit.getTwiter().getUserTag());
+                TwitComponent.this.mEntiteManager.sendUser(TwitComponent.this.mUser);
+                followbutton.setVisible(true);
+                deletebutton.setVisible(false);
             }
         });
 
