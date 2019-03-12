@@ -141,11 +141,13 @@ public class ListUserComponent extends JPanel implements IListUserComponent {
 
     private void handlerUpdateUser(User user) {
         UserComponent userComponent = this.users.get(user);
-        this.users.remove(user);
-        userComponent.removeAll();
-        userComponent.setmUser(user);
-        userComponent.init();
-        this.revalidate();
+        if (userComponent != null) {
+            this.users.remove(user);
+            userComponent.removeAll();
+            userComponent.setmUser(user);
+            userComponent.init();
+            this.revalidate();
+        }
     }
 
     /**
