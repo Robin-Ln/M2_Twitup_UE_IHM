@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -40,6 +42,15 @@ public class NorthLogedComponent extends JPanel implements INorthLogedComponent 
          * Barre de recherche
          */
         JTextField searchTextField = new JTextField();
+//        searchTextField.addKeyListener(new KeyAdapter() {
+//
+//            @Override
+//            public void keyTyped(KeyEvent e) {
+//                if (e.getKeyCode() == 0) {
+//                    NorthLogedComponent.this.handlerSearch(searchTextField.getText());
+//                }
+//            }
+//        });
 
         /**
          * Bouton de recherche
@@ -48,9 +59,7 @@ public class NorthLogedComponent extends JPanel implements INorthLogedComponent 
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (INorthLogedComponentObserver observer : NorthLogedComponent.this.mObservers) {
-                    observer.notifySearchRequest(searchTextField.getText());
-                }
+                NorthLogedComponent.this.handlerSearch(searchTextField.getText());
             }
         });
 
@@ -90,6 +99,12 @@ public class NorthLogedComponent extends JPanel implements INorthLogedComponent 
                         GridBagConstraints.NONE,
                         new Insets(5, 5, 0, 5), 0, 0));
 
+    }
+
+    private void handlerSearch(String search) {
+        for (INorthLogedComponentObserver observer : NorthLogedComponent.this.mObservers) {
+            observer.notifySearchRequest(search);
+        }
     }
 
     /**

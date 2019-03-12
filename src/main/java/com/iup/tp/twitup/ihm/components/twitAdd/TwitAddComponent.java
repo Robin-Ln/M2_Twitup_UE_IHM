@@ -107,7 +107,7 @@ public class TwitAddComponent extends JPanel implements ITwitAddComponent {
 
             @Override
             public void keyReleased(KeyEvent e) {
-                if (textArea.getText().length() < 250) {
+                if (textArea.getText().length() < 150) {
                     errorLabel.setVisible(false);
                 } else {
                     errorLabel.setVisible(true);

@@ -7,6 +7,7 @@ import com.iup.tp.twitup.datamodel.User;
 import com.iup.tp.twitup.ihm.components.listTwitComponent.ListTwitComponent;
 import com.iup.tp.twitup.ihm.components.listTwitComponent.ListTwitComponentAdapter;
 import com.iup.tp.twitup.ihm.components.listUserComponent.ListUserComponent;
+import com.iup.tp.twitup.ihm.components.notificationComponent.NotificationComponent;
 import com.iup.tp.twitup.ihm.components.profileComponent.ProfileComponent;
 import com.iup.tp.twitup.ihm.components.twitAdd.TwitAddComponent;
 
@@ -58,6 +59,8 @@ public class CenterComponent extends JPanel implements ICenterComponent {
     private ProfileComponent profileComponent;
 
     private ListUserComponent listUserComponent;
+
+    private NotificationComponent notificationComponent;
 
     public CenterComponent(IDatabase database, EntityManager entityManager, ResourceBundle bundle, User user) {
         super();
@@ -116,17 +119,30 @@ public class CenterComponent extends JPanel implements ICenterComponent {
         this.listUserComponent = new ListUserComponent(this.mBundle, this.mDatabase, this.mEntityManager);
 
         /**
+         * Notification
+         */
+        this.notificationComponent = new NotificationComponent(this.mBundle, this.mDatabase, this.mUser);
+
+        this.notificationComponent.addObserver(this.listTwitComponent);
+
+        /**
          * Ajout des composents
          */
 
-        this.add(this.profileComponent,
+        this.add(this.notificationComponent,
                 new GridBagConstraints(0, 0, 1, 1, 1, 0,
                         GridBagConstraints.NORTH,
                         GridBagConstraints.BOTH,
                         new Insets(5, 5, 5, 5), 0, 0));
 
+        this.add(this.profileComponent,
+                new GridBagConstraints(0, 1, 1, 1, 1, 0,
+                        GridBagConstraints.NORTH,
+                        GridBagConstraints.BOTH,
+                        new Insets(5, 5, 5, 5), 0, 0));
+
         this.add(this.listUserComponent,
-                new GridBagConstraints(0, 1, 1, 1, 1, 1,
+                new GridBagConstraints(0, 2, 1, 1, 1, 1,
                         GridBagConstraints.NORTH,
                         GridBagConstraints.BOTH,
                         new Insets(5, 5, 5, 5), 0, 0));
@@ -139,7 +155,7 @@ public class CenterComponent extends JPanel implements ICenterComponent {
                         new Insets(5, 5, 5, 5), 0, 0));
 
         this.add(this.listTwitComponent,
-                new GridBagConstraints(1, 1, 1, 1, 1, 1,
+                new GridBagConstraints(1, 1, 1, 2, 1, 1,
                         GridBagConstraints.NORTH,
                         GridBagConstraints.BOTH,
                         new Insets(5, 5, 5, 5), 0, 0));

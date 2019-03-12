@@ -7,7 +7,11 @@ import java.util.UUID;
  *
  * @author S.Lucas
  */
-public interface Constants {
+public class Constants {
+
+    private Constants() {
+    }
+
     /**
      * Extension des fichiers XML des User
      */

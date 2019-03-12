@@ -7,6 +7,7 @@ import com.iup.tp.twitup.datamodel.DatabaseAdapter;
 import com.iup.tp.twitup.datamodel.IDatabase;
 import com.iup.tp.twitup.datamodel.Twit;
 import com.iup.tp.twitup.datamodel.User;
+import com.iup.tp.twitup.ihm.components.notificationComponent.INotificationComponentObserver;
 import com.iup.tp.twitup.ihm.components.twitComponent.TwitComponent;
 import org.apache.commons.lang3.StringUtils;
 
@@ -14,7 +15,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 
-public class ListTwitComponent extends JPanel implements IListTwitComponent {
+public class ListTwitComponent extends JPanel implements IListTwitComponent, INotificationComponentObserver {
 
 
     /**
@@ -119,8 +120,19 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent {
         Set<String> userTags = MethodesUtils.extractTags(search, Constants.USER_TAG_DELIMITER);
         Set<String> wordTags = MethodesUtils.extractTags(search, Constants.WORD_TAG_DELIMITER);
 
+        // si @ et # ne sont pas indiquer dans la recherhce
+        if (!StringUtils.contains(search,Constants.USER_TAG_DELIMITER) &&
+                !StringUtils.contains(search,Constants.WORD_TAG_DELIMITER)){
+            String [] tags = search.split(" ");
+            for (String tag: tags) {
+                userTags.add(tag);
+                wordTags.add(tag);
+            }
+        }
+
         Set<Twit> twits = new HashSet<>();
 
+        // lancement de la recherche
         for (Twit twit : this.mDatabase.getTwits()) {
             // est ce que le tag du twiter correspond
             if (userTags.contains(twit.getTwiter().getUserTag())) {
@@ -206,4 +218,12 @@ public class ListTwitComponent extends JPanel implements IListTwitComponent {
         this.mObservers.remove(observer);
     }
 
+
+    /**
+     * Notification observer
+     */
+    @Override
+    public void notifyDisplayNotification(Set<Twit> twits) {
+        this.handlerUpdateListTwith(twits);
+    }
 }
